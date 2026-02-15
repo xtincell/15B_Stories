@@ -1,0 +1,16 @@
+{
+  "id": "kofi-friend",
+  "name": "Kofi",
+  "title": "L'Ami d'Enfance",
+  "personality": "Loyal jusqu'a la temerite, Kofi est le rayon de soleil du groupe. Il rit fort, parle sans filtre et se jette dans l'action sans toujours reflechir aux consequences. Son devouement envers le heros est inebranlable : il le considere comme un frere ou une soeur de coeur. Kofi incarne l'Ubuntu -- la conviction que l'on n'existe qu'a travers les autres. Sa plus grande force est aussi sa fragilite : il se sacrifierait sans hesiter pour ceux qu'il aime.",
+  "motivations": "Rester aux cotes du heros quoi qu'il arrive. Prouver sa valeur malgre l'absence de pouvoirs spirituels. Proteger le village et les gens ordinaires que les Tisserands oublient parfois. Vivre une aventure digne des recits des griots.",
+  "defaultAffinity": 5,
+  "beatRoles": {
+    "1": "Compagnon du heros au quotidien. Presente lors de la ceremonie des Ancetres, il est le premier a remarquer que quelque chose d'etrange se passe chez le heros.",
+    "2": "Insiste pour accompagner le heros malgre les avertissements d'Amara. Fait preuve de courage face aux premieres manifestations spirituelles.",
+    "3": "Part avec le heros vers les Terres Exterieures. Son humour et son optimisme allegent la tension du voyage.",
+    "7": "Retrouve le heros apres une separation. A vecu ses propres epreuves et a muri. Fait le lien entre le heros et Kazi, qu'il a rencontre en chemin.",
+    "10": "Confronte a un choix dechirrant qui met en tension sa loyaute envers le heros et la securite du village. Son arc personnel atteint son climax.",
+    "11": "Les consequences de son choix se font sentir. Kofi doit accepter que l'amitie ne suffit pas toujours et que le heros doit affronter certaines epreuves seul."
+  }
+}

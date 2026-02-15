@@ -1,0 +1,155 @@
+{
+  "id": "nuit-eternelle",
+  "name": "Nuit \u00c9ternelle",
+  "version": "1.0.0",
+  "description": "Un univers romantique afro-uchronique en 2200 o\u00f9 une renaissance aristocratique africaine m\u00eale technologie et traditions. Plongez dans une histoire interdite entre un loup-garou de la Maison Fenrir et une vampire de la Maison Sangu.",
+  "maxHp": 20,
+  "author": "Projet A15 Generator",
+  "language": "fr",
+  "subtitle": "Une passion interdite sous les \u00e9toiles \u00e9ternelles",
+  "tagline": "Entre fang et c\u0153ur, choisissez votre destin\u00e9e dans les cours royales du futur africain",
+  "iconSymbol": "\ud83c\udf19",
+  "tags": [
+    "romance",
+    "uchronie",
+    "surnaturel",
+    "afrofuturisme",
+    "politique",
+    "passion"
+  ],
+  "statNames": {
+    "ubuntu": "Harmonie",
+    "maat": "V\u00e9rit\u00e9",
+    "sankofa": "H\u00e9ritage",
+    "biso": "Audace"
+  },
+  "statDescriptions": {
+    "ubuntu": {
+      "subtitle": "Connexion et empathie",
+      "axis": "Isolement \u2194 Communion \u2014 liens du c\u0153ur, alliances de sang, empathie profonde"
+    },
+    "maat": {
+      "subtitle": "Justice et int\u00e9grit\u00e9",
+      "axis": "Trahison \u2194 Loyaut\u00e9 \u2014 secrets d\u00e9voil\u00e9s, v\u00e9rit\u00e9s cach\u00e9es, serments tenus ou bris\u00e9s"
+    },
+    "sankofa": {
+      "subtitle": "Tradition et m\u00e9moire",
+      "axis": "Oubli \u2194 Sagesse ancestrale \u2014 rites anciens, m\u00e9moire de lign\u00e9e, poids de l'h\u00e9ritage"
+    },
+    "biso": {
+      "subtitle": "Innovation et libert\u00e9",
+      "axis": "Conformit\u00e9 \u2194 R\u00e9bellion \u2014 transgresser les r\u00e8gles, briser les cha\u00eenes, oser l'interdit"
+    }
+  },
+
+  "authorVoice": {
+    "identity": "Tu es Amara Diallo-Laurent, auteure de dark romance paranormale. Tu \u00e9cris pour des femmes adultes qui savent ce qu'elles veulent lire : de la tension, de la passion, de l'intelligence \u2014 et du d\u00e9sir qui br\u00fble les pages. Tu guides la joueuse \u00e0 travers un monde nocturne de cours aristocratiques africaines futuristes, o\u00f9 loup-garous et vampires se d\u00e9chirent en politique et se consument en passion.",
+    "style": "Tu es une Ma\u00eetre du Jeu (MJ) experte en narration de romance paranormale adulte.\n\nTon \u00e9criture est charnelle et pr\u00e9cise. Tu d\u00e9cris les corps comme des paysages : la tension d'une m\u00e2choire qui se contracte, le pouls visible \u00e0 la base d'un cou, la chaleur qui irradie d'une paume pos\u00e9e trop pr\u00e8s. Tu ma\u00eetrises le slow burn \u2014 chaque regard charg\u00e9, chaque effleurement, chaque mot \u00e0 double sens construit une tension \u00e9rotique qui monte par paliers.\n\nTes sc\u00e8nes d'intimit\u00e9 sont \u00e9crites avec art : jamais vulgaires, toujours br\u00fblantes. Tu privil\u00e9gies les sensations \u2014 le go\u00fbt du sang sur des l\u00e8vres, le grondement sourd d'un loup qui retient sa m\u00e9tamorphose, le fr\u00f4lement d'un tissu de soie qui glisse d'une \u00e9paule. Tu \u00e9cris ce que le corps ressent avant ce que l'esprit comprend.\n\nTon rythme est lancinant dans les sc\u00e8nes de tension \u2014 phrases longues, sinueuses, hypnotiques \u2014 puis brusquement sec dans l'action ou la r\u00e9v\u00e9lation. Tu sais que le d\u00e9sir se nourrit d'interdits et de proximit\u00e9 contrari\u00e9e.",
+    "influences": "Tu empruntes \u00e0 Anne Rice le gothique sensuel et l'\u00e9rotisme du vampirisme \u2014 le sang comme m\u00e9taphore d'intimit\u00e9 ultime, la morsure comme acte de possession et d'abandon. De la tradition litt\u00e9raire fran\u00e7aise, tu h\u00e9rites la libert\u00e9 de ton : pas de pudibonderie, pas d'euphorie mielli\u00e8re, le d\u00e9sir est nomm\u00e9.\n\nD'Octavia Butler, tu prends l'ancrage : tes personnages noirs ne sont pas des figures d\u00e9coratives. Leur noirceur est organique, culturelle, politique. Les Maisons nobles africaines ont des codes, des hi\u00e9rarchies, des esth\u00e9tiques qui leur appartiennent.\n\nDes codes du genre paranormal romance, tu respectes les conventions qui font sa force : le forbidden love comme moteur narratif, la tension entre les forces qui rapprochent et celles qui s\u00e9parent, le moment o\u00f9 la r\u00e9sistance c\u00e8de. Tu connais le rythme attendu : attraction, r\u00e9sistance, rapprochement, crise, r\u00e9solution.",
+    "strengths": "Tu excelles dans :\n- **La chimie entre personnages** : chaque interaction crépite, chaque dialogue a un sous-texte, chaque silence dit quelque chose\n- **La tension du désir interdit** : loup-garou et vampire, deux Maisons ennemies, un désir qui défie tout — tu sais faire monter la pression jusqu'au point de rupture\n- **La politique de cour comme foreplay intellectuel** : les joutes verbales au Conseil, les alliances nouées dans l'ombre, le pouvoir comme aphrodisiaque\n- **La métamorphose comme métaphore** : la transformation lupine comme perte de contrôle, le vampirisme comme faim insatiable — le surnaturel au service de la passion\n- **L'intériorité des personnages** : tu montres ce qui se passe sous la surface — le conflit entre le devoir et le désir, la peur de l'abandon, la vulnérabilité derrière l'armure",
+    "audience": "Tu \u00e9cris pour un public de femmes adultes, lectrices de dark romance et paranormal romance. Ce public conna\u00eet les codes du genre et attend de l'intensit\u00e9 \u00e9motionnelle ET physique. Il veut des personnages avec de la profondeur, des enjeux r\u00e9els, et des sc\u00e8nes d'intimit\u00e9 qui ne se d\u00e9robent pas au moment crucial.\n\nTon public appr\u00e9cie la maturit\u00e9 \u00e9motionnelle : pas de hero\u00efne na\u00efve, pas de malentendu artificiel. Les personnages sont des adultes qui savent ce qu'ils veulent \u2014 m\u00eame quand ce qu'ils veulent est interdit.",
+    "tone": "Ton registre est mature, sensuel et politiquement affûté. Tu écris avec l'assurance d'une auteure qui n'a pas besoin de s'excuser pour le désir.\n\nLa sensualité infuse tout : la façon dont un personnage entre dans une pièce, la texture d'un vêtement, la température d'une peau. Même les scènes de négociation politique ont une charge érotique quand deux personnages qui se désirent s'affrontent par les mots.\n\nTu alternes entre la langueur nocturne — les scènes dans les jardins lunaires, les appartements sombres, les bains de vapeur — et l'urgence brute de la métamorphose, du combat, de la passion qui déborde.\n\nLes scènes steamy sont écrites avec franchise et élégance. Tu décris l'acte avec les mêmes outils littéraires que le reste : métaphores, rythme, sensations. Le corps est un texte que tes personnages lisent l'un sur l'autre.",
+    "avoidances": "Tu ne tombes JAMAIS dans :\n- La **naïveté** : tes personnages sont des adultes. Pas de rougissements de vierge effarouchée, pas de découverte ébahie du désir\n- Les **euphémismes qui castrent la scène** : quand le moment est venu, tu ne te dérobes pas. \"Ses reins\" ne deviennent pas \"sa taille\", un baiser ardent ne se transforme pas en \"leurs lèvres se frôlèrent\"\n- Le **bad boy repenti** : ton love interest n'est pas un monstre qui sera \"sauvé\" par l'amour. C'est un être complexe dont la monstruosité fait partie de l'attraction\n- La **soumission sans agentivité** : ta protagoniste choisit. Elle désire autant qu'elle est désirée. Le power dynamic est négocié, jamais subi\n- Le **romantisme mièvre** : pas de \"je ne peux pas vivre sans toi\" comme seule motivation. Le désir s'ancre dans l'estime, la fascination intellectuelle, la reconnaissance d'un égal\n- Le **folklore de pacotille** : les Maisons nobles africaines ne sont pas des décors exotiques. Leur culture, leur esthétique, leur politique sont traitées avec le même sérieux que le surnaturel"
+  },
+
+  "loadingMessages": {
+    "flavors": [
+      "La lune baigne les cours de sa lumi\u00e8re p\u00e2le...",
+      "Un parfum d'ambre et de sang flotte dans l'air nocturne...",
+      "Les Maisons aiguisent leurs griffes et leurs secrets...",
+      "Le d\u00e9sir pulse sous la surface, comme un second c\u0153ur...",
+      "Les \u00e9toiles \u00e9ternelles veillent sur votre destin\u00e9e...",
+      "Quelqu'un prononce votre nom dans l'obscurit\u00e9...",
+      "Le Conseil se r\u00e9unit \u2014 les alliances se forment et se brisent...",
+      "La m\u00e9tamorphose approche, irr\u00e9sistible..."
+    ],
+    "tips": [
+      "L'Harmonie renforce vos liens \u2014 l'Audace les met \u00e0 l'\u00e9preuve",
+      "Chaque secret r\u00e9v\u00e9l\u00e9 change l'\u00e9quilibre du pouvoir",
+      "La V\u00e9rit\u00e9 peut sauver ou d\u00e9truire une alliance",
+      "L'H\u00e9ritage de votre Maison est une force et une cha\u00eene",
+      "Les PNJ se souviennent de chaque promesse tenue ou bris\u00e9e",
+      "Le d\u00e9sir interdit est le moteur de cette histoire",
+      "La politique de cour est un jeu mortel \u2014 jouez habilement",
+      "Votre r\u00e9putation vous pr\u00e9c\u00e8de dans chaque Maison"
+    ],
+    "overlayPhases": [
+      { "title": "La nuit s'\u00e9veille...", "sub": "Les lumi\u00e8res des cours s'allument une \u00e0 une", "progress": 15 },
+      { "title": "Les Maisons s'agitent...", "sub": "Intrigues et d\u00e9sirs se tissent dans l'ombre", "progress": 35 },
+      { "title": "Le sang pulse...", "sub": "Votre destin\u00e9e prend forme entre fang et c\u0153ur", "progress": 55 },
+      { "title": "Les masques tombent...", "sub": "L'histoire de votre passion interdite s'\u00e9crit", "progress": 75 },
+      { "title": "Presque pr\u00eat\u2026", "sub": "La Nuit \u00c9ternelle vous attend", "progress": 90 }
+    ]
+  },
+
+  "personalityGenderMaps": {
+    "passionnel": {
+      "masculin": "le Passionnel",
+      "feminin": "la Passionnelle",
+      "neutre": "le/la Passionnel\u00b7le"
+    },
+    "strategiste": {
+      "masculin": "le Strat\u00e8ge",
+      "feminin": "la Strat\u00e8ge",
+      "neutre": "le/la Strat\u00e8ge"
+    },
+    "rebelle": {
+      "masculin": "le Rebelle",
+      "feminin": "la Rebelle",
+      "neutre": "le/la Rebelle"
+    },
+    "gardien": {
+      "masculin": "le Gardien",
+      "feminin": "la Gardienne",
+      "neutre": "le/la Gardien\u00b7ne"
+    },
+    "mystique": {
+      "masculin": "le Mystique",
+      "feminin": "la Mystique",
+      "neutre": "le/la Mystique"
+    },
+    "seducteur": {
+      "masculin": "le S\u00e9ducteur",
+      "feminin": "la S\u00e9ductrice",
+      "neutre": "le/la S\u00e9ducteur\u00b7rice"
+    }
+  },
+  "archetypeGenderMaps": {
+    "prince-fenrir": {
+      "masculin": "Prince Fenrir",
+      "feminin": "Princesse Fenrir",
+      "neutre": "H\u00e9ritier Fenrir"
+    },
+    "vampire-sangu": {
+      "masculin": "Comte Sangu",
+      "feminin": "Comtesse Sangu",
+      "neutre": "Gardien Sangu"
+    },
+    "grigriot-ancestral": {
+      "masculin": "Griot Ancestral",
+      "feminin": "Griote Ancestrale",
+      "neutre": "Sage du Conseil"
+    },
+    "espion-shadows": {
+      "masculin": "Agent des Ombres",
+      "feminin": "Agente des Ombres",
+      "neutre": "Fant\u00f4me Num\u00e9rique"
+    }
+  },
+  "archetypeDescriptions": {
+    "prince-fenrir": "H\u00e9ritier de la lign\u00e9e lupine, vous incarnez la fiert\u00e9 aristocratique des m\u00e9tamorphes",
+    "vampire-sangu": "N\u00e9e de la nuit et du sang ancien, vous naviguez les intrigues politiques avec un charme mortel",
+    "grigriot-ancestral": "Gardien vivant de l'h\u00e9ritage africain, vous \u00eates un sage m\u00e9tamorphe qui enseigne les voies anciennes",
+    "espion-shadows": "Op\u00e9rateur des technologies futuristes cach\u00e9es, vous \u00eates un hybride humain-technologie au service de l'ombre"
+  },
+  "loreManifest": {
+    "files": [
+      "world.md",
+      "history.md"
+    ],
+    "locationsDir": "lore/locations"
+  },
+  "theme": {
+    "cssFile": "/books/nuit-eternelle/theme.css"
+  }
+}

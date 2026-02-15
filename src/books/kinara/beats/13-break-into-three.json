@@ -1,0 +1,26 @@
+{
+  "number": 13,
+  "name": "Break into Three",
+  "slug": "break-into-three",
+  "description": "L'illumination. Le heros synthetise tout ce qu'il a appris - les enseignements d'Amara (Ubuntu), les connaissances de Nia (Sankofa), l'ingeniosite de Kazi (Biso), et la justice de Sekou (Maat) - pour forger un plan audacieux. Il comprend que pour vaincre l'Ombre, il ne doit pas seulement tisser le Voile mais traverser dans le Royaume des Ombres pour affronter la source. Et il n'ira pas seul : chaque allie apporte une piece du puzzle.",
+  "minScenes": 1,
+  "maxScenes": 2,
+  "dcBase": 16,
+  "narrativeGoal": "Fusionner les lecons des mondes A et B pour creer le plan final. Le heros combine toutes les philosophies et competences acquises en une strategie qui necessite l'ensemble de son equipe.",
+  "transitionCondition": "Le heros a formule un plan clair pour affronter l'Ombre dans le Royaume des Ombres, chaque allie a un role defini, et le groupe est pret a passer a l'action.",
+  "keyNpcIds": ["nia-scholar", "kazi-inventor", "zephyr-spirit"],
+  "locationIds": ["veil-temple", "shadow-realm"],
+  "loreKeys": ["weaving-magic", "shadow-realm-lore", "combined-philosophies", "final-strategy"],
+  "gmInstructions": "C'est le moment 'Eureka'. Le heros realise que les quatre philosophies de Kinara ne sont pas des approches separees mais les quatre fils d'un meme tissage. Ubuntu (la communaute) donne la force collective ; Sankofa (la tradition) fournit la methode ancienne ; Biso (l'innovation) offre l'outil nouveau ; Maat (la justice) guide la direction morale. Kazi a peut-etre repare son invention pour ouvrir un passage controle vers le Royaume des Ombres. Nia a decode les textes anciens revelant comment les premiers Tisserands tissaient. Le plan : traverser dans le Royaume des Ombres, liberer Zephyr en chemin, et affronter l'Ombre a la source de la corruption. Le DC est eleve car la planification et la coordination sont cruciales. Ce moment doit etre galvanisant - le heros passe du desespoir a la determination eclairee.",
+  "forbiddenElements": ["hesitation-prolongee", "abandon-d-allies", "plan-solitaire", "retour-au-village"],
+  "suggestedMoodTags": ["determination", "clarity", "unity", "hope", "resolve"],
+  "initialPacing": {
+    "tensionCurve": "rising",
+    "emotionalTone": "hope",
+    "narrativeCheckpoints": [
+      { "id": "synthesis-achieved", "description": "Le heros a synthetise les quatre philosophies en une strategie unifiee", "met": false },
+      { "id": "plan-formed", "description": "Un plan clair pour affronter l'Ombre a ete formule", "met": false }
+    ],
+    "maxTurnsBeforeForceProgress": 4
+  }
+}

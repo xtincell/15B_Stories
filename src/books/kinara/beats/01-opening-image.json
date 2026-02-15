@@ -1,0 +1,26 @@
+{
+  "number": 1,
+  "name": "Opening Image",
+  "slug": "opening-image",
+  "description": "Le village natal du heros baigne dans la lumiere doree du matin. Les esprits mineurs dansent entre les toits de chaume, visibles seulement comme des reflets fugaces. Le heros vit sa routine quotidienne, mais des murmures etranges le troublent - des voix que personne d'autre ne semble entendre. Ce beat etablit le monde ordinaire de Kinara avant que tout ne bascule.",
+  "minScenes": 1,
+  "maxScenes": 2,
+  "dcBase": 8,
+  "narrativeGoal": "Presenter le monde ordinaire du heros, son village, sa communaute, et glisser les premiers signes de son don unique : les murmures des esprits qu'il est le seul a percevoir.",
+  "transitionCondition": "Le heros a vecu une scene de vie quotidienne et a percu au moins un murmure spirituel inexplique qui le distingue des autres villageois.",
+  "keyNpcIds": ["elder-amara", "kofi-friend"],
+  "locationIds": ["village-of-origin"],
+  "loreKeys": ["spirit-veil", "village-traditions", "minor-spirits"],
+  "gmInstructions": "Decrivez le village avec chaleur et familiarite. Les esprits mineurs sont presents mais discrets - lumieres dansantes, brises parfumees, ombres joueuses. Le heros entend des chuchotements que les autres ignorent. Ne revelez pas encore la nature de ce don. Elder Amara observe le heros avec un regard entendu mais ne dit rien. Kofi est insouciant et joyeux, ancrant le heros dans la normalite. Utilisez les cinq sens pour immerger le joueur dans Kinara.",
+  "forbiddenElements": ["revelation-complete-du-don", "apparition-de-l-antagoniste", "combat-majeur", "voyage-hors-du-village"],
+  "suggestedMoodTags": ["serenity", "wonder", "nostalgia", "warmth"],
+  "initialPacing": {
+    "tensionCurve": "plateau",
+    "emotionalTone": "serenity",
+    "narrativeCheckpoints": [
+      { "id": "village-life-shown", "description": "Le joueur a vecu ou observe une scene de vie quotidienne au village", "met": false },
+      { "id": "whisper-heard", "description": "Le heros a percu un murmure ou une voix spirituelle que les autres n'entendent pas", "met": false }
+    ],
+    "maxTurnsBeforeForceProgress": 4
+  }
+}

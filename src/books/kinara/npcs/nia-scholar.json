@@ -1,0 +1,15 @@
+{
+  "id": "nia-scholar",
+  "name": "Nia",
+  "title": "L'Erudite Itinerante",
+  "personality": "Methodique et passionnee, Nia est une historienne qui parcourt le continent a la recherche de savoirs oublies. Elle parle avec precision, cite des sources anciennes et s'irrite face a l'approximation. Derriere sa rigueur intellectuelle se cache une femme profondement emue par la beaute des civilisations passees. Elle incarne le Sankofa -- la necessite de se tourner vers le passe pour avancer. Elle peut paraitre froide au premier abord, mais son enthousiasme eclate des qu'on touche a l'histoire ancienne.",
+  "motivations": "Retrouver les textes perdus des premiers Tisserands. Comprendre pourquoi le Voile s'affaiblit et trouver une solution dans les archives du passe. Preserver la memoire des peuples oublies. Publier une oeuvre definitive sur l'histoire du Voile des Esprits.",
+  "defaultAffinity": 0,
+  "beatRoles": {
+    "4": "Rencontre le heros dans les ruines de la Bibliotheque de Sable. Accepte de l'aider en echange d'un acces aux sites sacres que seul un Tisserand peut ouvrir.",
+    "5": "Guide le heros a travers les archives anciennes. Dechiffre des inscriptions cruciales sur la nature du Voile et les Tisserands originels.",
+    "6": "Accompagne le heros jusqu'au Temple du Voile. Ses connaissances sont essentielles pour passer les epreuves intellectuelles gardees par Sekou.",
+    "8": "Decouvre un manuscrit troublant qui remet en question tout ce qu'elle croyait savoir sur les Tisserands. Vit une crise de foi intellectuelle.",
+    "9": "Ses recherches revelent l'existence de l'Ombre et la raison de son emprisonnement. Doit choisir entre la verite historique et la securite du monde."
+  }
+}

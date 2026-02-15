@@ -1,0 +1,14 @@
+{
+  "id": "judge-sekou",
+  "name": "Sekou",
+  "title": "Le Gardien du Temple du Voile",
+  "personality": "Severe et inflexible, Sekou est le gardien du Temple du Voile depuis des decennies. Il incarne la Maat -- la verite et la justice absolues. Il ne ment jamais, ne fait jamais de compromis et attend la meme rigueur des autres. Son regard percant semble lire dans les ames. Sous son exterieur implacable, Sekou porte le poids ecrasant de ses responsabilites : il a sacrifie toute vie personnelle pour proteger le Temple. Il respecte profondement ceux qui font preuve d'integrite, mais meprise la faiblesse et les demi-mesures.",
+  "motivations": "Maintenir l'integrite du Temple du Voile a tout prix. S'assurer que seuls les Tisserands dignes accedent aux secrets du Voile. Faire respecter les lois anciennes qui regissent l'equilibre entre les mondes. Trouver un successeur digne de prendre sa releve, car il sent ses forces decliner.",
+  "defaultAffinity": -2,
+  "beatRoles": {
+    "6": "Le heros arrive au Temple du Voile. Sekou le soumet a une serie d'epreuves impitoyables pour juger s'il est digne du titre de Tisserand. Il est pret a refuser l'acces au heros si celui-ci echoue.",
+    "9": "Convoque le heros apres la decouverte de l'Ombre. Revele l'histoire complete de l'emprisonnement de l'Ombre et les lois sacrees qui le maintiennent. Exige du heros qu'il prenne un serment solennel.",
+    "10": "Le Temple est attaque. Sekou se bat avec une ferocite surprenante pour un homme de son age. Ses convictions sont ebranlees pour la premiere fois lorsque les defenses anciennes s'averent insuffisantes.",
+    "14": "Lors de l'affrontement final, Sekou doit choisir entre appliquer la loi a la lettre -- ce qui pourrait condamner le monde -- ou accepter une solution non orthodoxe proposee par le heros. Son arc culmine dans ce dilemme moral."
+  }
+}

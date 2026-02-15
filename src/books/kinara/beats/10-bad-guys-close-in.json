@@ -1,0 +1,29 @@
+{
+  "number": 10,
+  "name": "Bad Guys Close In",
+  "slug": "bad-guys-close-in",
+  "description": "La force ancienne derriere les dechirures - l'Ombre - intensifie ses attaques. Des creatures d'ombre traversent les breches du Voile, semant la terreur dans les villages. Les allies du heros sont mis a l'epreuve : Nia decouvre des textes qui suggerent que le dernier Tisserand a echoue, Kazi voit ses inventions sabotees par des energies corrompues, le Juge Sekou revele que le Temple lui-meme est menace. Pire encore, l'Ombre commence a murmurer directement au heros, tentant de le corrompre avec des promesses de pouvoir.",
+  "minScenes": 3,
+  "maxScenes": 5,
+  "dcBase": 14,
+  "narrativeGoal": "Intensifier la pression de tous les cotes. Les ennemis exterieurs se rapprochent, les failles internes du groupe apparaissent, et l'antagoniste commence a agir directement contre le heros et ses allies.",
+  "transitionCondition": "Le heros a subi plusieurs revers significatifs, ses allies sont fragilises, et la menace de l'Ombre est devenue personnelle et imminente.",
+  "keyNpcIds": ["shadow-antagonist", "nia-scholar", "kazi-inventor", "judge-sekou", "zephyr-spirit"],
+  "locationIds": ["veil-temple", "capital-zandara"],
+  "loreKeys": ["shadow-force-origin", "corruption-mechanics", "veil-degradation", "tisserand-failures"],
+  "gmInstructions": "La pression monte de tous les cotes. L'Ombre n'est plus une menace abstraite - elle agit directement. Ses murmures au heros sont seduisants : elle promet de lui montrer la verite sur ses origines, d'amplifier son pouvoir, de sauver ceux qu'il aime. Les allies souffrent : Nia est hantee par des visions des Tisserands passes qui ont echoue et sont devenus fous ; Kazi decouvre que ses inventions amplifient les dechirures au lieu de les detecter ; Sekou cache une blessure spirituelle que le Voile affaibli inflige aux gardiens. Zephyr devient instable, sa voix se melant parfois a celle de l'Ombre. Le DC est eleve car chaque decision a des consequences lourdes. Introduisez des conflits internes au groupe - la meilleure strategie divise les allies.",
+  "forbiddenElements": ["victoire-facile", "resolution-du-conflit", "mort-definitive-d-allie", "corruption-du-heros"],
+  "suggestedMoodTags": ["dread", "paranoia", "pressure", "fracture", "despair"],
+  "initialPacing": {
+    "tensionCurve": "rising",
+    "emotionalTone": "dread",
+    "narrativeCheckpoints": [
+      { "id": "shadow-direct-attack", "description": "L'Ombre a attaque directement le heros ou ses allies", "met": false },
+      { "id": "allies-tested", "description": "Au moins deux allies ont ete mis en difficulte ou fragilises", "met": false },
+      { "id": "shadow-whispers", "description": "L'Ombre a tente de seduire ou corrompre le heros directement", "met": false },
+      { "id": "group-conflict", "description": "Un conflit interne significatif a divise le groupe", "met": false },
+      { "id": "setback-suffered", "description": "Le heros a subi un revers majeur dans sa quete", "met": false }
+    ],
+    "maxTurnsBeforeForceProgress": 7
+  }
+}

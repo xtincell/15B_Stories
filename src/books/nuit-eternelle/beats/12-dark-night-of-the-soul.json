@@ -1,0 +1,63 @@
+{
+  "number": 12,
+  "name": "Dark Night of the Soul",
+  "slug": "dark-night-of-the-soul",
+  "description": "Dans ce moment d'introspection profonde, le joueur traverse le vide émotionnel et politique. Il ne s'agit pas d'action, mais de réflexion, de deuil et de transformation intérieure. C'est ici que le joueur redécouvre son essence, ses vrais alliés, et trouve en lui la force de se relever. Une figure mentale ou un guide (comme Amara, Zephyr, ou le fantôme symbolique de son amant) peut apparaître pour offrir sagesse ou rédemption.",
+  "minScenes": 1,
+  "maxScenes": 3,
+  "dcBase": 14,
+  "narrativeGoal": "Permettre au joueur de transformer son désespoir en détermination renouvelée, redécouvrant des valeurs profondes et trouvant des raisons de continuer au-delà de la relation romantique.",
+  "transitionCondition": "Le joueur doit avoir un moment d'épiphanie, recevoir une révélation, ou redécouvrir un allié ou une ressource cachée qui ravive l'espoir.",
+  "keyNpcIds": [
+    "amara-griot",
+    "zephyr-esprit",
+    "darius-fenrir",
+    "kora-sangu"
+  ],
+  "locationIds": [
+    "sanctuaire-ancestral",
+    "carrefour-numerique",
+    "lieu-de-meditation",
+    "cachot-reflexion"
+  ],
+  "loreKeys": [
+    "sagesse-ancestrale",
+    "connexion-spirituelle",
+    "transformation-interieure",
+    "redemption-personnelle"
+  ],
+  "gmInstructions": "Créez une scène intime et contemplative. Utilisez Amara comme guide sagesse, ou Zephyr pour une révélation numérique-spirituelle. Le joueur doit avoir accès à une vérité cachée ou à une perspective transformatrice. Montrez comment la relation amoureuse, bien que perdue en apparence, a changé le joueur de manière irréversible et positive. Préparez le terrain pour une renaissance.",
+  "forbiddenElements": [
+    "action-chaotique",
+    "introduction-nouveaux-antagonistes",
+    "solution-trop-facile"
+  ],
+  "suggestedMoodTags": [
+    "serenity",
+    "melancholy",
+    "hope",
+    "wisdom"
+  ],
+  "initialPacing": {
+    "tensionCurve": "falling",
+    "emotionalTone": "serenity",
+    "narrativeCheckpoints": [
+      {
+        "id": "moment-introspectif",
+        "description": "Le joueur se retire pour réfléchir, méditer, ou recevoir la visite d'un guide spirituel ou menteur",
+        "met": false
+      },
+      {
+        "id": "revelation-cachee",
+        "description": "Une vérité cachée émerge : connexion avec son amant malgré la séparation, détail crucial du passé, ou compréhension nouvelle du système",
+        "met": false
+      },
+      {
+        "id": "renaissance-interieure",
+        "description": "Le joueur accepte sa transformation et trouve la force de continuer, non par amour romantique seul, mais par conviction personnelle",
+        "met": false
+      }
+    ],
+    "maxTurnsBeforeForceProgress": 5
+  }
+}

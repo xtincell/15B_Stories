@@ -1,0 +1,65 @@
+{
+  "number": 14,
+  "name": "Finale",
+  "slug": "finale-climax",
+  "description": "Le grand affrontement se déploie : le joueur et ses alliés confrontent directement le système oppressif, Malachai et les Ombres Numériques, et les factions rigides des Maisons. C'est le moment du climax émotionnel, politique et parfois physique. La relation amoureuse interdit devient le cœur symbolique de cette bataille pour la transformation. Le joueur doit choisir : sauver uniquement son amant, ou transformer le système entier. Victoire ou défaite, le joueur agit enfin en accord avec ses convictions profondes.",
+  "minScenes": 2,
+  "maxScenes": 5,
+  "dcBase": 16,
+  "narrativeGoal": "Résoudre le conflit central via l'action directe du joueur, montrant comment son amour et sa détermination catalysent une transformation systémique.",
+  "transitionCondition": "Le joueur doit remporter une victoire significative (destruction de Malachai, effondrement du système ancien, alliance entre les Maisons, ou libération de son amant) ou accepter une défaite rédemptrice avec transformation personnelle.",
+  "keyNpcIds": [
+    "darius-fenrir",
+    "kora-sangu",
+    "malachai-antagoniste",
+    "okafor-conseil",
+    "amara-griot",
+    "zephyr-esprit"
+  ],
+  "locationIds": [
+    "siege-pouvoir",
+    "nexus-numerique-central",
+    "monument-fusion",
+    "arene-ultime"
+  ],
+  "loreKeys": [
+    "victoire-finale",
+    "transformation-hierarchies",
+    "mort-antagoniste",
+    "renaissance-systeme"
+  ],
+  "gmInstructions": "Orchéstrez un affrontement dramatique combinant éléments romantiques, politiques, et technologiques. Montrez comment les alliés du joueur contribuent à la victoire. Permettez des moments de bravoure personnelle et des choix moraux difficiles. L'antagoniste Malachai doit être vaincu de manière satisfaisante mais pas simpliste. Laissez la relation amoureuse se cristalliser comme symbole vivant de la transformation du monde.",
+  "forbiddenElements": [
+    "victoire-sans-cout",
+    "mort-non-consentie-protagoniste",
+    "retour-ancien-systeme"
+  ],
+  "suggestedMoodTags": [
+    "triumph",
+    "passion",
+    "rage",
+    "glory"
+  ],
+  "initialPacing": {
+    "tensionCurve": "climax",
+    "emotionalTone": "triumph",
+    "narrativeCheckpoints": [
+      {
+        "id": "confrontation-directe",
+        "description": "Le joueur et ses alliés font face directement à Malachai, au Conseil rigide, ou au cœur du système oppressif",
+        "met": false
+      },
+      {
+        "id": "moment-sacrifice",
+        "description": "Un choix difficile doit être fait : sacrifier quelque chose d'important pour la victoire, ou risquer tout pour l'amour",
+        "met": false
+      },
+      {
+        "id": "victoire-symbolique",
+        "description": "Défaite de l'antagoniste principal et/ou transformation visible du système. Le joueur et son amant se retrouvent ou sont réunis symboliquement",
+        "met": false
+      }
+    ],
+    "maxTurnsBeforeForceProgress": 5
+  }
+}

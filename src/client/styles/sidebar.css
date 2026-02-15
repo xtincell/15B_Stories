@@ -1,0 +1,239 @@
+/* ── Sidebar ── */
+
+.sidebar {
+  width: var(--sidebar-width);
+  background: var(--color-bg-secondary);
+  border-right: 1px solid var(--color-surface);
+  overflow-y: auto;
+  padding: 1.25rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.char-header h2 {
+  color: var(--color-gold);
+  font-size: 1.2rem;
+}
+.archetype-tag {
+  color: var(--color-text-dim);
+  font-size: 0.8rem;
+  font-style: italic;
+}
+
+/* HP Bar */
+.hp-bar {
+  position: relative;
+  height: 24px;
+  background: var(--color-surface);
+  border-radius: var(--radius);
+  overflow: hidden;
+}
+.hp-fill {
+  height: 100%;
+  background: linear-gradient(90deg, var(--color-risk-high), var(--color-risk-low));
+  transition: width 0.5s ease;
+  border-radius: var(--radius);
+}
+.hp-bar span {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-ui);
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--color-text);
+  text-shadow: 0 1px 2px rgba(0,0,0,0.5);
+}
+
+/* Stat Grid */
+.stat-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.5rem;
+}
+
+.stat-card {
+  background: var(--color-bg-card);
+  padding: 0.5rem;
+  border-radius: var(--radius);
+  text-align: center;
+  border: 1px solid transparent;
+  transition: border-color 0.2s;
+}
+.stat-card[data-stat="ubuntu"] { border-color: color-mix(in srgb, var(--color-ubuntu) 30%, transparent); }
+.stat-card[data-stat="maat"] { border-color: color-mix(in srgb, var(--color-maat) 30%, transparent); }
+.stat-card[data-stat="sankofa"] { border-color: color-mix(in srgb, var(--color-sankofa) 30%, transparent); }
+.stat-card[data-stat="biso"] { border-color: color-mix(in srgb, var(--color-biso) 30%, transparent); }
+
+.stat-card .stat-name {
+  display: block;
+  font-family: var(--font-ui);
+  font-size: 0.65rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--color-text-muted);
+  margin-bottom: 0.25rem;
+}
+.stat-card .stat-val {
+  display: block;
+  font-family: var(--font-ui);
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: var(--color-gold);
+}
+
+/* Inventory & Relationships */
+.inventory-section h3,
+.relationships-section h3 {
+  color: var(--color-gold-dim);
+  font-family: var(--font-ui);
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin-bottom: 0.5rem;
+}
+
+.inventory-section ul,
+.relationships-section ul {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.inventory-section li,
+.relationships-section li {
+  font-size: 0.85rem;
+  color: var(--color-text-dim);
+  padding: 0.25rem 0;
+}
+
+.relationship-bar {
+  display: inline-block;
+  width: 60px;
+  height: 4px;
+  background: var(--color-surface);
+  border-radius: 2px;
+  margin-left: 0.5rem;
+  vertical-align: middle;
+  position: relative;
+}
+.relationship-fill {
+  height: 100%;
+  border-radius: 2px;
+  position: absolute;
+  left: 50%;
+}
+.relationship-fill.positive {
+  background: var(--color-risk-low);
+}
+.relationship-fill.negative {
+  background: var(--color-risk-high);
+  transform: scaleX(-1);
+  transform-origin: left;
+}
+
+/* ── Sidebar Save Button ── */
+.btn-sidebar-action {
+  margin-top: auto;
+  padding: 0.5rem 0.75rem;
+  background: var(--color-bg-card);
+  border: 1px solid var(--color-surface);
+  border-radius: var(--radius);
+  color: var(--color-text-dim);
+  font-family: var(--font-ui);
+  font-size: 0.75rem;
+  cursor: pointer;
+  transition: border-color 0.2s, color 0.2s;
+  text-align: center;
+}
+.btn-sidebar-action:hover {
+  border-color: var(--color-gold-dim);
+  color: var(--color-gold);
+}
+
+/* Menu Principal button — visually distinct from Save */
+.btn-sidebar-menu {
+  margin-top: 0.5rem;
+  border-style: dashed;
+  font-size: 0.7rem;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+.btn-sidebar-menu:hover {
+  border-style: solid;
+}
+
+/* ── Stat Flash Animation ── */
+
+@keyframes statFlashUp {
+  0% { color: var(--color-gold); }
+  25% { color: var(--color-risk-low); text-shadow: 0 0 8px var(--color-risk-low); transform: scale(1.25); }
+  100% { color: var(--color-gold); text-shadow: none; transform: scale(1); }
+}
+@keyframes statFlashDown {
+  0% { color: var(--color-gold); }
+  25% { color: var(--color-risk-high); text-shadow: 0 0 8px var(--color-risk-high); transform: scale(0.85); }
+  100% { color: var(--color-gold); text-shadow: none; transform: scale(1); }
+}
+
+.stat-flash-up {
+  animation: statFlashUp 0.6s ease;
+}
+.stat-flash-down {
+  animation: statFlashDown 0.6s ease;
+}
+
+/* ── Empty State ── */
+.empty-state {
+  font-size: 0.8rem;
+  color: var(--color-text-muted);
+  font-style: italic;
+  padding: 0.25rem 0;
+}
+
+/* ── NPC Relationship Items (Sidebar) ── */
+
+.relationship-item {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-size: 0.85rem;
+  padding: 0.25rem 0;
+}
+
+.rel-name {
+  min-width: 70px;
+  color: var(--color-text-dim);
+  font-size: 0.8rem;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.rel-bar {
+  flex: 1;
+  height: 4px;
+  background: var(--color-surface);
+  border-radius: 2px;
+  overflow: hidden;
+  position: relative;
+}
+
+.rel-bar-fill {
+  height: 100%;
+  border-radius: 2px;
+  transition: width 0.4s ease;
+}
+
+.rel-val {
+  font-family: var(--font-ui);
+  font-size: 0.7rem;
+  min-width: 24px;
+  text-align: right;
+  color: var(--color-text-muted);
+  font-weight: 600;
+}

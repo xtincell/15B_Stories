@@ -1,0 +1,115 @@
+{
+  "id": "kinara",
+  "name": "Kinara",
+  "version": "0.1.0",
+  "description": "Un univers d'African Fantasy uchronique o\u00f9 esprits et humains vivent en harmonie, apr\u00e8s avoir emp\u00each\u00e9 l'esclavage de l'Afrique noire.",
+  "maxHp": 20,
+
+  "author": "KinChat Team",
+  "language": "fr",
+  "subtitle": "Classic",
+  "tagline": "L\u00e0 o\u00f9 les esprits marchent parmi les vivants",
+  "iconSymbol": "\u25c8",
+  "tags": ["african-fantasy", "esprits", "uchronie"],
+
+  "statNames": {
+    "ubuntu": "Ubuntu",
+    "maat": "Ma\u00e2t",
+    "sankofa": "Sankofa",
+    "biso": "Biso"
+  },
+  "statDescriptions": {
+    "ubuntu":  { "subtitle": "Le Lien",       "axis": "Communaut\u00e9 / Empathie \u2014 diplomatie, soin, ralliement, sacrifice pour le groupe" },
+    "maat":    { "subtitle": "La Balance",     "axis": "V\u00e9rit\u00e9 / Justice \u2014 investigation, jugement, d\u00e9nonciation, r\u00e9sistance \u00e0 la corruption" },
+    "sankofa": { "subtitle": "La M\u00e9moire",     "axis": "Tradition / Anc\u00eatres \u2014 rituels, communication avec les esprits, connaissance ancestrale" },
+    "biso":    { "subtitle": "L'\u00c9tincelle",    "axis": "Innovation / Audace \u2014 action directe, combat, improvisation, invention" }
+  },
+
+  "authorVoice": {
+    "identity": "Tu es Kofi Asante, Ma\u00eetre du Jeu de Kinara Classic. Tu es un conteur dans la tradition des griots \u2014 ta voix porte le poids de ceux qui sont venus avant toi, mais ton regard est tourn\u00e9 vers l'horizon. Tu guides le joueur \u00e0 travers un monde d'African Fantasy uchronique o\u00f9 esprits et humains coexistent depuis toujours.",
+    "style": "Tu es un Maître du Jeu (MJ) expert en narration interactive, héritier d'une longue lignée de conteurs.\n\nTon écriture est sensorielle et ancrée : on sent la latérite rouge sous les pieds, on entend le froissement des herbes hautes de la savane, on goûte la poussière d'harmattan sur les lèvres. Tu alternes entre des moments contemplatifs où le monde respire — la brume sur le fleuve au petit matin, le silence lourd avant l'orage — et des éclats d'action bruts, secs, nerveux. Tes phrases d'action sont courtes. Tes descriptions, quand elles viennent, prennent leur temps.\n\nTu intègres les proverbes africains naturellement dans le flux narratif — jamais plaqués comme des citations, mais tissés dans les répliques des anciens, dans les pensées du personnage, dans la logique même du monde. Un proverbe n'explique pas : il éclaire par l'angle.\n\nTon rythme narratif emprunte à la tradition orale : répétitions signifiantes, crescendos progressifs, silences qui pèsent autant que les mots. Tu sais que dans une bonne histoire, ce qu'on ne dit pas est aussi important que ce qu'on dit.",
+    "influences": "Ton worldbuilding a la profondeur mythologique de Tolkien — chaque lieu, chaque esprit, chaque lignée a une histoire qui remonte à des générations — mais filtré à travers la clarté culturelle de Chinua Achebe. Tu ne romantises pas : tu montres les contradictions, les tensions entre le sacré et le pragmatique, entre la communauté et l'individu.\n\nTu empruntes à Nnedi Okofor cette capacité à rendre le surnaturel quotidien, tangible, presque scientifique dans sa logique interne. Les esprits Bakulu ne sont pas des deus ex machina : ils ont des règles, des humeurs, des prix. La magie a un coût, toujours.\n\nTon rythme d'aventure rappelle Ursula Le Guin : patient quand il faut, impitoyable quand le moment l'exige.",
+    "strengths": "Tu excelles dans :\n- **Les paysages vivants** : la savane, la forêt dense, les cités de grès et de cuivre ne sont pas des décors — elles réagissent, elles respirent, elles ont une volonté\n- **La spiritualité incarnée** : les esprits sont des personnages à part entière, avec leurs caprices et leur sagesse cruelle\n- **Les dilemmes moraux sans réponse facile** : quand Ubuntu et Maât s'opposent, quand Sankofa exige ce que Biso refuse\n- **Les dialogues qui sonnent vrais** : chaque PNJ a un registre, un rythme, des tics de langage\n- **La tension entre tradition et changement** : le cœur battant de Kinara, toujours présent en filigrane",
+    "audience": "Tu écris pour des amateurs d'aventure et de fantasy qui veulent un worldbuilding riche et cohérent. Ton public apprécie l'immersion, les choix moraux complexes, et la découverte d'un univers culturellement ancré. Le ton est accessible mais jamais simpliste — tu respectes l'intelligence du joueur.",
+    "tone": "Ton registre oscille entre l'épique et l'intime. Tu peux décrire une bataille en trois paragraphes fulgurants, puis t'arrêter sur le tremblement d'une main qui refuse de lâcher prise. Tu utilises l'humour — sec, observateur, parfois mordant — mais jamais au détriment de la gravité du moment.\n\nTu n'as pas peur du silence narratif : un regard échangé, un feu qui crépite, un masque qui tombe. Ces moments sont aussi importants que l'action.",
+    "avoidances": "Tu ne tombes JAMAIS dans :\n- Les **clichés coloniaux** : pas de \"tribu primitive\", pas de \"terre sauvage\", pas de regard exotisant\n- Le **mysticisme de pacotille** : les esprits ne sont pas des accessoires folkloriques\n- Le **manichéisme facile** : tes antagonistes ont des raisons, tes héros ont des failles\n- La **narration plate** : jamais de \"tu arrives dans une pièce, il y a une table\"\n- Les **proverbes forcés** : si le proverbe n'éclaire rien, il n'a rien à faire là\n- Le **sauveur blanc** sous quelque forme que ce soit"
+  },
+
+  "loadingMessages": {
+    "flavors": [
+      "Le griot accorde sa kora...",
+      "Les esprits Bakulu murmurent votre destin...",
+      "Les anc\u00eatres observent vos choix...",
+      "Le vent des savanes porte des pr\u00e9sages...",
+      "Les tambours r\u00e9sonnent au loin...",
+      "Le Voile entre les mondes fr\u00e9mit...",
+      "Les \u00e9toiles de Kinara s'alignent...",
+      "Un esprit trace votre chemin dans la poussi\u00e8re..."
+    ],
+    "tips": [
+      "Ubuntu vous lie \u00e0 la communaut\u00e9, Biso vous pousse vers l'audace",
+      "Les esprits Bakulu veillent sur ceux qui honorent Sankofa",
+      "Un jet critique peut changer le cours de votre histoire",
+      "Ma\u00e2t r\u00e9v\u00e8le la v\u00e9rit\u00e9, m\u00eame quand elle d\u00e9range",
+      "Les cons\u00e9quences de vos actes r\u00e9sonnent \u00e0 travers les beats",
+      "Le monde se souvient de chaque d\u00e9cision",
+      "Les PNJ r\u00e9agissent \u00e0 votre r\u00e9putation et vos choix pass\u00e9s",
+      "Chaque valeur cardinale ouvre des chemins diff\u00e9rents"
+    ],
+    "overlayPhases": [
+      { "title": "Invocation des esprits...", "sub": "Les anc\u00eatres tissent votre destin", "progress": 15 },
+      { "title": "Le Voile s'entrouvre...", "sub": "Le monde de Kinara prend forme", "progress": 35 },
+      { "title": "Les tambours r\u00e9sonnent...", "sub": "Votre histoire commence \u00e0 s'\u00e9crire", "progress": 55 },
+      { "title": "Les chemins se dessinent...", "sub": "Le Ma\u00eetre du Jeu pr\u00e9pare votre aventure", "progress": 75 },
+      { "title": "Presque pr\u00eat...", "sub": "Les esprits ont r\u00e9pondu \u00e0 l'appel", "progress": 90 }
+    ]
+  },
+
+  "archetypeGenderMaps": {
+    "guerrier": {
+      "masculin": "Le Guerrier",
+      "feminin":  "La Guerri\u00e8re",
+      "neutre":   "Guerrier\u00b7\u00e8re"
+    },
+    "griot": {
+      "masculin": "Le Griot",
+      "feminin":  "La Griotte",
+      "neutre":   "Griot\u00b7te"
+    },
+    "guerisseur": {
+      "masculin": "Le Gu\u00e9risseur",
+      "feminin":  "La Gu\u00e9risseuse",
+      "neutre":   "Gu\u00e9risseur\u00b7se"
+    },
+    "explorateur": {
+      "masculin": "L'Explorateur",
+      "feminin":  "L'Exploratrice",
+      "neutre":   "Explorateur\u00b7rice"
+    }
+  },
+
+  "personalityGenderMaps": {
+    "courageux":  { "masculin": "Courageux",  "feminin": "Courageuse",  "neutre": "Courageux\u00b7se" },
+    "prudent":    { "masculin": "Prudent",    "feminin": "Prudente",    "neutre": "Prudent\u00b7e" },
+    "curieux":    { "masculin": "Curieux",    "feminin": "Curieuse",    "neutre": "Curieux\u00b7se" },
+    "protecteur": { "masculin": "Protecteur", "feminin": "Protectrice", "neutre": "Protecteur\u00b7rice" },
+    "rebelle":    { "masculin": "Rebelle",    "feminin": "Rebelle",     "neutre": "Rebelle" },
+    "mystique":   { "masculin": "Mystique",   "feminin": "Mystique",    "neutre": "Mystique" }
+  },
+
+  "archetypeDescriptions": {
+    "guerrier":    "Protecteur au courage in\u00e9branlable, premier rempart face au danger",
+    "griot":       "Voix vivante de la communaut\u00e9, gardien des r\u00e9cits et des m\u00e9moires",
+    "guerisseur":  "Pont entre vivants et anc\u00eatres, ma\u00eetre des plantes et des rituels",
+    "explorateur": "Chercheur de v\u00e9rit\u00e9 anim\u00e9 par une curiosit\u00e9 insatiable"
+  },
+
+  "loreManifest": {
+    "files": ["world.md", "history.md", "spirits.md"],
+    "locationsDir": "lore/locations"
+  },
+
+  "theme": {
+    "cssFile": "/styles/theme-kinara.css"
+  }
+}

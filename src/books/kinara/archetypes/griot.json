@@ -1,0 +1,16 @@
+{
+  "id": "griot",
+  "name": "Le Griot",
+  "description": "Gardien des recits et des memoires, le Griot est la voix vivante de la communaute. Par ses paroles, il guerit les coeurs brises, apaise les conflits et tisse des liens entre les etres. Son pouvoir reside dans l'empathie et la comprehension profonde des autres. La ou les guerriers tranchent et les inventeurs construisent, le Griot ecoute, raconte et rassemble. En tant que Tisserand, il percoit le Voile comme une immense tapisserie de recits entremeles -- chaque dechirure est une histoire interrompue qu'il doit achever.",
+  "suggestedStats": {
+    "ubuntu": 7,
+    "maat": 5,
+    "sankofa": 5,
+    "biso": 3
+  },
+  "startingItems": [
+    "kora-ancestrale",
+    "sacoche-a-contes"
+  ],
+  "backstoryHook": "Depuis l'enfance, les gens se confient a vous sans que vous le demandiez. Les disputes s'apaisent en votre presence, les pleurs se tarissent sous vos paroles. Amara dit que c'est un don rare -- celui de porter les histoires des autres sans en etre ecrase. Mais recemment, les histoires que vous entendez ne viennent plus des vivants. Des murmures anciens s'insinuent dans vos recits, des voix oubliees cherchent a etre entendues a travers vous. Le Voile vous parle, et il a une histoire urgente a raconter."
+}

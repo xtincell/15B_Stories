@@ -1,0 +1,50 @@
+/* Theme: Nuit Éternelle — Dark paranormal romance */
+:root {
+  /* Deep violet/midnight backgrounds */
+  --color-bg: #0d0a14;
+  --color-bg-secondary: #1a1525;
+  --color-bg-card: #231e30;
+  --color-surface: #342d42;
+
+  /* Violet & silver accents */
+  --color-gold: #c4a0ff;
+  --color-gold-dim: #8a6db8;
+  --color-amber: #9b7fc4;
+  --color-copper: #7a5ea8;
+
+  /* Text — light enough for dark violet backgrounds */
+  --color-text: #e8e0f0;
+  --color-text-dim: #b0a4c4;
+  --color-text-muted: #7d7394;
+
+  /* Stats */
+  --color-ubuntu: #e074b7;
+  --color-maat: #a090e0;
+  --color-sankofa: #7ac4c4;
+  --color-biso: #d4a0ff;
+
+  /* Mood colors */
+  --color-wonder: #b090e0;
+  --color-dread: #8b1030;
+  --color-hope: #c4a0ff;
+  --color-grief: #5a4880;
+  --color-triumph: #e074b7;
+  --color-tension: #d05070;
+  --color-serenity: #7ac4c4;
+  --color-rage: #c02040;
+
+  /* Risk levels */
+  --color-risk-low: #7ac4c4;
+  --color-risk-medium: #c4a0ff;
+  --color-risk-high: #d05070;
+
+  /* Layout */
+  --sidebar-width: 280px;
+  --beat-tracker-height: 48px;
+  --radius: 8px;
+  --radius-lg: 12px;
+
+  /* Typography */
+  --font-body: 'Georgia', 'Times New Roman', serif;
+  --font-ui: system-ui, -apple-system, sans-serif;
+}

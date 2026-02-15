@@ -1,0 +1,28 @@
+{
+  "number": 3,
+  "name": "Set-Up",
+  "slug": "set-up",
+  "description": "La vie au village se deploie dans ses multiples facettes. Le heros interagit avec sa communaute, decouvre les tensions sous-jacentes, et les premiers signes de perturbation du Voile Spirituel se manifestent. Les animaux se comportent etrangement, les recoltes fletrissent dans un champ, un esprit mineur semble agite. Le heros tente d'en parler mais personne ne le prend au serieux.",
+  "minScenes": 2,
+  "maxScenes": 4,
+  "dcBase": 8,
+  "narrativeGoal": "Etablir les enjeux personnels du heros, ses relations, ses forces et faiblesses, et montrer les premices du dereglement du Voile Spirituel qui affecte le monde ordinaire.",
+  "transitionCondition": "Le joueur a explore au moins deux aspects de la vie du heros (relations, competences, quotidien) et a ete temoin d'au moins un signe concret de la perturbation du Voile.",
+  "keyNpcIds": ["elder-amara", "kofi-friend", "zephyr-spirit"],
+  "locationIds": ["village-of-origin", "spirit-grove"],
+  "loreKeys": ["spirit-veil", "village-traditions", "ubuntu-philosophy", "veil-disturbances"],
+  "gmInstructions": "Developpez le monde du heros a travers des interactions significatives. Kofi incarne l'amitie et l'Ubuntu - montrez leur lien. Elder Amara observe avec inquietude les signes de perturbation. Zephyr, l'esprit du vent, peut faire sa premiere apparition subtile - une brise qui murmure, un tourbillon de feuilles qui semble intentionnel. Introduisez les quatre stats a travers des situations naturelles : un dilemme communautaire (Ubuntu), une question de justice (Maat), un rite traditionnel (Sankofa), un probleme necessitant de l'ingeniosite (Biso). Les perturbations du Voile sont encore legeres mais troublantes.",
+  "forbiddenElements": ["depart-du-village", "combat-majeur", "revelation-du-tisserand", "apparition-directe-antagoniste"],
+  "suggestedMoodTags": ["warmth", "unease", "community", "foreshadowing"],
+  "initialPacing": {
+    "tensionCurve": "rising",
+    "emotionalTone": "wonder",
+    "narrativeCheckpoints": [
+      { "id": "relationships-established", "description": "Le heros a interagi de maniere significative avec au moins deux PNJ", "met": false },
+      { "id": "veil-sign-witnessed", "description": "Un signe concret de perturbation du Voile a ete observe", "met": false },
+      { "id": "stats-introduced", "description": "Au moins deux des quatre stats ont ete mises en jeu naturellement", "met": false },
+      { "id": "hero-unheard", "description": "Le heros a tente de partager ses perceptions et n'a pas ete pris au serieux", "met": false }
+    ],
+    "maxTurnsBeforeForceProgress": 6
+  }
+}

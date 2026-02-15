@@ -1,0 +1,59 @@
+{
+  "number": 7,
+  "name": "B Story",
+  "slug": "b-story",
+  "description": "L'introduction d'un allié ou d'une figure mentor qui aidera le joueur dans sa quête. Cet allié offre un contraste émotionnel ou philosophique à la relation principale. Néo, l'Inventeur des Ombres Numériques, peut devenir un allié complexe offrant technologie et secrets. Amara peut servir de conseillère spirituelle. Cette relation B Story révèle des aspects cachés du joueur et prépare les défis à venir.",
+  "minScenes": 1,
+  "maxScenes": 2,
+  "dcBase": 12,
+  "narrativeGoal": "Établir une relation secondaire qui reflétera et soutiendra la croissance émotionnelle du joueur, tout en offrant des ressources pratiques ou émotionnelles.",
+  "transitionCondition": "L'allié accepte de s'investir dans le voyage du joueur, créant une trinité de confiance (joueur, amour interdit, allié).",
+  "keyNpcIds": [
+    "neo-inventeur",
+    "amara-griot"
+  ],
+  "locationIds": [
+    "atelier-neo",
+    "temple-griots"
+  ],
+  "loreKeys": [
+    "alliés-cachés",
+    "technologie-ombres",
+    "sagesse-ancestrale"
+  ],
+  "gmInstructions": "Présentez un personnage avec ses propres secrets et motivations. Cet allié ne doit pas être simple ou entièrement de confiance. Montrez comment il contraste avec l'amour interdit (logique vs passion, ancien vs nouveau, etc.). Laissez une ambiguïté sur ses véritables intentions. Cet allié offre help mais avec un prix potentiel.",
+  "forbiddenElements": [
+    "trahison-immediate-allie",
+    "resolution-conflict-b-story",
+    "surcharge-personnages",
+    "deviation-narration-principale"
+  ],
+  "suggestedMoodTags": [
+    "alliance",
+    "complexity",
+    "hidden-depths",
+    "hope-tempered"
+  ],
+  "initialPacing": {
+    "tensionCurve": "rising",
+    "emotionalTone": "hope",
+    "narrativeCheckpoints": [
+      {
+        "id": "allie-present",
+        "description": "Un personnage secondaire significatif est introduit et accepte de soutenir le joueur",
+        "met": false
+      },
+      {
+        "id": "contraste-emotionnel",
+        "description": "L'allié offre une perspective différente de l'amour interdit (raison vs émotion, etc.)",
+        "met": false
+      },
+      {
+        "id": "ressources-pratiques",
+        "description": "L'allié apporte des outils, des informations, ou des connexions utiles",
+        "met": false
+      }
+    ],
+    "maxTurnsBeforeForceProgress": 5
+  }
+}

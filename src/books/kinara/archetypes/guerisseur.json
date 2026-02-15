@@ -1,0 +1,16 @@
+{
+  "id": "guerisseur",
+  "name": "Le Guerisseur",
+  "description": "Ancre dans les traditions et connecte au monde des esprits, le Guerisseur est le pont entre les vivants et les ancetres. Il connait les plantes, les rituels et les prieres anciennes qui soignent le corps et l'ame. Sa sagesse vient d'une ecoute patiente de la terre et de ceux qui l'ont precedee. Il incarne le Sankofa -- la conviction que le passe detient les cles du present. En tant que Tisserand, il percoit le Voile comme un organisme vivant -- chaque dechirure est une blessure a panser avec soin et respect, chaque fil repare une guerison du monde.",
+  "suggestedStats": {
+    "ubuntu": 5,
+    "maat": 3,
+    "sankofa": 9,
+    "biso": 3
+  },
+  "startingItems": [
+    "bourse-aux-herbes-sacrees",
+    "masque-des-ancetres"
+  ],
+  "backstoryHook": "Les anciens du village disent que vous etes ne avec les yeux ouverts -- non pas les yeux du corps, mais ceux de l'esprit. Depuis toujours, vous percevez des presences la ou les autres ne voient que le vide. Les plantes vous murmurent leurs vertus, les pierres vous racontent leur age. Amara vous a enseigne a canaliser ce don, mais elle a toujours refuse de vous reveler sa veritable nature. La nuit de la ceremonie, quand le Voile a tremble, vous avez vu ce que personne d'autre ne pouvait voir : les fils lumineux qui maintiennent le monde ensemble, et les tenebres qui s'infiltrent par les dechirures."
+}

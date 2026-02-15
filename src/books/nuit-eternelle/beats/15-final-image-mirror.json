@@ -1,0 +1,63 @@
+{
+  "number": 15,
+  "name": "Final Image",
+  "slug": "final-image-mirror",
+  "description": "Miroir transformé du beat 1, le joueur contemple son nouveau rôle dans un monde fondamentalement changé. Il ne s'agit pas simplement d'une fin heureuse romantique, mais d'une vision du joueur intégré dans un nouveau tissu social où l'amour interdit et la diversité des Maisons ne sont plus des menaces. L'image finale montre le joueur à la fois plus fort, plus sage, et transformé par l'amour et la lutte. La Nuit Éternelle elle-même a changé de signification.",
+  "minScenes": 1,
+  "maxScenes": 3,
+  "dcBase": 16,
+  "narrativeGoal": "Célébrer la transformation du joueur et du monde, montrant comment l'amour et la détermination ont catalysé une renaissance. Offrir une conclusion qui honore le voyage.",
+  "transitionCondition": "Le joueur accède à une nouvelle position de pouvoir ou d'influence, reconnaît sa transformation, et s'engage dans le nouveau monde créé.",
+  "keyNpcIds": [
+    "darius-fenrir",
+    "kora-sangu",
+    "amara-griot",
+    "zephyr-esprit"
+  ],
+  "locationIds": [
+    "nouveau-palais-fusion",
+    "carrefour-numerique-transforme",
+    "jardin-union",
+    "horizon-nouveau"
+  ],
+  "loreKeys": [
+    "nouveau-monde-ordre",
+    "legacy-transformation",
+    "amour-conquete",
+    "renaissance-nuit-eternelle"
+  ],
+  "gmInstructions": "Créez une image visuelle et émotionnelle puissante montrant le joueur dans ce nouveau monde. Écho les éléments du beat 1 mais transformés : s'il était isolé, il est maintenant connecté ; s'il était opprimé, il est maintenant libéré ou libérateur ; s'il était en conflit interne, il est maintenant en paix. Terminez avec une image de l'amant du joueur à ses côtés, symbole vivant de la transformation. La Nuit Éternelle continue, mais elle n'est plus solitaire.",
+  "forbiddenElements": [
+    "retour-ancien-monde",
+    "mort-du-protagoniste",
+    "finale-vague-ou-ambigue"
+  ],
+  "suggestedMoodTags": [
+    "serenity",
+    "love",
+    "hope",
+    "legacy"
+  ],
+  "initialPacing": {
+    "tensionCurve": "plateau",
+    "emotionalTone": "wonder",
+    "narrativeCheckpoints": [
+      {
+        "id": "reconnaissance-transformation",
+        "description": "Le joueur reconnaît pleinement comment il a changé et accepte sa nouvelle identité dans le monde transformé",
+        "met": false
+      },
+      {
+        "id": "reunion-romantique",
+        "description": "Moment visuel ou émotionnel fort montrant le joueur avec son amant dans ce nouveau contexte",
+        "met": false
+      },
+      {
+        "id": "vision-future",
+        "description": "Image finale établissant la legacy du joueur et la continuité de la transformation dans les générations futures",
+        "met": false
+      }
+    ],
+    "maxTurnsBeforeForceProgress": 5
+  }
+}

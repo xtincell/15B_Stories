@@ -1,0 +1,29 @@
+{
+  "number": 14,
+  "name": "Finale",
+  "slug": "finale",
+  "description": "Le heros et ses allies penetrent dans le Royaume des Ombres pour affronter la force ancienne. C'est un monde inverse - les couleurs sont inversees, les sons sont des echos, les ombres ont de la substance. Le heros libere Zephyr, affronte l'Ombre qui se revele etre le dernier Tisserand corrompu par la solitude et l'amertume, et doit tisser la plus grande reparation de l'histoire de Kinara. La victoire ne vient pas de la force brute mais de la synthese des quatre vertus et de l'unite de l'equipe.",
+  "minScenes": 3,
+  "maxScenes": 5,
+  "dcBase": 16,
+  "narrativeGoal": "Resoudre le conflit principal a travers un climax en cinq parties : rassembler l'equipe, executer le plan, affronter l'antagoniste, tenter une nouvelle approche quand le plan initial echoue, et triompher grace a la synthese de toutes les lecons apprises.",
+  "transitionCondition": "L'Ombre a ete vaincue ou redimee, le Voile a ete repare ou renforce, Zephyr a ete libere, et les consequences immediates de la victoire sont visibles.",
+  "keyNpcIds": ["shadow-antagonist", "zephyr-spirit", "nia-scholar", "kazi-inventor", "kofi-friend"],
+  "locationIds": ["shadow-realm", "veil-temple"],
+  "loreKeys": ["shadow-realm-lore", "weaving-magic", "combined-philosophies", "tisserand-sacrifice", "redemption"],
+  "gmInstructions": "La Finale suit la structure en cinq points de Blake Snyder. 1) Rassemblement : le heros et ses allies entrent dans le Royaume des Ombres, chacun surmontant un obstacle lie a sa peur. 2) Execution du plan : Kazi ouvre le passage avec son invention, Nia guide avec les textes anciens, le heros tisse un chemin de lumiere. 3) Confrontation : l'Ombre se revele comme un ancien Tisserand qui a voulu porter seul le fardeau du Voile et a ete consume par l'amertume et la solitude - c'est le miroir sombre du heros. La question Maat se pose : justice ou compassion ? 4) Nouvelle approche : le plan initial de 'reparer le Voile' ne suffit pas - le heros doit offrir a l'Ombre ce qu'elle n'a jamais eu : la communaute, Ubuntu. 5) Victoire : le heros tisse non pas en repoussant l'Ombre mais en l'integrant, en guerissant la blessure originelle. Zephyr est libere. Le Voile brille d'une lumiere nouvelle, plus forte qu'avant. Kofi peut apparaitre a travers une connexion spirituelle, rappelant au heros ses racines.",
+  "forbiddenElements": ["victoire-par-violence-pure", "mort-du-heros", "echec-total", "deus-ex-machina"],
+  "suggestedMoodTags": ["tension", "courage", "sacrifice", "triumph", "unity"],
+  "initialPacing": {
+    "tensionCurve": "climax",
+    "emotionalTone": "tension",
+    "narrativeCheckpoints": [
+      { "id": "shadow-realm-entered", "description": "Le heros et ses allies ont penetre dans le Royaume des Ombres", "met": false },
+      { "id": "zephyr-freed", "description": "Zephyr a ete libere de l'emprise de l'Ombre", "met": false },
+      { "id": "antagonist-confronted", "description": "L'Ombre a ete confrontee et sa veritable nature revelee", "met": false },
+      { "id": "new-approach-found", "description": "Le heros a trouve une approche inattendue pour vaincre l'Ombre", "met": false },
+      { "id": "veil-restored", "description": "Le Voile a ete repare ou renforce par le tissage final", "met": false }
+    ],
+    "maxTurnsBeforeForceProgress": 7
+  }
+}

@@ -1,0 +1,15 @@
+{
+  "id": "darius-fenrir",
+  "name": "Darius",
+  "title": "Prince de la Maison Fenrir",
+  "personality": "Darius est votre frère de cœur, un loup-garou charismatique aux cheveux tressés d'or et aux yeux ambrés ardents. Il possède un humour piquant mais cache une loyauté indéfectible sous son apparence insouciante. Son charme naturel en fait un favori des cercles nobles, mais il préfère votre compagnie à celle des courtisans.",
+  "motivations": "Il souhaite vous protéger coûte que coûte, même si cela signifie défier les traditions familiales. Il espère secrètement que vous trouverez une forme d'amour authentique, ayant lui-même renoncé à cette quête par devoir.",
+  "defaultAffinity": 4,
+  "beatRoles": {
+    "1": "Darius vous présente discrètement la vampire de la Maison Sangu lors d'un bal masqué, initiant votre rencontre fatale.",
+    "4": "Il vous aide à vous échapper lors de la première confrontation avec les gardes de la Maison.",
+    "6": "Darius devient votre confident et vous supplie de renoncer avant qu'il ne soit trop tard.",
+    "9": "Il se bat à vos côtés contre les assassins envoyés par l'antagoniste.",
+    "12": "Darius prend une décision déchirante : il choisit de vous soutenir publiquement, risquant l'exil."
+  }
+}

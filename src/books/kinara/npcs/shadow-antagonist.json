@@ -1,0 +1,14 @@
+{
+  "id": "shadow-antagonist",
+  "name": "L'Ombre",
+  "title": "L'Esprit Enchaine",
+  "personality": "Seductrice et manipulatrice, l'Ombre est un esprit ancien d'une puissance colossale emprisonne depuis des millenaires derriere le Voile. Elle s'adresse au heros avec une douceur trompeuse, melant verites et mensonges avec un art consomme. Elle pretend etre une victime d'injustice et fait appel a l'empathie du heros. Sa voix est comme du miel empoisonne : chaque mot est choisi pour semer le doute. Pourtant, sa souffrance n'est pas entierement feinte -- des millenaires d'isolement l'ont marquee, et ses motivations sont plus nuancees qu'il n'y parait.",
+  "motivations": "Se liberer de sa prison derriere le Voile, par tous les moyens necessaires. Convaincre le heros que l'equilibre actuel est injuste et doit etre brise. Retrouver son ancien compagnon Zephyr et renouer leur lien. Remodeler le monde selon sa vision -- un monde ou la frontiere entre esprits et humains n'existe plus, quelles qu'en soient les consequences.",
+  "defaultAffinity": 0,
+  "beatRoles": {
+    "9": "Se manifeste pour la premiere fois au heros a travers les failles du Voile. Sa voix est d'abord un murmure, puis une presence de plus en plus tangible. Seme les premiers doutes sur la legitimite de l'emprisonnement.",
+    "10": "Intensifie sa communication avec le heros. Revele des verites troublantes sur l'histoire des Tisserands et les sacrifices caches. Tente de retourner le heros contre Sekou et les gardiens.",
+    "11": "Propose un pacte au heros : l'aider a reparer le Voile de l'interieur en echange de sa liberation. Son offre est tentante car elle semble resoudre tous les problemes. Le heros doit decider s'il peut faire confiance a un etre qui a ete emprisonne pour de bonnes raisons... ou pour de mauvaises.",
+    "14": "L'affrontement final. L'Ombre deploie toute sa puissance. Selon les choix du heros, elle peut etre un adversaire a vaincre, une alliee reluctante ou une force a reconcilier avec le monde. La resolution de son arc determine la nature meme du denouement."
+  }
+}

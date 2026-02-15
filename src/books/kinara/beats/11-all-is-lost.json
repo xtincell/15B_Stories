@@ -1,0 +1,27 @@
+{
+  "number": 11,
+  "name": "All Is Lost",
+  "slug": "all-is-lost",
+  "description": "Le coup le plus dur tombe. L'Ombre reussit a ouvrir une breche massive dans le Voile, et les consequences sont devastatrices. Le village natal du heros est touche - des nouvelles arrivent que des creatures d'ombre ont envahi la region. Zephyr est capture ou absorbe par l'Ombre, laissant le heros sans son guide spirituel. Le Juge Sekou tombe en defendant le Temple. Le heros tente de tisser la grande breche mais echoue - son pouvoir semble insuffisant face a l'ampleur de la destruction.",
+  "minScenes": 1,
+  "maxScenes": 3,
+  "dcBase": 14,
+  "narrativeGoal": "Infliger la defaite la plus profonde au heros. Tout ce qu'il a construit semble s'effondrer. La perte de Zephyr et la menace sur son village rendent le desespoir personnel et visceral.",
+  "transitionCondition": "Le heros a subi une perte majeure (Zephyr capture, village menace, echec de tissage), et se retrouve au plus bas point de son parcours emotionnel et strategique.",
+  "keyNpcIds": ["zephyr-spirit", "judge-sekou", "shadow-antagonist", "kofi-friend"],
+  "locationIds": ["veil-temple", "village-of-origin"],
+  "loreKeys": ["veil-degradation", "shadow-force-power", "tisserand-sacrifice", "spirit-capture"],
+  "gmInstructions": "C'est le moment le plus sombre. La mort du mentor (Sekou tombe ou est grievement blesse) est le 'whiff of death' classique de Blake Snyder. La perte de Zephyr est particulierement douloureuse car c'etait le lien le plus intime du heros avec le monde spirituel. Decrivez l'echec du tissage avec des details sensoriels : les fils de lumiere se brisent dans les mains du heros, la dechirure resiste, l'Ombre rit. Les nouvelles du village arrivent par fragments - peut-etre un message de Kofi, desespere, ou une vision a travers le Voile affaibli. Le heros doit ressentir que tout est perdu : son mentor tombe, son compagnon spirituel capture, son village en danger, son pouvoir insuffisant. Ne donnez pas d'espoir facile ici.",
+  "forbiddenElements": ["resolution-rapide", "victoire-partielle", "sauvetage-miraculeux", "apparition-nouveau-pouvoir"],
+  "suggestedMoodTags": ["despair", "grief", "defeat", "loss", "darkness"],
+  "initialPacing": {
+    "tensionCurve": "climax",
+    "emotionalTone": "grief",
+    "narrativeCheckpoints": [
+      { "id": "major-loss", "description": "Zephyr a ete capture ou perdu pour le heros", "met": false },
+      { "id": "mentor-falls", "description": "Le Juge Sekou est tombe ou a ete grievement blesse", "met": false },
+      { "id": "weaving-failure", "description": "Le heros a echoue a tisser face a la grande breche", "met": false }
+    ],
+    "maxTurnsBeforeForceProgress": 5
+  }
+}

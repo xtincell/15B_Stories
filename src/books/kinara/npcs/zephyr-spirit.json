@@ -1,0 +1,22 @@
+{
+  "id": "zephyr-spirit",
+  "name": "Zephyr",
+  "title": "L'Esprit du Vent",
+  "personality": "Espiegle et enigmatique, Zephyr est un esprit du vent ancien qui s'exprime en devinettes, metaphores et demi-verites. Il peut etre tour a tour farceur et profondement sage. Sa nature spirituelle lui donne une perspective radicalement differente sur le monde : il percoit le temps comme un fleuve et les emotions humaines comme des couleurs. Il est lie au heros par un pacte scelle lors du beat 2 et oscille entre guide malicieux et compagnon sincere. Il cache une tristesse ancienne liee a la solitude de son existence immortelle.",
+  "motivations": "Decouvrir pourquoi il a ete attire vers le heros. Explorer le monde des humains qu'il observe depuis des siecles sans jamais y participer. Proteger le Voile des Esprits dont il depend pour exister. Trouver un sens a son existence eternelle a travers son lien avec le heros.",
+  "defaultAffinity": 2,
+  "beatRoles": {
+    "4": "Commence a se manifester pleinement au heros. Enseigne la perception du monde spirituel et les bases du tissage a travers des enigmes et des jeux.",
+    "5": "Guide le heros vers des lieux de pouvoir invisibles aux yeux ordinaires. Revele des fragments de l'histoire du Voile a travers ses propres souvenirs.",
+    "6": "Reagit avec mefiance au Temple du Voile et a Sekou. Revele qu'il a des raisons personnelles de se mefier des gardiens.",
+    "7": "Aide le heros a naviguer entre le monde physique et le monde spirituel. Ses pouvoirs sont essentiels lors d'une traversee perilleuse.",
+    "8": "Son lien avec le heros s'approfondit. Il partage un souvenir douloureux de son passe : il a connu le dernier grand Tisserand et l'a vu echouer.",
+    "9": "Reconnait l'Ombre comme un ancien compagnon. Ce lien inattendu bouleverse sa loyaute et cree une tension dramatique.",
+    "10": "Dechire entre son passe avec l'Ombre et son present avec le heros. Doit faire un choix qui definira la suite de son existence.",
+    "11": "Les consequences de son choix se manifestent dans ses pouvoirs. Il s'affaiblit ou se renforce selon les decisions du heros.",
+    "12": "Revele la nature veritable du Voile et le role exact des Tisserands. Cette revelation change la perspective sur toute l'aventure.",
+    "13": "Prepare le heros a l'affrontement final. Accepte que leur lien pourrait ne pas survivre a la reparation du Voile.",
+    "14": "Joue un role crucial dans l'affrontement final. Son destin est intimement lie au choix ultime du heros.",
+    "15": "Epilogue : le lien entre Zephyr et le heros trouve sa resolution, qu'elle soit douce-amere ou triomphante selon les choix precedents."
+  }
+}

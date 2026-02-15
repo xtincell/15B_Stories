@@ -1,0 +1,15 @@
+{
+  "id": "amara-griot",
+  "name": "Amara",
+  "title": "Griot du Conseil des Anciens",
+  "personality": "Amara est une femme d'âge indéterminé, aux yeux luminescents qui reflètent des siècles de sagesse. Elle parle en énigmes et paraboles, mêlant les traditions ancestrales aux vérités cosmiques. Malgré son apparence fragile, elle irradie une autorité bienveillante qui apaise les âmes tourmentées.",
+  "motivations": "Elle cherche à préserver l'équilibre entre les Maisons et à empêcher une guerre qui dévasterait l'ordre établi. Elle voit en vous un catalyseur du changement et souhaite guider votre destinée vers la réconciliation.",
+  "defaultAffinity": 3,
+  "beatRoles": {
+    "1": "Amara vous accueille dans les jardins nocturnes du Conseil et révèle les premiers indices sur l'interdiction des unions entre Fenrir et Sangu.",
+    "3": "Elle vous confie une relique ancestrale et vous avertit des dangers politiques qui entoureront votre romance.",
+    "7": "Amara intervient secrètement pour vous offrir un refuge temporaire dans les catacombes sacrées.",
+    "10": "Elle vous délivre une prophétie cryptique sur le choix qui déterminera le sort des deux Maisons.",
+    "14": "Amara révèle la vérité cachée sur l'origine de la vendetta entre Fenrir et Sangu."
+  }
+}

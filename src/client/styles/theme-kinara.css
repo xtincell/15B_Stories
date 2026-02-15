@@ -1,0 +1,49 @@
+:root {
+  /* Earth tones inspired by African landscapes */
+  --color-bg: #1a1410;
+  --color-bg-secondary: #241e18;
+  --color-bg-card: #2d2520;
+  --color-surface: #3a302a;
+
+  /* Gold and warm accents */
+  --color-gold: #d4a853;
+  --color-gold-dim: #a07d3a;
+  --color-amber: #c68b3e;
+  --color-copper: #b87333;
+
+  /* Text */
+  --color-text: #e8ddd0;
+  --color-text-dim: #a89882;
+  --color-text-muted: #7a6e60;
+
+  /* Stats */
+  --color-ubuntu: #4ecdc4;
+  --color-maat: #ffe66d;
+  --color-sankofa: #a78bfa;
+  --color-biso: #ff6b6b;
+
+  /* Mood colors */
+  --color-wonder: #4ecdc4;
+  --color-dread: #8b0000;
+  --color-hope: #ffe66d;
+  --color-grief: #6b5b95;
+  --color-triumph: #d4a853;
+  --color-tension: #ff6b6b;
+  --color-serenity: #87ceeb;
+  --color-rage: #dc143c;
+
+  /* Risk levels */
+  --color-risk-low: #4ecdc4;
+  --color-risk-medium: #ffe66d;
+  --color-risk-high: #ff6b6b;
+
+  /* Layout */
+  --sidebar-width: 280px;
+  --beat-tracker-height: 48px;
+  --radius: 8px;
+  --radius-lg: 12px;
+
+  /* Typography */
+  --font-body: 'Georgia', 'Times New Roman', serif;
+  --font-ui: system-ui, -apple-system, sans-serif;
+}

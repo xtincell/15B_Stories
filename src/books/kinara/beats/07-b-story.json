@@ -1,0 +1,28 @@
+{
+  "number": 7,
+  "name": "B Story",
+  "slug": "b-story",
+  "description": "Au Marche des Carrefours, le heros rencontre Nia, une erudite itinerante qui etudie les anciennes traditions de Kinara et les recits des Tisserands passes. Nia represente Sankofa - le regard vers le passe pour avancer. A travers elle, le heros decouvre que son don s'inscrit dans une lignee ancienne et que les reponses se trouvent peut-etre dans les textes oublies du Temple du Voile. Leur relation - faite de respect mutuel, de debats intellectuels et de confiance naissante - porte le theme de l'histoire.",
+  "minScenes": 2,
+  "maxScenes": 4,
+  "dcBase": 12,
+  "narrativeGoal": "Introduire la B Story a travers la relation avec Nia, qui incarne le theme et offre une perspective complementaire sur la quete. Cette relation fait echo au theme central : comprendre le passe pour tisser l'avenir.",
+  "transitionCondition": "Le heros a etabli une relation significative avec Nia, a appris des elements cles sur l'histoire des Tisserands, et a un nouvel objectif ou une nouvelle piste pour sa quete.",
+  "keyNpcIds": ["nia-scholar", "zephyr-spirit"],
+  "locationIds": ["crossroads-market"],
+  "loreKeys": ["tisserand-legacy", "sankofa-philosophy", "ancient-texts", "veil-temple-lore"],
+  "gmInstructions": "Le Marche des Carrefours est un lieu vibrant ou se croisent toutes les cultures de Kinara. Decrivez-le comme un microcosme du monde : marchands d'epices, conteurs, forgerons spirituels, guerisseurs. Nia se distingue par sa curiosite insatiable et ses connaissances profondes. Elle ne cherche pas le heros - c'est une rencontre fortuite qui se revele providentielle. Nia peut d'abord etre sceptique face aux affirmations du heros, puis fascinee quand elle voit des preuves de son don. Elle partage des fragments de savoir sur les anciens Tisserands - leurs pouvoirs, leurs sacrifices, leur disparition mysterieuse. Zephyr reagit a Nia avec mefiance ou curiosite, ajoutant une dynamique a trois. Le DC monte car les defis intellectuels et sociaux sont plus complexes hors du village.",
+  "forbiddenElements": ["romance-precipitee", "revelation-complete-du-mystere", "combat-avec-antagoniste", "retour-au-village"],
+  "suggestedMoodTags": ["curiosity", "discovery", "connection", "wonder"],
+  "initialPacing": {
+    "tensionCurve": "plateau",
+    "emotionalTone": "wonder",
+    "narrativeCheckpoints": [
+      { "id": "nia-introduced", "description": "Nia a ete rencontree et une premiere interaction significative a eu lieu", "met": false },
+      { "id": "tisserand-lore-shared", "description": "Nia a partage des connaissances sur l'histoire des Tisserands", "met": false },
+      { "id": "relationship-established", "description": "Une relation de confiance ou de respect mutuel s'est formee entre le heros et Nia", "met": false },
+      { "id": "new-lead-discovered", "description": "Un nouvel objectif ou une piste pour la quete a ete decouverte", "met": false }
+    ],
+    "maxTurnsBeforeForceProgress": 6
+  }
+}

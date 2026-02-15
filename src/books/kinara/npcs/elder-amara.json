@@ -1,0 +1,15 @@
+{
+  "id": "elder-amara",
+  "name": "Amara",
+  "title": "L'Ancienne du Village",
+  "personality": "Sage et chaleureuse, Amara degage une autorite naturelle temperee par une profonde bienveillance. Elle parle avec des paraboles et des proverbes anciens, choisissant ses mots avec soin. Sous sa douceur se cache un secret douloureux : elle fut elle-meme une Tisserande, mais un echec tragique l'a poussee a renoncer a ses pouvoirs. Elle est protectrice envers le heros, parfois au point de lui dissimuler des verites essentielles.",
+  "motivations": "Proteger le village et ses habitants des menaces du Voile. Guider le heros sur le chemin du Tisserand sans qu'il commette les memes erreurs qu'elle. Racheter sa propre faute passee en formant un successeur digne. Preserver l'equilibre entre le monde des esprits et celui des humains.",
+  "defaultAffinity": 3,
+  "beatRoles": {
+    "1": "Presente le heros a la communaute lors de la ceremonie des Ancetres. Remarque les premiers signes du don de Tisserand chez le heros et tente de les dissimuler aux autres.",
+    "2": "Revele au heros l'existence du Voile des Esprits et lui confie qu'il possede le potentiel d'un Tisserand. Lui enseigne les bases de la perception spirituelle.",
+    "3": "Envoie le heros en quete vers les Terres Exterieures apres une dechirure inquietante du Voile pres du village. Lui remet un talisman de protection ancestral.",
+    "12": "Le heros retrouve Amara au village, transformee par les evenements. Elle revele enfin la verite sur son passe de Tisserande et l'echec qui a coute la vie a son propre mentor.",
+    "13": "Accompagne le heros lors de la preparation finale. Transmet ses derniers enseignements et accepte de laisser le heros tracer son propre chemin, meme si cela signifie le perdre."
+  }
+}

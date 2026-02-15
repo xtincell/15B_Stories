@@ -1,0 +1,29 @@
+{
+  "number": 8,
+  "name": "Fun and Games",
+  "slug": "fun-and-games",
+  "description": "Le heros voyage a travers Kinara avec Nia et Zephyr, decouvrant les merveilles et les dangers du monde. Il apprend a maitriser son don de Tisserand en reparant de petites dechirures du Voile, rencontre Kazi l'inventeur dans la capitale Zandara, et fait face a des defis qui testent chacune de ses stats. C'est la promesse de l'aventure realisee : exploration, decouverte, et montee en puissance.",
+  "minScenes": 3,
+  "maxScenes": 6,
+  "dcBase": 12,
+  "narrativeGoal": "Livrer la promesse du concept. Le heros explore Kinara, developpe ses pouvoirs de Tisserand, noue de nouvelles alliances, et affronte des defis varies qui testent les quatre stats. C'est le coeur ludique et exploratoire de l'aventure.",
+  "transitionCondition": "Le heros a repare au moins une dechirure du Voile, a developpe ses competences de Tisserand, a rencontre Kazi, et a progresse significativement vers le Temple du Voile.",
+  "keyNpcIds": ["nia-scholar", "kazi-inventor", "zephyr-spirit"],
+  "locationIds": ["crossroads-market", "capital-zandara"],
+  "loreKeys": ["weaving-magic", "biso-philosophy", "capital-politics", "veil-tears", "kinara-wonders"],
+  "gmInstructions": "C'est le beat le plus libre et le plus ludique. Variez les types de scenes : exploration de ruines anciennes, marches animes, forets hantees, la grande capitale Zandara avec ses tours d'inventeurs et ses arenes de debat. Kazi apporte l'energie Biso - il est enthousiaste, inventif, parfois imprudent. Il a peut-etre fabrique un outil qui detecte les dechirures du Voile. Le heros apprend a tisser de maniere plus consciente : chaque reparation est un mini-defi avec des consequences. Montrez les merveilles de Kinara : des esprits-flammes qui dansent sur les marches, des ponts de lumiere au-dessus des ravins, des arbres qui chantent au crepuscule. Mais glissez aussi des indices inquietants - les dechirures deviennent plus frequentes, plus profondes, et quelque chose semble observer le heros depuis l'autre cote du Voile.",
+  "forbiddenElements": ["defaite-totale-du-heros", "revelation-identite-antagoniste", "resolution-du-conflit-principal", "mort-de-compagnon"],
+  "suggestedMoodTags": ["adventure", "wonder", "discovery", "empowerment", "fun"],
+  "initialPacing": {
+    "tensionCurve": "rising",
+    "emotionalTone": "wonder",
+    "narrativeCheckpoints": [
+      { "id": "veil-repair-practiced", "description": "Le heros a repare au moins une dechirure mineure du Voile", "met": false },
+      { "id": "kazi-met", "description": "Kazi l'inventeur a ete rencontre et integre au groupe", "met": false },
+      { "id": "kinara-explored", "description": "Le heros a explore au moins deux nouveaux lieux de Kinara", "met": false },
+      { "id": "powers-growing", "description": "Les competences de Tisserand du heros se sont developpees", "met": false },
+      { "id": "ominous-signs", "description": "Des indices inquietants sur une menace plus grande ont ete percus", "met": false }
+    ],
+    "maxTurnsBeforeForceProgress": 8
+  }
+}

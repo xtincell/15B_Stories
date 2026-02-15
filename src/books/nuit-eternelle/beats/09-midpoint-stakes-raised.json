@@ -1,0 +1,61 @@
+{
+  "number": 9,
+  "name": "Midpoint",
+  "slug": "midpoint-stakes-raised",
+  "description": "Le joueur et son amour interdit atteignent un sommet d'intimité et de compréhension mutuelle, révélant leurs véritables intentions et rêves pour un futur ensemble. Cependant, cette vulnérabilité expose leur relation aux yeux du monde politique des Maisons. Les enjeux se cristallisent : continuer à se cacher signifie renoncer à leur amour, mais se révéler signifie une guerre entre les Maisons.",
+  "minScenes": 2,
+  "maxScenes": 4,
+  "dcBase": 12,
+  "narrativeGoal": "Atteindre le point d'intensité maximale de la relation romantique tout en rendant les conséquences politiques inévitables et irréversibles.",
+  "transitionCondition": "Le joueur et son amant doivent faire une déclaration publique ou privée engageante, ou être découverts ensemble dans une situation compromettante.",
+  "keyNpcIds": [
+    "darius-fenrir",
+    "kora-sangu",
+    "amara-griot",
+    "okafor-conseil"
+  ],
+  "locationIds": [
+    "palais-fenrir",
+    "tour-sangu",
+    "jardin-ancestral-numerique"
+  ],
+  "loreKeys": [
+    "lien-ame-loups-vampires",
+    "hierarchie-maisons-nobles",
+    "rituels-union-interdite"
+  ],
+  "gmInstructions": "Créez un moment d'intimité profonde où le joueur et son amant se confient leurs véritables sentiments et visualisent ensemble un avenir possible. Ensuite, faites en sorte que cette intimité soit compromise ou menacée d'exposition. Utilisez Amara comme témoin sympathique ou Okafor comme menace politique. Le joueur doit prendre conscience que le secret ne peut plus durer.",
+  "forbiddenElements": [
+    "separation-immediate",
+    "mort-personnage-principal",
+    "retour-statu-quo"
+  ],
+  "suggestedMoodTags": [
+    "passion",
+    "tendresse",
+    "apprehension",
+    "determination"
+  ],
+  "initialPacing": {
+    "tensionCurve": "rising",
+    "emotionalTone": "hope",
+    "narrativeCheckpoints": [
+      {
+        "id": "moment-intimite",
+        "description": "Scène d'intimité émotionnelle ou physique entre le joueur et son amant, révélant des détails personnels jamais partagés",
+        "met": false
+      },
+      {
+        "id": "vision-commune",
+        "description": "Les deux amants articulent ensemble ce qu'ils désirent vraiment et imaginent un futur possible",
+        "met": false
+      },
+      {
+        "id": "exposition-menace",
+        "description": "Un élément compromettant émerge (témoin, preuve physique, rumeur) menaçant de révéler la relation",
+        "met": false
+      }
+    ],
+    "maxTurnsBeforeForceProgress": 5
+  }
+}

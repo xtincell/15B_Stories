@@ -1,0 +1,27 @@
+{
+  "number": 4,
+  "name": "Catalyst",
+  "slug": "catalyst",
+  "description": "Une dechirure majeure s'ouvre dans le Voile Spirituel pres du village. Les esprits s'affolent, la realite vacille - les ombres prennent des formes monstrueuses, le sol tremble, un froid surnaturel envahit le Bosquet des Esprits. Elder Amara est blessee ou affaiblie en tentant de contenir la dechirure. Dans le chaos, le heros agit instinctivement et ses mains tissent des fils de lumiere qui referment partiellement la breche. Son don de Tisserand se revele au grand jour.",
+  "minScenes": 1,
+  "maxScenes": 2,
+  "dcBase": 10,
+  "narrativeGoal": "Provoquer l'evenement declencheur qui revele le don du heros et rend impossible tout retour a la vie ordinaire. La menace du Voile dechire devient tangible et personnelle.",
+  "transitionCondition": "La dechirure du Voile s'est manifestee de maniere spectaculaire, le don du heros a ete revele, et Elder Amara a confirme ou reconnu la nature de Tisserand du heros.",
+  "keyNpcIds": ["elder-amara", "kofi-friend", "zephyr-spirit"],
+  "locationIds": ["village-of-origin", "spirit-grove"],
+  "loreKeys": ["spirit-veil", "tisserand-legacy", "veil-tears", "weaving-magic"],
+  "gmInstructions": "C'est le moment de bascule. La dechirure doit etre terrifiante et spectaculaire - decrivez-la avec tous les sens. Le danger est reel : des creatures d'ombre s'infiltrent, les esprits familiers fuient ou sont aspires. Elder Amara tente d'intervenir mais le Voile est trop endommage pour ses capacites. Le heros reagit par instinct - ses mains brillent, des fils lumineux apparaissent, et il parvient a reduire la dechirure sans la refermer completement. Zephyr se manifeste clairement pour la premiere fois, guidant le heros. Apres la crise, Amara revele que le heros est un Tisserand potentiel - le premier depuis des generations. Le DC augmente car les enjeux sont reels.",
+  "forbiddenElements": ["resolution-complete-de-la-dechirure", "mort-d-amara", "depart-immediat", "explication-complete-de-la-magie"],
+  "suggestedMoodTags": ["dread", "chaos", "revelation", "urgency"],
+  "initialPacing": {
+    "tensionCurve": "climax",
+    "emotionalTone": "dread",
+    "narrativeCheckpoints": [
+      { "id": "veil-tear-erupts", "description": "Une dechirure majeure du Voile se manifeste de maniere spectaculaire", "met": false },
+      { "id": "hero-power-revealed", "description": "Le don de Tisserand du heros se manifeste pour la premiere fois", "met": false },
+      { "id": "amara-confirmation", "description": "Elder Amara confirme ou reconnaît la nature de Tisserand du heros", "met": false }
+    ],
+    "maxTurnsBeforeForceProgress": 4
+  }
+}

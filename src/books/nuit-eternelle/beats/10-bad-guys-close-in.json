@@ -1,0 +1,64 @@
+{
+  "number": 10,
+  "name": "Bad Guys Close In",
+  "slug": "bad-guys-close-in",
+  "description": "Les forces d'opposition se resserrent autour du joueur et de son amant. Les antagonistes (Malachai et les Ombres Numériques, ainsi que les factions rigides des Maisons) dévoilent leurs propres plans et menaces. Les alliances se fragmentent, les trahisons émergent, et la pression politique s'intensifie. Le joueur découvre que d'autres acteurs manipulent les événements pour leurs propres gains.",
+  "minScenes": 2,
+  "maxScenes": 5,
+  "dcBase": 14,
+  "narrativeGoal": "Intensifier la pression externe et montrer que les forces systémiques et les antagonistes travaillent activement à détruire la relation et les rêves du joueur.",
+  "transitionCondition": "Une série de revers majeurs doit être subie : alliances rompues, secrets révélés, ou attaques directes contre le joueur ou son amant.",
+  "keyNpcIds": [
+    "malachai-antagoniste",
+    "okafor-conseil",
+    "darius-fenrir",
+    "kora-sangu",
+    "neo-inventeur"
+  ],
+  "locationIds": [
+    "ombres-numeriques-repaire",
+    "conseil-des-anciens",
+    "archives-maison-fenrir",
+    "chambre-haute-sangu"
+  ],
+  "loreKeys": [
+    "complot-ombres-numeriques",
+    "factions-maisons-nobles",
+    "technologie-souveraine",
+    "trahisons-politiques"
+  ],
+  "gmInstructions": "Déployez progressivement les menaces : Malachai révèle ses plans pour contrôler les Maisons via la technologie, Okafor prend une position hostile, et certains PNJ secondaires deviennent des ennemis ou se retirent. Montrez que le système lui-même est contre le joueur, pas seulement quelques individus. Créez un sentiment d'isolation progressive, où les alliés se comptent sur les doigts de la main.",
+  "forbiddenElements": [
+    "resolution-trop-rapide",
+    "absence-obstacles",
+    "redemption-antagoniste-prematuree"
+  ],
+  "suggestedMoodTags": [
+    "tension",
+    "trahison",
+    "dread",
+    "isolation"
+  ],
+  "initialPacing": {
+    "tensionCurve": "climax",
+    "emotionalTone": "dread",
+    "narrativeCheckpoints": [
+      {
+        "id": "revelation-complot",
+        "description": "Le joueur découvre un plan majeur de Malachai ou des factions des Maisons visant à les séparer ou à les détruire",
+        "met": false
+      },
+      {
+        "id": "trahison-alliée",
+        "description": "Un allié de confiance se révèle être un ennemi ou se retire de manière critiques",
+        "met": false
+      },
+      {
+        "id": "separation-forcee",
+        "description": "Le joueur et son amant sont séparés par la force (confinement, bannissement, ou danger immédiat)",
+        "met": false
+      }
+    ],
+    "maxTurnsBeforeForceProgress": 4
+  }
+}

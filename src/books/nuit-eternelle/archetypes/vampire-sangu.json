@@ -1,0 +1,16 @@
+{
+  "id": "vampire-sangu",
+  "name": "Comtesse de la Maison Sangu",
+  "description": "Née de la nuit et du sang ancien, vous naviguez les intrigues politiques avec une transparence glaciale. Votre beauté aristocratique cache une soif insatiable de vérité et une loyauté envers votre maison qui vacille depuis que vous avez croisé son regard. En tant que vampire, vous incarnez la sagesse des siècles passés, mais l'amour vous pousse vers l'inconnu.",
+  "suggestedStats": {
+    "ubuntu": 3,
+    "maat": 8,
+    "sankofa": 6,
+    "biso": 3
+  },
+  "startingItems": [
+    "collier-sangu-obsidienne",
+    "grimoire-sanguin-ancien"
+  ],
+  "backstoryHook": "Tu existes depuis deux cents ans, observatrice silencieuse des alliances et des trahisons. Ton honneur envers la Maison Sangu te définit, mais celui qu'on t'interdit d'aimer te montre une vérité que tu ne peux ignorer. La nuit du Bal, tu dois choisir : le devoir ou le cœur."
+}

@@ -1,0 +1,64 @@
+{
+  "number": 8,
+  "name": "Fun and Games",
+  "slug": "fun-and-games",
+  "description": "La phase des 'promesses du spectacle' où le joueur vit pleinement la romance et l'intrigue. Des moments volés de tendresse alternent avec des intrigues politiques subtiles. Le joueur explore les mondes de son amour interdit : peut-être une visite nocturne au domaine Fenrir ou Sangu, des échanges poétiques, des aventures partagées dans les Carrefours Numériques. Le danger est latent mais distant, permettant au joueur de savourer les enjeux.",
+  "minScenes": 2,
+  "maxScenes": 3,
+  "dcBase": 12,
+  "narrativeGoal": "Créer une connexion profonde et incarnée entre le joueur et son amour interdit tout en construisant de l'intimité narrative et émotionnelle.",
+  "transitionCondition": "Un événement ou une révélation dérangle le tableau idyllique, annonçant des turbulences imminentes.",
+  "keyNpcIds": [
+    "darius-fenrir",
+    "kora-sangu",
+    "zephyr-esprit",
+    "neo-inventeur"
+  ],
+  "locationIds": [
+    "jardins-nuit-eternelle",
+    "estate-fenrir",
+    "chateau-sangu",
+    "carrefours-numeriques"
+  ],
+  "loreKeys": [
+    "intimite-interdite",
+    "beaute-monde-afro-uchronique",
+    "metamorphose-amour",
+    "technologie-esprit-carrefours"
+  ],
+  "gmInstructions": "Créez des scènes sensuelles et romantiques qui explorent les spécificités de ces créatures (loup-garou et vampire) dans ce monde afro-uchronique. Intégrez la technologie de Zephyr comme enabler de rencontres secrètes. Montrez la beauté et le luxe de ce monde parallèlement à l'intensité émotionnelle. Laissez le joueur explorer les différents facettes de son amour : humain, animal, émotionnel, politique.",
+  "forbiddenElements": [
+    "climax-majeur-confrontation",
+    "mort-personnage-ppal",
+    "revelation-trahison",
+    "separation-definitive"
+  ],
+  "suggestedMoodTags": [
+    "romance",
+    "sensuousness",
+    "wonder",
+    "stolen-moments"
+  ],
+  "initialPacing": {
+    "tensionCurve": "plateau",
+    "emotionalTone": "wonder",
+    "narrativeCheckpoints": [
+      {
+        "id": "moments-intimes-multiples",
+        "description": "Au moins deux scènes de connexion émotionnelle/romantique profonde entre les amoureux",
+        "met": false
+      },
+      {
+        "id": "mondes-explores",
+        "description": "Le joueur découvre et expérimente l'univers de son amour interdit (domaine, culture, pouvoirs)",
+        "met": false
+      },
+      {
+        "id": "promesse-tenue",
+        "description": "Les 'promesses du spectacle' sont tenues : le joueur vit la romance interdite pleinement",
+        "met": false
+      }
+    ],
+    "maxTurnsBeforeForceProgress": 6
+  }
+}

@@ -1,0 +1,27 @@
+{
+  "number": 12,
+  "name": "Dark Night of the Soul",
+  "slug": "dark-night-of-the-soul",
+  "description": "Le heros est brise. Seul dans les ruines du Temple du Voile, sans Zephyr, sans mentor, il contemple l'etendue de son echec. Les doutes le submergent : peut-etre n'etait-il pas le bon Tisserand, peut-etre que les anciens avaient raison de disparaitre. Nia reste a ses cotes, silencieuse, partageant sa douleur. C'est dans ce gouffre de desespoir que le heros doit trouver en lui-meme la raison de continuer.",
+  "minScenes": 1,
+  "maxScenes": 3,
+  "dcBase": 14,
+  "narrativeGoal": "Explorer le fond du desespoir pour permettre la renaissance. Le heros doit confronter ses peurs les plus profondes, accepter ses limites, et trouver une nouvelle raison de se battre qui vient de l'interieur.",
+  "transitionCondition": "Le heros a traverse son moment le plus sombre, a confronte ses peurs et ses doutes, et a trouve en lui-meme ou a travers ses liens une nouvelle determination pour continuer.",
+  "keyNpcIds": ["nia-scholar", "elder-amara", "kazi-inventor"],
+  "locationIds": ["veil-temple"],
+  "loreKeys": ["tisserand-legacy", "ubuntu-philosophy", "sankofa-philosophy", "inner-strength"],
+  "gmInstructions": "Ce beat est introspectif et emotionnel. Le heros est au fond du gouffre. Laissez le joueur exprimer sa douleur, sa colere, son desespoir. Nia peut partager sa propre histoire de perte et de perseverance, incarnant Sankofa : regarder en arriere pour trouver la force d'avancer. Kazi, malgre ses inventions brisees, refuse d'abandonner - il travaille fievreusement sur une solution, incarnant Biso. Le tournant peut venir de plusieurs sources : un souvenir d'Amara et de ses paroles (le theme revient), une realisation que la force du heros n'est pas dans son pouvoir individuel mais dans ses liens (Ubuntu), un message de Kofi depuis le village, ou un dernier murmure de Zephyr a travers le Voile. Le heros comprend que les anciens Tisserands ont echoue parce qu'ils agissaient seuls - lui a des allies, une communaute, des liens. C'est sa force unique.",
+  "forbiddenElements": ["resolution-immediate", "nouveau-pouvoir-magique", "sauvetage-exterieur", "minimisation-de-la-douleur"],
+  "suggestedMoodTags": ["despair", "introspection", "grief", "quiet", "catharsis"],
+  "initialPacing": {
+    "tensionCurve": "falling",
+    "emotionalTone": "grief",
+    "narrativeCheckpoints": [
+      { "id": "rock-bottom", "description": "Le heros a atteint son point le plus bas emotionnellement", "met": false },
+      { "id": "fears-confronted", "description": "Le heros a confronte ses peurs et doutes les plus profonds", "met": false },
+      { "id": "new-resolve", "description": "Le heros a trouve une nouvelle raison de continuer, venant de l'interieur ou de ses liens", "met": false }
+    ],
+    "maxTurnsBeforeForceProgress": 5
+  }
+}

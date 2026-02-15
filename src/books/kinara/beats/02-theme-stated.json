@@ -1,0 +1,26 @@
+{
+  "number": 2,
+  "name": "Theme Stated",
+  "slug": "theme-stated",
+  "description": "Elder Amara partage une verite profonde avec le heros, souvent deguisee en proverbe ou en lecon anodine. Le theme central est enonce : 'Le Voile qui separe les mondes est aussi fragile que les liens qui unissent une communaute - il faut quelqu'un qui entend les deux cotes pour le reparer.' Le heros ne comprend pas encore la portee de ces mots.",
+  "minScenes": 1,
+  "maxScenes": 2,
+  "dcBase": 8,
+  "narrativeGoal": "Enoncer le theme central de l'histoire a travers un dialogue ou une situation qui plante la graine thematique : la connexion entre les mondes visible et invisible, et le role unique de ceux qui peuvent entendre les deux.",
+  "transitionCondition": "Le theme a ete enonce par un PNJ ou par une situation symbolique, et le heros a reagi a cette verite sans en saisir pleinement la signification.",
+  "keyNpcIds": ["elder-amara"],
+  "locationIds": ["village-of-origin", "spirit-grove"],
+  "loreKeys": ["spirit-veil", "tisserand-legacy", "proverbs-of-kinara"],
+  "gmInstructions": "Elder Amara doit transmettre le theme de maniere naturelle - un proverbe lors d'une tache quotidienne, une histoire au coin du feu, ou une reflexion face au Bosquet des Esprits. Le theme tourne autour de la dualite et de la connexion : ecouter ce que les autres refusent d'entendre, tisser ce qui est dechire. Le heros peut acquiescer poliment sans comprendre. C'est un moment calme mais charge de sens. N'expliquez pas le theme - plantez-le comme une graine.",
+  "forbiddenElements": ["explication-directe-du-don", "combat", "depart-du-village", "apparition-antagoniste"],
+  "suggestedMoodTags": ["wisdom", "serenity", "foreshadowing", "intimacy"],
+  "initialPacing": {
+    "tensionCurve": "plateau",
+    "emotionalTone": "serenity",
+    "narrativeCheckpoints": [
+      { "id": "theme-delivered", "description": "Le theme central a ete enonce par Elder Amara ou une situation symbolique", "met": false },
+      { "id": "hero-reacts", "description": "Le heros a reagi au theme, meme sans le comprendre pleinement", "met": false }
+    ],
+    "maxTurnsBeforeForceProgress": 4
+  }
+}

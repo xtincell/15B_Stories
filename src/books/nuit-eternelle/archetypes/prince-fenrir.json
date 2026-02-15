@@ -1,0 +1,16 @@
+{
+  "id": "prince-fenrir",
+  "name": "Prince de la Maison Fenrir",
+  "description": "Héritier de la lignée lupine, vous incarnez la fierté aristocratique des métamorphes nordiques. Vos crocs et votre grâce féline vous désignent comme un prédateur raffiné, éduqué aux codes de la noblesse africaine. Malgré votre rang, une passion interdite vous consume pour une vampire de la Maison Sangu, bravant les alliances ancestrales.",
+  "suggestedStats": {
+    "ubuntu": 8,
+    "maat": 5,
+    "sankofa": 4,
+    "biso": 3
+  },
+  "startingItems": [
+    "amulette-fenrir-argent",
+    "cape-ceremonielle-noir-or"
+  ],
+  "backstoryHook": "Tu es né sous la lune de la Savane Éternelle, dans les tours de diamant de la Maison Fenrir. Ton rang t'oblige à respecter les traditions, mais ton cœur appartient à celle que tu ne dois pas aimer. Ce soir, tu vas la revoir lors du Bal des Masques, peu importe le prix politique."
+}

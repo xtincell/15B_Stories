@@ -1,0 +1,61 @@
+{
+  "number": 3,
+  "name": "Set-Up",
+  "slug": "set-up",
+  "description": "Les obstacles et enjeux du monde ordinaire se cristallisent. Le joueur découvre les intrigues politiques des Maisons, les rivalités entre Fenrir et Sangu, et les attentes spécifiques placées sur lui. Des signaux avant-coureurs de danger émergent : des mouvements suspects des Ombres Numériques, des tensions diplomatiques, ou des prophéties anciennes.",
+  "minScenes": 2,
+  "maxScenes": 3,
+  "dcBase": 8,
+  "narrativeGoal": "Révéler les forces qui maintiennent le statu quo et montrer ce qui est en jeu pour le joueur s'il s'oppose au système.",
+  "transitionCondition": "Le joueur comprend pleinement les conséquences potentielles de ses choix futurs, ou une menace externe force la main des événements.",
+  "keyNpcIds": [
+    "okafor-conseil",
+    "darius-fenrir",
+    "kora-sangu"
+  ],
+  "locationIds": [
+    "palais-conseil-ancestral",
+    "estate-fenrir",
+    "chateau-sangu"
+  ],
+  "loreKeys": [
+    "rivalite-maisons-fenrir-sangu",
+    "ombres-numeriques-threat",
+    "prophecies-anciennes"
+  ],
+  "gmInstructions": "Construisez une toile politique complexe. Présentez les personnages de pouvoir avec leurs motivations propres. Créez des moments de tension subtile : une remarque glissée lors d'un banquet, une interdiction formelle, une alliance fragile. Montrez que la romance interdite n'est pas juste sentimentale, elle est politiquement explosif.",
+  "forbiddenElements": [
+    "rencontre-prolongee-amour-secret",
+    "basculement-action",
+    "allie-major-revele-traite",
+    "mort-principal-pnj"
+  ],
+  "suggestedMoodTags": [
+    "political-tension",
+    "foreboding",
+    "complexity",
+    "constraint"
+  ],
+  "initialPacing": {
+    "tensionCurve": "rising",
+    "emotionalTone": "dread",
+    "narrativeCheckpoints": [
+      {
+        "id": "enjeux-politiques-clairs",
+        "description": "Le joueur comprend les rivalités des Maisons et les règles non-dites de la hiérarchie",
+        "met": false
+      },
+      {
+        "id": "menace-externe-sentie",
+        "description": "Une menace ou une anomalie (Ombres Numériques, prophétie) crée une pression temporelle",
+        "met": false
+      },
+      {
+        "id": "prix-de-la-rebellion",
+        "description": "Le joueur reconnaît clairement ce qu'il perdrait s'il défie son Maison",
+        "met": false
+      }
+    ],
+    "maxTurnsBeforeForceProgress": 6
+  }
+}

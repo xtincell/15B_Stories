@@ -1,0 +1,58 @@
+{
+  "number": 2,
+  "name": "Theme Stated",
+  "slug": "theme-stated",
+  "description": "Une question existentielle ou morale est posée, généralement par un autre personnage. Cette question explore la tension entre devoir et désir, entre l'ordre établi et la liberté individuelle, ou entre le pouvoir et l'amour. Amara, la Griot, peut incarner cette interrogation à travers une histoire ancestrale ou une énigme.",
+  "minScenes": 1,
+  "maxScenes": 2,
+  "dcBase": 8,
+  "narrativeGoal": "Poser la question centrale du récit : peut-on défier la hiérarchie des Maisons pour l'amour ? Qu'est-ce qui prime, le devoir ou le cœur ?",
+  "transitionCondition": "Le joueur reçoit une réponse émotionnelle ou intellectuelle à la question posée, créant un doute intérieur.",
+  "keyNpcIds": [
+    "amara-griot"
+  ],
+  "locationIds": [
+    "temple-griots",
+    "jardins-nuit-eternelle"
+  ],
+  "loreKeys": [
+    "ancestralites-africaines",
+    "conflict-devoir-desir",
+    "codes-maisons-nobles"
+  ],
+  "gmInstructions": "Utilisez Amara pour poser la question thématique avec poésie et profondeur. Intégrez les histoires ancestrales africaines comme métaphores. Laissez le joueur explorer ses propres convictions. La question ne doit pas avoir de réponse facile, elle doit déranger et fasciner.",
+  "forbiddenElements": [
+    "reponse-simple-definitif",
+    "introduction-direct-antagoniste",
+    "mort-personnage-clé",
+    "resolution-conflict-principal"
+  ],
+  "suggestedMoodTags": [
+    "introspection",
+    "mystery",
+    "wisdom-seeking",
+    "philosophical"
+  ],
+  "initialPacing": {
+    "tensionCurve": "rising",
+    "emotionalTone": "wonder",
+    "narrativeCheckpoints": [
+      {
+        "id": "question-thematique-posee",
+        "description": "Une question existentielle clé est énoncée ou suggérée au joueur",
+        "met": false
+      },
+      {
+        "id": "joueur-questionne",
+        "description": "Le joueur reconnaît la pertinence personnelle de cette question",
+        "met": false
+      },
+      {
+        "id": "reference-ancestrale",
+        "description": "La question est liée aux traditions ou à la lore africaine du monde",
+        "met": false
+      }
+    ],
+    "maxTurnsBeforeForceProgress": 5
+  }
+}

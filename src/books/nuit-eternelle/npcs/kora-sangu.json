@@ -1,0 +1,16 @@
+{
+  "id": "kora-sangu",
+  "name": "Kora",
+  "title": "Comtesse de la Maison Sangu",
+  "personality": "Kora est votre intérêt romantique, une vampire aux lèvres couleur pourpre et aux cicatrices qui racontent mille histoires d'amour perdus. Elle possède une grâce mélancolique teintée d'une passion destructrice, oscillant entre tendresse et rage. Son rire résonne comme du velours sur du verre brisé.",
+  "motivations": "Kora cherche à échapper au contrôle étouffant de sa Maison et aux alliances politiques arrangées qui ont détruit sa vie sentimentale antérieure. Elle voit en vous une promesse de liberté et d'amour véritable, même si cet amour pourrait les détruire tous deux.",
+  "defaultAffinity": 2,
+  "beatRoles": {
+    "1": "Kora vous aperçoit au bal masqué et votre regard suffit à déclencher une attraction irrésistible.",
+    "2": "Elle vous rencontre en secret dans les tours holographiques et vous raconte son passé tragique.",
+    "5": "Kora est découverte lors d'une rencontre clandestine et doit fuir, vous laissant dans l'incertitude sur ses sentiments.",
+    "8": "Elle revient vers vous, prête à tout sacrifier pour être avec vous malgré les conséquences.",
+    "13": "Kora vous sauve au péril de sa vie lors du dernier affrontement.",
+    "15": "Elle choisit de rester à vos côtés, franchissant le point de non-retour de sa Maison."
+  }
+}

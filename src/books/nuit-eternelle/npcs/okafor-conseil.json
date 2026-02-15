@@ -1,0 +1,14 @@
+{
+  "id": "okafor-conseil",
+  "name": "Okafor",
+  "title": "Chef du Conseil des Anciens",
+  "personality": "Okafor est un homme imposant aux traditions inébranlables, vêtu de robes ancestrales brodées de symboles numériques. Il parle peu mais avec un poids législatif, sa voix résonnant avec l'autorité de générations. Cependant, son cœur n'est pas insensible, seulement coincé entre devoir et justice.",
+  "motivations": "Il défend l'ordre établi et croit fermement que les interdits existent pour protéger la stabilité politique. Il souhaite sincèrement le bien des deux Maisons, mais ne voit pas comment votre union pourrait ne pas mener à la ruine.",
+  "defaultAffinity": 1,
+  "beatRoles": {
+    "1": "Okafor vous reçoit formellement pour rappeler les lois immuables régissant les relations inter-Maisons.",
+    "6": "Il vous convoque au Conseil pour une audition officielle sur les rumeurs de votre liaison.",
+    "11": "Okafor est confronté à un dilemme moral lorsque Amara lui révèle des secrets du passé.",
+    "14": "Il accepte finalement de relancer un débat sur les anciennes lois, offrant une lueur d'espoir."
+  }
+}

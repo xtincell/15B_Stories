@@ -1,0 +1,16 @@
+{
+  "id": "guerrier",
+  "name": "Le Guerrier",
+  "description": "Forge par l'action et l'audace, le Guerrier est celui qui avance quand les autres hesitent. Son courage n'est pas l'absence de peur mais la volonte de la traverser. Il protege les faibles, affronte l'injustice et n'hesite jamais a mettre son corps entre le danger et ceux qu'il aime. Son approche directe peut parfois manquer de subtilite, mais sa determination est inegalee. En tant que Tisserand, il percoit le Voile comme un champ de bataille -- chaque dechirure est une breche a defendre, chaque reparation un territoire reconquis.",
+  "suggestedStats": {
+    "ubuntu": 3,
+    "maat": 5,
+    "sankofa": 3,
+    "biso": 9
+  },
+  "startingItems": [
+    "lance-de-fer-rouge",
+    "amulette-de-bravoure"
+  ],
+  "backstoryHook": "Vous avez toujours ete le premier a agir, le dernier a fuir. Quand les betes sauvages menacaient le village, c'est vous qui preniez la lance. Quand les enfants se perdaient dans la brousse, c'est vous qui partiez a leur recherche. Mais depuis quelques lunes, vos reflexes se sont aiguises au-dela du naturel. Vos sens percoivent des menaces invisibles, votre corps reagit a des dangers que personne d'autre ne ressent. La nuit de la ceremonie des Ancetres, vous avez senti la dechirure du Voile comme une blessure dans votre propre chair."
+}

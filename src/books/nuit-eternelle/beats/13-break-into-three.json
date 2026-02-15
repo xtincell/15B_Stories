@@ -1,0 +1,64 @@
+{
+  "number": 13,
+  "name": "Break into Three",
+  "slug": "break-into-three",
+  "description": "Galvanisé par sa redécouverte intérieure, le joueur émerge de l'obscurité avec un nouveau plan d'attaque. Il rassemble ses véritables alliés (peut-être quelques figures des Maisons, Amara, Zephyr, voire son amant s'il est toujours vivant), et lance une contre-offensive finale. Le joueur comprend maintenant qu'il ne s'agit pas seulement de sauver sa relation, mais de transformer le système lui-même.",
+  "minScenes": 2,
+  "maxScenes": 4,
+  "dcBase": 16,
+  "narrativeGoal": "Marquer le passage de la défaite à l'action finale, en rassemblant les ressources critiques et en clarifiant le véritable enjeu : transformation systémique, pas simple victoire romantique.",
+  "transitionCondition": "Le joueur doit formuler un plan concret, rallier des alliés clés, et s'engager irrévocablement dans une action finale qui défie le statu quo.",
+  "keyNpcIds": [
+    "amara-griot",
+    "zephyr-esprit",
+    "darius-fenrir",
+    "kora-sangu",
+    "neo-inventeur"
+  ],
+  "locationIds": [
+    "cœur-politique",
+    "nexus-numerique",
+    "repaire-alliés",
+    "arene-finale-symbolique"
+  ],
+  "loreKeys": [
+    "alliance-nouvelle",
+    "plan-final",
+    "technologie-et-tradition",
+    "unite-maisons"
+  ],
+  "gmInstructions": "Montrez le rassemblement des alliés et la formation d'une coalition improbable. Utilisez Amara pour légitimer moralement l'action via la sagesse ancestrale, Zephyr pour naviguer la technologie, et Néo pour activer des ressources cachées. Le plan doit être bold mais réaliste dans le contexte de l'univers. Établissez des scènes tactiques montrant comment le joueur passera des ombres à la lumière finale.",
+  "forbiddenElements": [
+    "alliance-avec-antagoniste",
+    "abandonment-du-but",
+    "retour-laches"
+  ],
+  "suggestedMoodTags": [
+    "determination",
+    "hope",
+    "unity",
+    "triumph"
+  ],
+  "initialPacing": {
+    "tensionCurve": "rising",
+    "emotionalTone": "hope",
+    "narrativeCheckpoints": [
+      {
+        "id": "rassemblement-allies",
+        "description": "Le joueur rassemble ses alliés critiques et les convainct de rejoindre sa cause finale",
+        "met": false
+      },
+      {
+        "id": "revelation-plan",
+        "description": "Émergence d'un plan ou d'une stratégie révolutionnaire qui combine tradition ancestrale et technologie",
+        "met": false
+      },
+      {
+        "id": "point-de-non-retour",
+        "description": "Le joueur s'engage publiquement ou secrètement dans une action qui ne peut être annulée",
+        "met": false
+      }
+    ],
+    "maxTurnsBeforeForceProgress": 4
+  }
+}

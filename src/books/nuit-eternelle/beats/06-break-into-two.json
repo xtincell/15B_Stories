@@ -1,0 +1,60 @@
+{
+  "number": 6,
+  "name": "Break into Two",
+  "slug": "break-into-two",
+  "description": "Une décision ou un événement irréversible pousse le joueur à l'action. Peut-être une révélation que l'amour interdit aussi ressent intensément, une menace imminente des Ombres Numériques ciblant l'amour, ou une confrontation politique qui force une prise de position. Le joueur choisit de poursuivre la relation envers et contre tout, ou de s'engager à la sauver d'une menace extérieure.",
+  "minScenes": 1,
+  "maxScenes": 2,
+  "dcBase": 10,
+  "narrativeGoal": "Marquer le passage du monde ordinaire au monde de l'aventure romantique et politique. Le joueur s'engage maintenant à défier le statu quo.",
+  "transitionCondition": "Une action concrète est prise : une promesse échangée formellement, une fuite arrangée, ou une alliance secrète forgée.",
+  "keyNpcIds": [
+    "darius-fenrir",
+    "kora-sangu",
+    "malachai-antagoniste"
+  ],
+  "locationIds": [
+    "lieu-critique-choice",
+    "carrefours-numeriques"
+  ],
+  "loreKeys": [
+    "point-non-retour",
+    "defiance-hierarchy",
+    "ombres-numeriques-escalation"
+  ],
+  "gmInstructions": "Créez une scène de décision dramatique. Le joueur doit faire un choix actif, pas passif. Intégrez une menace extérieure (Malachai ou les Ombres) qui serve de catalyst final. L'amour interdit doit aussi prendre une action parallèle, montrant son propre engagement. Après cette scène, le retour en arrière doit sembler impossible.",
+  "forbiddenElements": [
+    "indecision-prolongee",
+    "separation-definitive-amour",
+    "mort-majeure",
+    "revelation-antagoniste-complete"
+  ],
+  "suggestedMoodTags": [
+    "commitment",
+    "rebellion",
+    "stakes-heightened",
+    "crossroads"
+  ],
+  "initialPacing": {
+    "tensionCurve": "climax",
+    "emotionalTone": "triumph",
+    "narrativeCheckpoints": [
+      {
+        "id": "decision-irrévocable",
+        "description": "Le joueur prend une action concrete et consciente en faveur de l'amour interdit",
+        "met": false
+      },
+      {
+        "id": "engagement-mutuel",
+        "description": "Les deux amoureux reconnaissent mutuellement leur engagement",
+        "met": false
+      },
+      {
+        "id": "menace-externe-provoquee",
+        "description": "La menace du statu quo ou des antagonistes s'intensifie en réaction",
+        "met": false
+      }
+    ],
+    "maxTurnsBeforeForceProgress": 4
+  }
+}

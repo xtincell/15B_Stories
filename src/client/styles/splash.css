@@ -1,0 +1,691 @@
+/* ── Splash / Title Screen ── */
+
+.splash-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  padding: 2rem;
+  position: relative;
+  overflow: hidden;
+  background:
+    radial-gradient(ellipse at 50% 40%, rgba(212, 168, 83, 0.08) 0%, transparent 60%),
+    var(--color-bg);
+}
+
+/* Decorative zigzag patterns */
+.splash-pattern {
+  position: absolute;
+  left: 0;
+  right: 0;
+  width: 100%;
+  opacity: 0.3;
+}
+.splash-pattern-top {
+  top: 0;
+}
+.splash-pattern-bottom {
+  bottom: 0;
+}
+.splash-pattern svg {
+  width: 100%;
+  height: 40px;
+}
+
+/* Spirit symbol - animated rings */
+.splash-spirit {
+  position: relative;
+  width: 140px;
+  height: 140px;
+  margin-bottom: 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.spirit-ring {
+  position: absolute;
+  border-radius: 50%;
+  border: 1.5px solid var(--color-gold-dim);
+}
+
+.spirit-ring-outer {
+  width: 140px;
+  height: 140px;
+  animation: spiritRotate 12s linear infinite;
+  border-style: dashed;
+}
+
+.spirit-ring-middle {
+  width: 100px;
+  height: 100px;
+  animation: spiritRotate 8s linear infinite reverse;
+  border-color: var(--color-gold);
+  opacity: 0.6;
+}
+
+.spirit-ring-inner {
+  width: 60px;
+  height: 60px;
+  animation: spiritRotate 5s linear infinite;
+  border-color: var(--color-amber);
+  border-style: dotted;
+}
+
+.spirit-core {
+  font-size: 2rem;
+  color: var(--color-gold);
+  animation: spiritPulse 3s ease-in-out infinite;
+  z-index: 1;
+}
+
+@keyframes spiritRotate {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+@keyframes spiritPulse {
+  0%, 100% { opacity: 0.6; transform: scale(1); }
+  50% { opacity: 1; transform: scale(1.15); }
+}
+
+/* Title */
+.splash-title {
+  font-size: 4rem;
+  color: var(--color-gold);
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  margin-bottom: -0.25rem;
+  animation: titleReveal 1.2s ease-out;
+  text-shadow: 0 0 30px rgba(212, 168, 83, 0.3);
+}
+
+.splash-subtitle-main {
+  font-size: 1.6rem;
+  color: var(--color-copper);
+  letter-spacing: 0.4em;
+  text-transform: uppercase;
+  font-weight: 300;
+  margin-bottom: 1.5rem;
+  animation: titleReveal 1.2s ease-out 0.2s both;
+}
+
+.splash-tagline {
+  color: var(--color-text-dim);
+  font-style: italic;
+  font-size: 1rem;
+  margin-bottom: 2.5rem;
+  animation: titleReveal 1.2s ease-out 0.4s both;
+}
+
+@keyframes titleReveal {
+  from {
+    opacity: 0;
+    transform: translateY(15px);
+    letter-spacing: 0.4em;
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* 4 Values */
+.splash-values {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin-bottom: 3rem;
+  animation: titleReveal 1.2s ease-out 0.6s both;
+}
+
+.splash-value {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.1rem;
+  font-family: var(--font-ui);
+  font-size: 0.8rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  padding: 0.3rem 0.7rem;
+  border-radius: 4px;
+  transition: transform 0.3s, opacity 0.3s;
+}
+
+.splash-value small {
+  font-size: 0.55rem;
+  font-weight: 400;
+  text-transform: none;
+  letter-spacing: 0.02em;
+  opacity: 0.7;
+}
+.splash-value:hover {
+  transform: scale(1.1);
+}
+
+.splash-value[data-stat="ubuntu"] { color: var(--color-ubuntu); border: 1px solid var(--color-ubuntu); }
+.splash-value[data-stat="maat"] { color: var(--color-maat); border: 1px solid var(--color-maat); }
+.splash-value[data-stat="sankofa"] { color: var(--color-sankofa); border: 1px solid var(--color-sankofa); }
+.splash-value[data-stat="biso"] { color: var(--color-biso); border: 1px solid var(--color-biso); }
+
+.splash-separator {
+  color: var(--color-text-muted);
+  font-size: 1.2rem;
+}
+
+/* Enter Button */
+.btn-enter {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 1rem 2.5rem;
+  background: transparent;
+  border: 2px solid var(--color-gold);
+  color: var(--color-gold);
+  font-family: var(--font-ui);
+  font-size: 1rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  cursor: pointer;
+  border-radius: var(--radius);
+  transition: all 0.3s ease;
+  animation: titleReveal 1.2s ease-out 0.8s both;
+}
+
+.btn-enter:hover {
+  background: var(--color-gold);
+  color: var(--color-bg);
+  transform: scale(1.02);
+  box-shadow: 0 0 20px rgba(212, 168, 83, 0.3);
+}
+
+.btn-enter-arrow {
+  transition: transform 0.3s;
+}
+.btn-enter:hover .btn-enter-arrow {
+  transform: translateX(4px);
+}
+
+/* ── Resume Game Button (prominent, shown when game is in progress) ── */
+.btn-resume-game {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.25rem;
+  padding: 1rem 3rem;
+  background: rgba(212, 168, 83, 0.12);
+  border: 2px solid var(--color-gold);
+  color: var(--color-gold);
+  font-family: var(--font-ui);
+  font-size: 1.05rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  cursor: pointer;
+  border-radius: var(--radius);
+  transition: all 0.3s ease;
+  animation: titleReveal 1.2s ease-out 0.7s both;
+  margin-bottom: 0.75rem;
+  position: relative;
+  overflow: hidden;
+}
+.btn-resume-game::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, rgba(212, 168, 83, 0.05) 0%, transparent 60%);
+  pointer-events: none;
+}
+.btn-resume-game:hover {
+  background: var(--color-gold);
+  color: var(--color-bg);
+  transform: scale(1.02);
+  box-shadow: 0 0 25px rgba(212, 168, 83, 0.35);
+}
+.btn-resume-game.hidden {
+  display: none;
+}
+
+.btn-resume-icon {
+  font-size: 0.9rem;
+  transition: transform 0.3s;
+}
+.btn-resume-game:hover .btn-resume-icon {
+  transform: translateX(3px);
+}
+
+.btn-resume-text {
+  font-size: 1rem;
+}
+
+.btn-resume-sub {
+  font-size: 0.7rem;
+  font-weight: 400;
+  text-transform: none;
+  letter-spacing: 0.02em;
+  opacity: 0.7;
+}
+
+/* When there's an active game, make "Nouvelle Partie" secondary/smaller */
+.btn-enter.btn-enter-secondary {
+  padding: 0.7rem 1.8rem;
+  border-width: 1px;
+  border-color: var(--color-gold-dim);
+  color: var(--color-gold-dim);
+  font-size: 0.85rem;
+}
+.btn-enter.btn-enter-secondary:hover {
+  border-color: var(--color-gold);
+  color: var(--color-gold);
+  background: rgba(212, 168, 83, 0.08);
+  box-shadow: none;
+}
+
+/* ── Splash Actions Row ── */
+.splash-actions {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+  margin-top: 0.75rem;
+  animation: titleReveal 1.2s ease-out 1s both;
+}
+
+/* ── Load Save Button (Title Screen) ── */
+.btn-load-save {
+  padding: 0.6rem 1.5rem;
+  background: transparent;
+  border: 1px solid var(--color-gold-dim);
+  border-radius: var(--radius);
+  color: var(--color-gold-dim);
+  font-family: var(--font-ui);
+  font-size: 0.85rem;
+  cursor: pointer;
+  transition: border-color 0.2s, color 0.2s, background 0.2s;
+  letter-spacing: 0.03em;
+}
+.btn-load-save:hover {
+  border-color: var(--color-gold);
+  color: var(--color-gold);
+  background: rgba(212, 168, 83, 0.1);
+}
+
+/* ── Archives Button (Title Screen) ── */
+.btn-archives {
+  padding: 0.6rem 1.5rem;
+  background: transparent;
+  border: 1px solid var(--color-gold-dim);
+  border-radius: var(--radius);
+  color: var(--color-gold-dim);
+  font-family: var(--font-ui);
+  font-size: 0.85rem;
+  cursor: pointer;
+  transition: border-color 0.2s, color 0.2s, background 0.2s;
+  letter-spacing: 0.03em;
+}
+.btn-archives:hover {
+  border-color: var(--color-gold);
+  color: var(--color-gold);
+  background: rgba(212, 168, 83, 0.1);
+}
+
+/* (Book Selector removed in v0.9.0 — replaced by Hub grid) */
+
+/* ── Update Notification ── */
+.update-notification {
+  margin-top: 1.5rem;
+  animation: titleReveal 1.2s ease-out 1.2s both;
+}
+
+.update-toggle-btn {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.4rem 1rem;
+  background: transparent;
+  border: 1px solid var(--color-surface);
+  border-radius: var(--radius);
+  color: var(--color-text-muted);
+  font-family: var(--font-ui);
+  font-size: 0.75rem;
+  cursor: pointer;
+  transition: all 0.2s;
+  letter-spacing: 0.03em;
+}
+.update-toggle-btn:hover {
+  border-color: var(--color-gold-dim);
+  color: var(--color-gold-dim);
+}
+
+.update-badge {
+  display: inline-block;
+  padding: 0.1rem 0.4rem;
+  background: var(--color-gold);
+  color: var(--color-bg);
+  font-size: 0.6rem;
+  font-weight: 700;
+  border-radius: 3px;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  animation: badgePulse 2s ease-in-out infinite;
+}
+.update-badge.hidden {
+  display: none;
+}
+
+@keyframes badgePulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.6; }
+}
+
+/* ── Changelog Panel (on Splash Screen) ── */
+.changelog-panel {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: min(460px, 90vw);
+  max-height: 70vh;
+  background: var(--color-bg-secondary);
+  border: 1px solid var(--color-surface);
+  border-radius: var(--radius-lg);
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
+  z-index: 50;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  animation: changelogSlideIn 0.3s ease;
+}
+.changelog-panel.hidden {
+  display: none;
+}
+
+@keyframes changelogSlideIn {
+  from { opacity: 0; transform: translate(-50%, -48%); }
+  to { opacity: 1; transform: translate(-50%, -50%); }
+}
+
+.changelog-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.75rem 1rem;
+  border-bottom: 1px solid var(--color-surface);
+}
+.changelog-header h3 {
+  color: var(--color-gold);
+  font-size: 0.9rem;
+  letter-spacing: 0.03em;
+  font-family: var(--font-ui);
+}
+
+.changelog-body {
+  overflow-y: auto;
+  padding: 0.75rem 1rem 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.changelog-entry {
+  padding-bottom: 0.75rem;
+  border-bottom: 1px solid var(--color-surface);
+}
+.changelog-entry:last-child {
+  border-bottom: none;
+  padding-bottom: 0;
+}
+
+.changelog-version-header {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin-bottom: 0.25rem;
+}
+
+.changelog-version {
+  display: inline-block;
+  padding: 0.1rem 0.5rem;
+  background: var(--color-gold);
+  color: var(--color-bg);
+  font-family: var(--font-ui);
+  font-size: 0.7rem;
+  font-weight: 700;
+  border-radius: 3px;
+  letter-spacing: 0.03em;
+}
+
+.changelog-date {
+  color: var(--color-text-muted);
+  font-size: 0.7rem;
+  font-family: var(--font-ui);
+}
+
+.changelog-title {
+  color: var(--color-text);
+  font-size: 0.85rem;
+  font-weight: 600;
+  margin-bottom: 0.4rem;
+}
+
+.changelog-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+}
+.changelog-list li {
+  color: var(--color-text-dim);
+  font-size: 0.78rem;
+  line-height: 1.4;
+  padding-left: 1rem;
+  position: relative;
+}
+.changelog-list li::before {
+  content: '\25B8';
+  position: absolute;
+  left: 0;
+  color: var(--color-gold-dim);
+}
+
+/* ── Fullscreen Loading Overlay ── */
+
+.loading-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background:
+    radial-gradient(ellipse at 50% 50%, rgba(212, 168, 83, 0.05) 0%, transparent 50%),
+    var(--color-bg);
+  animation: overlayFadeIn 0.4s ease;
+}
+
+.loading-overlay.hidden {
+  display: none !important;
+}
+
+.loading-overlay.fade-out {
+  animation: overlayFadeOut 0.6s ease forwards;
+}
+
+@keyframes overlayFadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes overlayFadeOut {
+  from { opacity: 1; }
+  to { opacity: 0; }
+}
+
+.loading-overlay-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.5rem;
+  max-width: 400px;
+  text-align: center;
+}
+
+/* Orbiting animation */
+.loading-spirit-anim {
+  position: relative;
+  width: 120px;
+  height: 120px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.loading-orbit {
+  position: absolute;
+  border-radius: 50%;
+  border: 1.5px solid transparent;
+}
+
+.loading-orbit-1 {
+  width: 120px;
+  height: 120px;
+  border-top-color: var(--color-ubuntu);
+  border-right-color: var(--color-maat);
+  animation: orbitSpin 3s linear infinite;
+}
+
+.loading-orbit-2 {
+  width: 85px;
+  height: 85px;
+  border-bottom-color: var(--color-sankofa);
+  border-left-color: var(--color-biso);
+  animation: orbitSpin 2s linear infinite reverse;
+}
+
+.loading-orbit-3 {
+  width: 50px;
+  height: 50px;
+  border-top-color: var(--color-gold);
+  border-bottom-color: var(--color-gold-dim);
+  animation: orbitSpin 1.5s linear infinite;
+}
+
+.loading-center-glyph {
+  font-size: 1.5rem;
+  color: var(--color-gold);
+  animation: spiritPulse 2s ease-in-out infinite;
+  z-index: 1;
+}
+
+@keyframes orbitSpin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+.loading-overlay-title {
+  font-size: 1.3rem;
+  color: var(--color-gold);
+  letter-spacing: 0.05em;
+  animation: loadTextPulse 2.5s ease-in-out infinite;
+}
+
+.loading-overlay-sub {
+  color: var(--color-text-dim);
+  font-style: italic;
+  font-size: 0.9rem;
+  min-height: 1.4em;
+  transition: opacity 0.3s;
+}
+
+@keyframes loadTextPulse {
+  0%, 100% { opacity: 0.7; }
+  50% { opacity: 1; }
+}
+
+/* Progress bar */
+.loading-progress-bar {
+  width: 200px;
+  height: 3px;
+  background: var(--color-surface);
+  border-radius: 2px;
+  overflow: hidden;
+}
+
+.loading-progress-fill {
+  height: 100%;
+  width: 0%;
+  background: linear-gradient(90deg, var(--color-gold-dim), var(--color-gold), var(--color-amber));
+  border-radius: 2px;
+  transition: width 0.5s ease;
+  animation: progressShimmer 2s ease-in-out infinite;
+}
+
+@keyframes progressShimmer {
+  0% { background-position: -200px 0; }
+  100% { background-position: 200px 0; }
+}
+
+.loading-tip {
+  color: var(--color-text-muted);
+  font-size: 0.75rem;
+  font-style: italic;
+  min-height: 1.2em;
+  transition: opacity 0.5s;
+}
+
+/* ── Enhanced In-Game Loading ── */
+
+.loading-quill {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 0.5rem;
+}
+
+.quill-feather {
+  font-size: 1.5rem;
+  color: var(--color-gold);
+  animation: quillWrite 1.8s ease-in-out infinite;
+}
+
+@keyframes quillWrite {
+  0% { transform: translateX(-10px) rotate(-5deg); opacity: 0.5; }
+  25% { transform: translateX(0) rotate(0deg); opacity: 1; }
+  50% { transform: translateX(10px) rotate(5deg); opacity: 0.5; }
+  75% { transform: translateX(0) rotate(0deg); opacity: 1; }
+  100% { transform: translateX(-10px) rotate(-5deg); opacity: 0.5; }
+}
+
+.loading-flavor {
+  color: var(--color-text-muted);
+  font-size: 0.85rem;
+  font-style: italic;
+  transition: opacity 0.3s;
+  min-height: 1.4em;
+}
+
+/* ── Transition between screens ── */
+
+.screen-exit {
+  animation: screenSlideOut 0.5s ease forwards;
+}
+
+.screen-enter {
+  animation: screenSlideIn 0.5s ease forwards;
+}
+
+@keyframes screenSlideOut {
+  from { opacity: 1; transform: translateX(0); }
+  to { opacity: 0; transform: translateX(-30px); }
+}
+
+@keyframes screenSlideIn {
+  from { opacity: 0; transform: translateX(30px); }
+  to { opacity: 1; transform: translateX(0); }
+}

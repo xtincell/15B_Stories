@@ -1,0 +1,58 @@
+{
+  "number": 11,
+  "name": "All Is Lost",
+  "slug": "all-is-lost",
+  "description": "Le joueur atteint le point de rupture : tout semble perdu. Son amant est capturé, exilé, ou forcé de renier la relation. La hiérarchie des Maisons s'écroule ou se solidifie autour de l'oppression. Les Ombres Numériques gagnent du terrain. Le joueur est seul, apparemment sans ressources et sans chemin vers la victoire. C'est le moment du deuil, où il faut accepter la perte avant de pouvoir renaître.",
+  "minScenes": 1,
+  "maxScenes": 3,
+  "dcBase": 14,
+  "narrativeGoal": "Plonger le joueur dans le désespoir total pour créer le contraste dramatique avec le rebond qui suivra, marquant la 'mort' symbolique du monde ancien.",
+  "transitionCondition": "Une perte majeure doit être acceptée ou subie : mort d'un personnage important, séparation définitive en apparence, ou destruction d'un symbole clé (lieu, artefact, structure sociale).",
+  "keyNpcIds": [
+    "darius-fenrir",
+    "kora-sangu",
+    "malachai-antagoniste",
+    "okafor-conseil"
+  ],
+  "locationIds": [
+    "cachot-maison-ennemie",
+    "ruines-numeriques",
+    "monument-detruit",
+    "exil-exterieur"
+  ],
+  "loreKeys": [
+    "mort-symbolique",
+    "sacrifice-ultime",
+    "effondrement-hierarchies",
+    "moment-sombre"
+  ],
+  "gmInstructions": "Créez une scène de dévastation personnelle et politique. Montrez les conséquences complètes des choix précédents du joueur. Cet acte narratif doit être court mais intense : un moment final de perte où tout semble vraiment terminé. Ne laissez pas d'échappatoire évidente. C'est le silence avant la tempête.",
+  "forbiddenElements": [
+    "redemption-immediate",
+    "retournement-trop-rapide",
+    "personnage-principal-mort-definitif"
+  ],
+  "suggestedMoodTags": [
+    "grief",
+    "despair",
+    "silence",
+    "acceptance"
+  ],
+  "initialPacing": {
+    "tensionCurve": "falling",
+    "emotionalTone": "grief",
+    "narrativeCheckpoints": [
+      {
+        "id": "moment-de-perte",
+        "description": "L'événement catastrophique qui change tout : capture, exil, trahison définitive, ou perte d'un proche",
+        "met": false
+      },
+      {
+        "id": "acceptation-defaite",
+        "description": "Le joueur reconnaît l'ampleur de la défaite et abandonne temporairement l'espoir de victoire",
+        "met": false
+      }
+    ],
+    "maxTurnsBeforeForceProgress": 3
+  }
+}

@@ -1,0 +1,26 @@
+{
+  "number": 6,
+  "name": "Break into Two",
+  "slug": "break-into-two",
+  "description": "Le heros prend sa decision et quitte le village. C'est un moment charge d'emotion - les adieux avec Kofi, la benediction d'Amara, les regards des villageois. Le heros franchit la lisiere du territoire connu, accompagne par Zephyr, l'esprit du vent, qui devient son guide. Le monde s'ouvre devant lui : les vastes plaines de Kinara, le Marche des Carrefours au loin, et un chemin qui mene vers l'inconnu.",
+  "minScenes": 1,
+  "maxScenes": 2,
+  "dcBase": 10,
+  "narrativeGoal": "Marquer le passage definitif du monde ordinaire au monde extraordinaire. Le heros s'engage sur le chemin de sa quete, laissant derriere lui tout ce qu'il connait.",
+  "transitionCondition": "Le heros a quitte physiquement le village et s'est engage sur la route vers sa premiere destination, accompagne de Zephyr.",
+  "keyNpcIds": ["elder-amara", "kofi-friend", "zephyr-spirit"],
+  "locationIds": ["village-of-origin", "crossroads-market"],
+  "loreKeys": ["kinara-geography", "spirit-companions", "tisserand-quest"],
+  "gmInstructions": "C'est un moment de seuil. Les adieux doivent etre emotionnels mais pas melodramatiques. Amara donne au heros un objet symbolique (un talisman, un fil de lumiere cristallisee, un souvenir ancestral). Kofi promet d'attendre son retour ou exprime le desir de l'accompagner (mais ne peut pas). Zephyr se manifeste pleinement comme compagnon spirituel - decrivez sa forme evanescente, sa voix comme le bruissement du vent dans les hautes herbes. Le moment ou le heros franchit les limites du village doit etre marque visuellement : la lumiere change, les sons se transforment, le monde devient plus vaste et plus etrange. Le Marche des Carrefours est la premiere etape logique.",
+  "forbiddenElements": ["retour-au-village", "combat-majeur", "rencontre-antagoniste", "resolution-rapide"],
+  "suggestedMoodTags": ["hope", "grief", "determination", "vastness"],
+  "initialPacing": {
+    "tensionCurve": "rising",
+    "emotionalTone": "hope",
+    "narrativeCheckpoints": [
+      { "id": "farewell-scene", "description": "Le heros a fait ses adieux au village et a ses proches", "met": false },
+      { "id": "threshold-crossed", "description": "Le heros a physiquement quitte le territoire connu", "met": false }
+    ],
+    "maxTurnsBeforeForceProgress": 4
+  }
+}

@@ -1,0 +1,676 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html, body {
+  height: 100%;
+  background: var(--color-bg);
+  color: var(--color-text);
+  font-family: var(--font-body);
+  font-size: 16px;
+  line-height: 1.6;
+}
+
+#app {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.screen {
+  display: none;
+  height: 100%;
+}
+.screen.active {
+  display: flex;
+  flex-direction: column;
+}
+
+/* ── Creation Screen ── */
+
+.creation-container {
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 3rem 2rem;
+  overflow-y: auto;
+}
+
+.title-kinara {
+  font-size: 2.5rem;
+  color: var(--color-gold);
+  text-align: center;
+  letter-spacing: 0.1em;
+  margin-bottom: 0.25rem;
+}
+
+.subtitle {
+  text-align: center;
+  color: var(--color-text-dim);
+  margin-bottom: 2.5rem;
+  font-style: italic;
+}
+
+.creation-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.form-group label {
+  display: block;
+  color: var(--color-gold-dim);
+  font-family: var(--font-ui);
+  font-size: 0.85rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin-bottom: 0.5rem;
+}
+
+.form-group input[type="text"] {
+  width: 100%;
+  padding: 0.75rem 1rem;
+  background: var(--color-surface);
+  border: 1px solid var(--color-gold-dim);
+  border-radius: var(--radius);
+  color: var(--color-text);
+  font-family: var(--font-body);
+  font-size: 1rem;
+  outline: none;
+  transition: border-color 0.2s;
+}
+.form-group input[type="text"]:focus {
+  border-color: var(--color-gold);
+}
+
+/* Archetype grid */
+.archetype-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.75rem;
+}
+
+.archetype-card {
+  padding: 1rem;
+  background: var(--color-bg-card);
+  border: 2px solid transparent;
+  border-radius: var(--radius-lg);
+  cursor: pointer;
+  transition: border-color 0.2s, background 0.2s;
+}
+.archetype-card:hover {
+  background: var(--color-surface);
+}
+.archetype-card.selected {
+  border-color: var(--color-gold);
+  background: var(--color-surface);
+}
+.archetype-card h3 {
+  color: var(--color-gold);
+  font-size: 1rem;
+  margin-bottom: 0.25rem;
+}
+.archetype-card p {
+  color: var(--color-text-dim);
+  font-size: 0.8rem;
+  line-height: 1.4;
+}
+
+/* Stat sliders */
+.stat-sliders {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.stat-row {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.stat-label {
+  width: 110px;
+  font-family: var(--font-ui);
+  color: var(--color-text-dim);
+}
+
+.stat-slider {
+  flex: 1;
+  -webkit-appearance: none;
+  height: 6px;
+  background: var(--color-surface);
+  border-radius: 3px;
+  outline: none;
+}
+.stat-slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: var(--color-gold);
+  cursor: pointer;
+}
+
+.stat-value {
+  width: 24px;
+  text-align: center;
+  font-family: var(--font-ui);
+  font-weight: bold;
+  color: var(--color-gold);
+}
+
+#stat-total {
+  font-family: var(--font-ui);
+  font-size: 0.85rem;
+}
+#stat-total.invalid {
+  color: var(--color-risk-high);
+}
+#stat-total.valid {
+  color: var(--color-risk-low);
+}
+
+/* Buttons */
+.btn-primary {
+  padding: 0.875rem 2rem;
+  background: var(--color-gold);
+  color: var(--color-bg);
+  border: none;
+  border-radius: var(--radius);
+  font-family: var(--font-ui);
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: opacity 0.2s;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+.btn-primary:hover:not(:disabled) {
+  opacity: 0.9;
+}
+.btn-primary:disabled {
+  opacity: 0.3;
+  cursor: not-allowed;
+}
+
+/* ── Game Layout ── */
+
+.game-layout {
+  display: flex;
+  flex: 1;
+  overflow: hidden;
+}
+
+/* ── Gender Selector ── */
+
+.gender-selector {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 0.75rem;
+}
+
+.gender-btn {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.35rem;
+  padding: 0.85rem 0.5rem;
+  background: var(--color-bg-card);
+  border: 2px solid transparent;
+  border-radius: var(--radius-lg);
+  cursor: pointer;
+  transition: border-color 0.2s, background 0.2s;
+  color: var(--color-text);
+}
+.gender-btn:hover {
+  background: var(--color-surface);
+}
+.gender-btn.selected {
+  border-color: var(--color-gold);
+  background: var(--color-surface);
+}
+
+.gender-icon {
+  font-size: 1.4rem;
+}
+
+.gender-label {
+  font-family: var(--font-ui);
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--color-gold);
+}
+
+/* ── Archetype Concept Description ── */
+
+.archetype-concept {
+  color: var(--color-text-dim);
+  font-size: 0.75rem;
+  line-height: 1.4;
+  font-style: italic;
+}
+
+/* ── Game Mode Selector ── */
+
+.mode-selector {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.75rem;
+}
+
+.mode-btn {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.35rem;
+  padding: 1rem;
+  background: var(--color-bg-card);
+  border: 2px solid transparent;
+  border-radius: var(--radius-lg);
+  cursor: pointer;
+  transition: border-color 0.2s, background 0.2s;
+  color: var(--color-text);
+}
+.mode-btn:hover {
+  background: var(--color-surface);
+}
+.mode-btn.selected {
+  border-color: var(--color-gold);
+  background: var(--color-surface);
+}
+
+.mode-icon {
+  font-size: 1.5rem;
+}
+
+.mode-label {
+  font-family: var(--font-ui);
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--color-gold);
+}
+
+.mode-desc {
+  font-size: 0.75rem;
+  color: var(--color-text-dim);
+  text-align: center;
+  line-height: 1.3;
+}
+
+/* ── Personality Grid ── */
+
+.personality-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 0.6rem;
+}
+
+.personality-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.25rem;
+  padding: 0.75rem 0.5rem;
+  background: var(--color-bg-card);
+  border: 2px solid transparent;
+  border-radius: var(--radius-lg);
+  cursor: pointer;
+  transition: border-color 0.2s, background 0.2s, transform 0.15s;
+  color: var(--color-text);
+}
+.personality-card:hover {
+  background: var(--color-surface);
+  transform: translateY(-2px);
+}
+.personality-card.selected {
+  border-color: var(--color-gold);
+  background: var(--color-surface);
+}
+
+.personality-emoji {
+  font-size: 1.5rem;
+}
+
+.personality-name {
+  font-family: var(--font-ui);
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--color-gold);
+}
+
+.personality-desc {
+  font-size: 0.65rem;
+  color: var(--color-text-dim);
+  text-align: center;
+  line-height: 1.3;
+}
+
+/* ── Stat Label Subtitles (Creation Form) ── */
+
+.stat-label {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+.stat-label strong {
+  font-size: 0.9rem;
+  color: var(--color-text-dim);
+  font-family: var(--font-ui);
+}
+
+.stat-label small {
+  font-size: 0.65rem;
+  color: var(--color-text-muted);
+  font-style: italic;
+  font-weight: normal;
+  line-height: 1;
+}
+
+/* ── Stat Subtitle (Sidebar) ── */
+
+.stat-card .stat-subtitle {
+  display: block;
+  font-size: 0.55rem;
+  color: var(--color-text-muted);
+  font-style: italic;
+  margin-bottom: 0.15rem;
+}
+
+/* ── Utilities ── */
+
+/* ── Back to Title Button (Creation Screen) ── */
+.btn-back-title {
+  display: block;
+  margin: 0.75rem auto 0;
+  padding: 0.5rem 1rem;
+  background: none;
+  border: 1px dashed var(--color-surface);
+  border-radius: var(--radius);
+  color: var(--color-text-muted);
+  font-family: var(--font-ui);
+  font-size: 0.8rem;
+  cursor: pointer;
+  transition: border-color 0.2s, color 0.2s;
+}
+.btn-back-title:hover {
+  border-color: var(--color-gold-dim);
+  color: var(--color-gold);
+  border-style: solid;
+}
+
+.hidden {
+  display: none !important;
+}
+
+/* ══════════════════════════════════════════ */
+/* ── Mobile Responsive ──                   */
+/* ══════════════════════════════════════════ */
+
+@media (max-width: 768px) {
+  :root {
+    --sidebar-width: 100%;
+    --beat-tracker-height: 40px;
+  }
+
+  /* Stack game layout vertically on mobile */
+  .game-layout {
+    flex-direction: column;
+    height: 100%;
+  }
+
+  /* Sidebar becomes a bottom sheet overlay on mobile */
+  .sidebar {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 150;
+    width: 100%;
+    max-height: 65vh;
+    overflow-y: auto;
+    padding: 1rem;
+    gap: 0.75rem;
+    border-right: none;
+    border-top: 1px solid var(--color-surface);
+    border-radius: var(--radius-lg) var(--radius-lg) 0 0;
+    box-shadow: 0 -8px 30px rgba(0, 0, 0, 0.5);
+    transform: translateY(100%);
+    transition: transform 0.3s ease;
+    flex-direction: column;
+    flex-wrap: nowrap;
+  }
+  .sidebar.mobile-open {
+    transform: translateY(0);
+  }
+
+  /* Bottom sheet drag handle */
+  .sidebar::before {
+    content: '';
+    display: block;
+    width: 40px;
+    height: 4px;
+    background: var(--color-surface);
+    border-radius: 2px;
+    margin: 0 auto 0.5rem;
+    flex-shrink: 0;
+  }
+
+  .sidebar .char-header {
+    width: 100%;
+  }
+
+  .sidebar .hp-bar {
+    width: 100%;
+  }
+
+  .sidebar .stat-grid {
+    width: 100%;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 0.25rem;
+  }
+
+  .sidebar .stat-card .stat-val {
+    font-size: 1.1rem;
+  }
+
+  .sidebar .inventory-section,
+  .sidebar .relationships-section {
+    width: 100%;
+  }
+
+  .sidebar .btn-sidebar-action {
+    margin-top: 0;
+    padding: 0.5rem;
+    font-size: 0.75rem;
+  }
+
+  /* Sidebar toggle button — floating bottom-left */
+  .btn-sidebar-toggle {
+    display: flex !important;
+    position: fixed;
+    bottom: 1rem;
+    left: 1rem;
+    z-index: 140;
+    width: 44px;
+    height: 44px;
+    align-items: center;
+    justify-content: center;
+    background: var(--color-bg-card);
+    border: 1px solid var(--color-surface);
+    border-radius: 50%;
+    color: var(--color-gold);
+    font-size: 1.2rem;
+    cursor: pointer;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
+    transition: background 0.2s, transform 0.2s;
+  }
+  .btn-sidebar-toggle:active {
+    transform: scale(0.9);
+  }
+
+  /* Mobile sidebar backdrop */
+  .sidebar-backdrop {
+    display: none;
+    position: fixed;
+    inset: 0;
+    z-index: 145;
+    background: rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(2px);
+  }
+  .sidebar-backdrop.visible {
+    display: block;
+  }
+
+  /* Beat tracker dots smaller */
+  .beat-dot {
+    width: 8px;
+    height: 8px;
+  }
+  .beat-dot.current {
+    transform: scale(1.2);
+  }
+  .beat-connector {
+    width: 8px;
+  }
+  .turn-counter {
+    font-size: 0.6rem;
+  }
+
+  /* Beat tracker scrollable horizontally */
+  .beat-tracker {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+    padding: 0.3rem 0.5rem;
+  }
+  .beat-tracker::-webkit-scrollbar {
+    display: none;
+  }
+
+  /* Chat messages full width */
+  .chat-messages {
+    padding: 0.75rem;
+    gap: 0.75rem;
+  }
+
+  .message-narration {
+    padding: 1rem;
+    font-size: 0.9rem;
+    line-height: 1.7;
+  }
+
+  /* Choices full width */
+  .choices-area {
+    padding: 0.5rem 0.75rem;
+    gap: 0.35rem;
+  }
+
+  .choice-btn {
+    padding: 0.65rem 0.75rem;
+    font-size: 0.85rem;
+    gap: 0.5rem;
+    touch-action: manipulation;
+  }
+
+  .choice-key {
+    width: 18px;
+    height: 18px;
+    font-size: 0.6rem;
+  }
+
+  /* Free input sticky at bottom */
+  .free-input-area {
+    position: sticky;
+    bottom: 0;
+    background: var(--color-bg);
+    padding: 0.5rem 0.75rem;
+    border-top: 1px solid var(--color-surface);
+  }
+
+  /* Creation screen */
+  .creation-container {
+    padding: 1.5rem 1rem;
+  }
+
+  .title-kinara {
+    font-size: 1.8rem;
+  }
+
+  .archetype-grid {
+    grid-template-columns: 1fr;
+    gap: 0.5rem;
+  }
+
+  .personality-grid {
+    grid-template-columns: 1fr 1fr;
+    gap: 0.4rem;
+  }
+
+  .mode-selector {
+    grid-template-columns: 1fr;
+  }
+
+  .stat-sliders {
+    padding: 0;
+  }
+  .stat-row {
+    flex-wrap: wrap;
+  }
+  .stat-label {
+    width: 100%;
+    margin-bottom: 0.25rem;
+  }
+
+  /* Context panel full screen on mobile */
+  .context-panel {
+    width: 100%;
+  }
+
+  /* Saves modal wider */
+  .saves-modal-content {
+    width: 95%;
+    max-height: 80vh;
+  }
+
+  /* Toast at bottom center on mobile */
+  .toast-container {
+    bottom: 4rem;
+    right: 50%;
+    transform: translateX(50%);
+  }
+
+  /* Disable double-tap zoom on interactive elements */
+  button, .choice-btn, .archetype-card, .personality-card, .mode-btn, .gender-btn {
+    touch-action: manipulation;
+  }
+}
+
+@media (max-width: 480px) {
+  .sidebar .stat-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .personality-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .end-actions {
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  .hub-container {
+    padding: 1.5rem 0.75rem;
+  }
+}
+
+/* ── Hide sidebar toggle on desktop ── */
+.btn-sidebar-toggle {
+  display: none;
+}
+.sidebar-backdrop {
+  display: none;
+}

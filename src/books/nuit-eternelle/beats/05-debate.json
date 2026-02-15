@@ -1,0 +1,61 @@
+{
+  "number": 5,
+  "name": "Debate",
+  "slug": "debate",
+  "description": "Le joueur hésite entre poursuivre cette attraction dangereuse et respecter les obligations envers sa Maison. Des doutes assaillent le héros : est-ce vraiment possible ? Y a-t-il un précédent ? Okafor ou d'autres sages offrent des conseils ambigus. Des rencontres clandestines augmentent le frisson et le risque. La tension monte mais aucune action décisive n'est encore prise.",
+  "minScenes": 2,
+  "maxScenes": 3,
+  "dcBase": 10,
+  "narrativeGoal": "Montrer l'interne conflict du joueur et les obstacles pratiques/politiques à surmonter avant de s'engager pleinement.",
+  "transitionCondition": "Une confrontation, une interdiction explicite, ou une nouvelle menace force le joueur à choisir entre conformité et rébellion.",
+  "keyNpcIds": [
+    "okafor-conseil",
+    "amara-griot",
+    "darius-fenrir",
+    "kora-sangu"
+  ],
+  "locationIds": [
+    "palais-conseil-ancestral",
+    "lieux-secrets-alternants"
+  ],
+  "loreKeys": [
+    "amours-interdites-histoire",
+    "codes-honneur-maisons",
+    "consequences-transgression"
+  ],
+  "gmInstructions": "Oscillez entre les moments de douceur secrète et les moments de panique politique. Montrez des rumeurs qui commencent à circuler. Offrez des chemins alternatifs au joueur mais montrez leur insuffisance. Utilisez les sages pour soulever des questions, pas pour donner des réponses. Construisez la pression graduellement.",
+  "forbiddenElements": [
+    "engagement-complet",
+    "fuite-ensemble",
+    "trahison-maison",
+    "mort-amour-interdit"
+  ],
+  "suggestedMoodTags": [
+    "doubt",
+    "temptation",
+    "internal-conflict",
+    "secrecy-thrill"
+  ],
+  "initialPacing": {
+    "tensionCurve": "rising",
+    "emotionalTone": "tension",
+    "narrativeCheckpoints": [
+      {
+        "id": "doutes-interieurs",
+        "description": "Le joueur exprime ou montre ses hésitations et ses peurs",
+        "met": false
+      },
+      {
+        "id": "rencontres-clandestines",
+        "description": "Au moins une rencontre secrète a lieu, augmentant le risque émotionnel",
+        "met": false
+      },
+      {
+        "id": "obstacles-politiques-clairs",
+        "description": "Le joueur comprend concrètement ce qui s'oppose à cette union",
+        "met": false
+      }
+    ],
+    "maxTurnsBeforeForceProgress": 6
+  }
+}

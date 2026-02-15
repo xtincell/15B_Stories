@@ -1,0 +1,17 @@
+{
+  "id": "malachai-antagoniste",
+  "name": "Malachai",
+  "title": "Agent Principal des Ombres Numériques",
+  "personality": "Malachai est un loup-garou métamorphe dont la vraie forme est cachée sous des projections holographiques changeantes, créant une aura de menace imprévisible. Il parle avec une douceur trompeuse et possède une intelligence tactique glaçante. Chaque geste calcule deux coups d'avance.",
+  "motivations": "Malachai travaille pour préserver l'ordre des castes, croyant sincèrement que votre union destabiliserait l'équilibre critique entre Fenrir et Sangu. Il souhaite écraser votre romance pour éviter une révolution qui balaierait tout ce qu'il connaît, justifiant ses actes cruels comme des mesures de préservation.",
+  "defaultAffinity": -4,
+  "beatRoles": {
+    "4": "Malachai apprend votre romance et commence une campagne de surveillance organisée.",
+    "5": "Il ordonne l'attaque surprise lors de votre rencontre avec Kora, semant la discorde.",
+    "7": "Malachai présente des 'preuves' falsifiées au Conseil suggérant que vous êtes une menace sécuritaire.",
+    "9": "Il envoie des assassins pour vous éliminer tous les deux, escaladant la violence.",
+    "11": "Malachai capture brièvement Kora, tentant de la tourner contre vous avec des promesses trompeuses.",
+    "13": "Il orchestre un ultimatum final : renoncer à votre amour ou voir les deux Maisons s'entreguerrer.",
+    "14": "Malachai affronte directement vous et Kora dans un duel qui décidera du sort de votre union."
+  }
+}

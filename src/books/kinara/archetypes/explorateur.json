@@ -1,0 +1,16 @@
+{
+  "id": "explorateur",
+  "name": "L'Explorateur",
+  "description": "Anime par une soif insatiable de verite, l'Explorateur est celui qui pose les questions que personne n'ose formuler. Il observe, analyse et devoile ce qui est cache. Sa quete de justice le pousse a traquer le mensonge sous toutes ses formes. Il incarne la Maat -- la conviction que la verite, meme douloureuse, est toujours preferable a l'ignorance confortable. En tant que Tisserand, il percoit le Voile comme une enigme -- chaque dechirure est un indice, chaque reparation une reponse qui mene a de nouvelles questions sur la nature meme de la realite.",
+  "suggestedStats": {
+    "ubuntu": 4,
+    "maat": 7,
+    "sankofa": 3,
+    "biso": 6
+  },
+  "startingItems": [
+    "journal-des-decouvertes",
+    "boussole-stellaire"
+  ],
+  "backstoryHook": "Les autres enfants jouaient pendant que vous exploriez les grottes interdites aux abords du village. Les adultes racontaient des legendes pendant que vous cherchiez les preuves de leur veracite. Votre insatiable curiosite vous a mene partout ou il ne fallait pas aller, et c'est precisement la que vous avez trouve les reponses les plus precieuses. La nuit de la ceremonie, tandis que tous priaient les yeux fermes, les votres etaient grands ouverts. Vous avez vu la dechirure dans le Voile, et au lieu de la crainte, c'est une question brulante qui vous a envahi : pourquoi maintenant, et que cache-t-on de l'autre cote ?"
+}

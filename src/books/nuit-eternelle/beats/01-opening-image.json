@@ -1,0 +1,59 @@
+{
+  "number": 1,
+  "name": "Opening Image",
+  "slug": "opening-image",
+  "description": "Le joueur est présenté dans la Nuit Éternelle de 2200, contemplant la vie aristocratique afro-uchronique depuis sa position sociale. Une scène intime révèle les tensions entre les Maisons nobles et l'ordre établi, où traditions ancestrales et technologie avancée coexistent. Le monde semble harmonieux en surface, mais des fissures apparaissent dans la structure sociale figée.",
+  "minScenes": 1,
+  "maxScenes": 2,
+  "dcBase": 8,
+  "narrativeGoal": "Établir le statut quo du joueur dans la hiérarchie des Maisons nobles et montrer son insatisfaction face aux conventions imposées.",
+  "transitionCondition": "Le joueur exprime son sentiment d'être prisonnier des traditions ou découvre une première anomalie dans l'ordre établi.",
+  "keyNpcIds": [
+    "amara-griot",
+    "okafor-conseil"
+  ],
+  "locationIds": [
+    "palais-conseil-ancestral",
+    "jardins-nuit-eternelle"
+  ],
+  "loreKeys": [
+    "maisons-nobles-africaines",
+    "hierarchie-sociale-2200",
+    "renaissance-aristocratique"
+  ],
+  "gmInstructions": "Créez une atmosphère luxueuse mais étouffante. Présentez les codes visuels et culturels afro-uchroniques : architecture blendée, textiles traditionnels avec nano-fibres, symboles ancestraux holographiques. Montrez le confort matériel du joueur contraste avec son malaise émotionnel. Ne révélez pas encore l'amour interdite.",
+  "forbiddenElements": [
+    "rencontre-directe-amour-interdite",
+    "action-violente",
+    "trahison-maison",
+    "revelation-antagoniste"
+  ],
+  "suggestedMoodTags": [
+    "luxury",
+    "melancholy",
+    "tradition-bound",
+    "serene-unease"
+  ],
+  "initialPacing": {
+    "tensionCurve": "plateau",
+    "emotionalTone": "serenity",
+    "narrativeCheckpoints": [
+      {
+        "id": "status-quo-revealed",
+        "description": "La position sociale du joueur et ses responsabilités sont clairement établies",
+        "met": false
+      },
+      {
+        "id": "discontent-shown",
+        "description": "Le malaise émotionnel ou l'aspiration du joueur transparaît dans ses pensées ou dialogues",
+        "met": false
+      },
+      {
+        "id": "world-detail-anchored",
+        "description": "Au moins trois éléments spécifiques du monde afro-uchronique sont vécus directement",
+        "met": false
+      }
+    ],
+    "maxTurnsBeforeForceProgress": 5
+  }
+}

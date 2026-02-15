@@ -1,0 +1,16 @@
+{
+  "id": "grigriot-ancestral",
+  "name": "Griot du Conseil des Anciens",
+  "description": "Gardien vivant de l'héritage africain, vous êtes un sage métamorphe qui enseigne la mémoire collective aux jeunes nobles. Vos chants portent la magie des ancêtres et vous percez les secrets des deux maisons avec une audace bienveillante. Vous seul pouvez naviguer entre les traditions et la modernité, entre amour et devoir.",
+  "suggestedStats": {
+    "ubuntu": 7,
+    "maat": 4,
+    "sankofa": 9,
+    "biso": 0
+  },
+  "startingItems": [
+    "kora-ancestrale-vibrants",
+    "mala-des-dix-mille-histoires"
+  ],
+  "backstoryHook": "Tu portes en toi les voix de mille générations, chaque cicatrice de ton corps raconte une époque révolue. Quand tu découvres l'amour secret entre ces deux ennemis, tu réalises que seul l'héritage peut les sauver. Tu dois tisser une nouvelle histoire, avant que le sang ne coule."
+}

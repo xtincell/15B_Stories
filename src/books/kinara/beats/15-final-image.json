@@ -1,0 +1,26 @@
+{
+  "number": 15,
+  "name": "Final Image",
+  "slug": "final-image",
+  "description": "Le heros revient au village, transforme par son voyage. Le meme village, la meme lumiere doree du matin, mais tout est different. Les esprits dansent librement entre les mondes, le Voile brille d'une lumiere douce et solide. Le heros entend toujours les murmures - mais maintenant il les comprend, et les autres commencent a les entendre aussi. Kofi l'accueille, Amara sourit avec fierte. Le heros n'est plus un villageois ordinaire troublé par des voix etranges : il est un Tisserand, un pont entre les mondes, ancre dans sa communaute.",
+  "minScenes": 1,
+  "maxScenes": 2,
+  "dcBase": 16,
+  "narrativeGoal": "Miroir inverse de l'image d'ouverture. Montrer combien le heros et son monde ont change. Le meme cadre, une realite transformee. Clore l'arc narratif avec resonance emotionnelle et satisfaction thematique.",
+  "transitionCondition": "Le heros est de retour dans son monde ordinaire transforme. L'image finale fait echo a l'image d'ouverture tout en montrant le changement profond. L'histoire est complete.",
+  "keyNpcIds": ["elder-amara", "kofi-friend", "zephyr-spirit", "nia-scholar", "kazi-inventor"],
+  "locationIds": ["village-of-origin", "spirit-grove"],
+  "loreKeys": ["spirit-veil", "tisserand-legacy", "ubuntu-philosophy", "new-kinara"],
+  "gmInstructions": "L'image finale est le miroir de l'image d'ouverture. Reprenez les memes elements visuels et sensoriels du Beat 1 mais montrez la transformation. La lumiere doree du matin est la meme, mais le heros la voit differemment. Les esprits mineurs ne sont plus des reflets fugaces - ils sont des presences reconnues, acceptees, celebrees. Le murmure qui troublait le heros est devenu une symphonie qu'il comprend et dirige. Kofi peut dire quelque chose comme 'Tu entends ca ? Je crois que moi aussi, maintenant...' suggérant que le don du heros a ouvert les perceptions de la communaute. Amara peut evoquer le theme une derniere fois, et cette fois le heros le comprend pleinement. Zephyr est present, libre, un ami et non plus un mystere. Nia et Kazi sont peut-etre de passage, suggerant que les liens tisses pendant l'aventure perdurent. Terminez sur une note d'espoir et de plenitude, pas de fermeture definitive - le monde continue, et le heros y a sa place.",
+  "forbiddenElements": ["nouvelle-menace", "cliffhanger-non-resolu", "ton-sombre", "separation-definitive-des-allies"],
+  "suggestedMoodTags": ["serenity", "triumph", "hope", "wholeness", "homecoming"],
+  "initialPacing": {
+    "tensionCurve": "falling",
+    "emotionalTone": "serenity",
+    "narrativeCheckpoints": [
+      { "id": "homecoming", "description": "Le heros est revenu a son village d'origine", "met": false },
+      { "id": "mirror-image", "description": "L'image finale fait echo a l'image d'ouverture en montrant la transformation", "met": false }
+    ],
+    "maxTurnsBeforeForceProgress": 4
+  }
+}

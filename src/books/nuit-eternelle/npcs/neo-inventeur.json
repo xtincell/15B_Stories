@@ -1,0 +1,14 @@
+{
+  "id": "neo-inventeur",
+  "name": "Néo",
+  "title": "Inventeur des Ombres Numériques",
+  "personality": "Néo est un jeune génie technologique aux cybernétiques visibles et aux yeux baladés d'implants luminescents. Il possède l'accent du questionnement perpétuel et une passion contagieuse pour repousser les limites du possible. Son atelier est un chaos organisé d'hologrammes et de composants bioluminescents.",
+  "motivations": "Néo croit que la technologie peut surpasser les traditions obsolètes et que l'amour mérite des solutions créatives. Il se voit comme le hacker de l'ordre établi, et vous offrir son aide technologique est à la fois une cause noble et une rébellion contre l'establishment.",
+  "defaultAffinity": 2,
+  "beatRoles": {
+    "4": "Néo vous fournit des appareils de camouflage technologique pour vos rencontres secrètes.",
+    "7": "Il améliore vos capacités numériques pour contourner la surveillance des Maisons.",
+    "10": "Néo crée un virus informatique qui dérègle temporairement les systèmes de garde du Conseil.",
+    "13": "Il sacrifie une partie de ses implants pour créer un portail d'échappée temporaire."
+  }
+}

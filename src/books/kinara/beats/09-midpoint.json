@@ -1,0 +1,27 @@
+{
+  "number": 9,
+  "name": "Midpoint",
+  "slug": "midpoint",
+  "description": "Au Temple du Voile, le heros decouvre une verite bouleversante : les dechirures ne sont pas aleatoires. Elles forment un motif delibere - quelqu'un ou quelque chose les cause intentionnellement pour affaiblir la barriere entre les mondes. Le Juge Sekou, gardien du Temple, revele que la derniere grande dechirure a eu lieu il y a des siecles, provoquee par un ancien Tisserand corrompu qui voulait fusionner les deux mondes. Les enjeux passent du personnel a l'universel.",
+  "minScenes": 2,
+  "maxScenes": 3,
+  "dcBase": 12,
+  "narrativeGoal": "Elever les enjeux de maniere decisive. Le heros decouvre que la menace est deliberee et ancienne, transformant sa quete de reparation en quete de confrontation. C'est le pivot de l'histoire : de la victoire apparente au danger reel.",
+  "transitionCondition": "Le heros a decouvert la nature deliberee des dechirures, a rencontre le Juge Sekou, et comprend que la menace est bien plus grande qu'une simple degradation naturelle du Voile.",
+  "keyNpcIds": ["judge-sekou", "nia-scholar", "zephyr-spirit", "shadow-antagonist"],
+  "locationIds": ["veil-temple"],
+  "loreKeys": ["veil-temple-lore", "maat-philosophy", "ancient-tisserand-corruption", "shadow-force-origin"],
+  "gmInstructions": "Le Temple du Voile est un lieu sacre et imposant - decrivez-le comme une cathedrale de lumiere vivante ou le Voile est visible comme un tissu scintillant tendu entre les piliers. Le Juge Sekou est severe, methodique, et profondement attache a la verite (Maat). Il teste le heros avant de partager ses connaissances - pas par cruaute, mais par devoir. La revelation doit etre un moment de bascule : montrez la carte des dechirures formant un motif, ou une vision du passe montrant le Tisserand corrompu. L'ombre de l'antagoniste peut se manifester brievement - une presence malveillante effleurant la conscience du heros a travers le Voile. Le faux-triomphe : le heros pensait qu'il suffisait de reparer les dechirures une par une, mais la verite est qu'il doit affronter la source.",
+  "forbiddenElements": ["defaite-du-heros", "confrontation-directe-antagoniste", "mort-de-pnj", "resolution-du-mystere-complet"],
+  "suggestedMoodTags": ["revelation", "dread", "awe", "gravity"],
+  "initialPacing": {
+    "tensionCurve": "climax",
+    "emotionalTone": "tension",
+    "narrativeCheckpoints": [
+      { "id": "temple-reached", "description": "Le heros est arrive au Temple du Voile", "met": false },
+      { "id": "sekou-met", "description": "Le Juge Sekou a ete rencontre et a teste le heros", "met": false },
+      { "id": "deliberate-pattern-revealed", "description": "La nature deliberee des dechirures a ete revelee", "met": false }
+    ],
+    "maxTurnsBeforeForceProgress": 5
+  }
+}

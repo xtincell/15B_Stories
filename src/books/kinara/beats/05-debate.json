@@ -1,0 +1,28 @@
+{
+  "number": 5,
+  "name": "Debate",
+  "slug": "debate",
+  "description": "Le heros est tiraille. Elder Amara, affaiblie, explique que les dechirures du Voile se multiplient a travers Kinara et que seul un Tisserand peut trouver la source et reparer le Voile. Mais partir signifie abandonner le village, Kofi, tout ce que le heros connait. Le village lui-meme est divise : certains veulent que le heros parte sauver le monde, d'autres craignent de perdre leur protecteur. Le heros doute de lui-meme.",
+  "minScenes": 2,
+  "maxScenes": 4,
+  "dcBase": 10,
+  "narrativeGoal": "Explorer le dilemme moral et emotionnel du heros face a l'appel a l'aventure. Faire peser les arguments pour et contre le depart, ancres dans les valeurs d'Ubuntu et de communaute.",
+  "transitionCondition": "Le heros a explore les arguments pour et contre le depart, a confronte ses peurs et ses doutes, et un evenement ou une revelation finale le pousse a prendre sa decision.",
+  "keyNpcIds": ["elder-amara", "kofi-friend", "zephyr-spirit"],
+  "locationIds": ["village-of-origin", "spirit-grove"],
+  "loreKeys": ["tisserand-legacy", "ubuntu-philosophy", "veil-tears", "kinara-geography"],
+  "gmInstructions": "Ce beat est centre sur le conflit interieur. Presentez des arguments convaincants des deux cotes. Kofi peut etre divise entre vouloir garder son ami et comprendre la necessite de son depart. Amara doit expliquer la gravite de la situation sans forcer la main du heros. Zephyr presse le heros de partir - les murmures deviennent plus urgents. Le village peut organiser un conseil ou le heros entend differentes perspectives. Integrez un test Ubuntu (la communaute vs la quete individuelle) et un test Maat (quelle est la juste chose a faire). Un nouvel incident mineur - une autre perturbation du Voile - peut servir de catalyseur final pour la decision.",
+  "forbiddenElements": ["depart-sans-deliberation", "resolution-du-conflit-principal", "apparition-directe-antagoniste", "mort-de-pnj"],
+  "suggestedMoodTags": ["tension", "doubt", "community", "responsibility"],
+  "initialPacing": {
+    "tensionCurve": "rising",
+    "emotionalTone": "tension",
+    "narrativeCheckpoints": [
+      { "id": "stakes-explained", "description": "Les enjeux du voyage ont ete clairement expliques par Amara", "met": false },
+      { "id": "arguments-explored", "description": "Le heros a entendu des arguments pour et contre le depart", "met": false },
+      { "id": "self-doubt-expressed", "description": "Le heros a exprime ou montre ses doutes et ses peurs", "met": false },
+      { "id": "decision-catalyst", "description": "Un evenement pousse le heros vers sa decision finale", "met": false }
+    ],
+    "maxTurnsBeforeForceProgress": 6
+  }
+}

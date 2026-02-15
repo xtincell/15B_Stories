@@ -1,0 +1,548 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="theme-color" content="#0e0e0e">
+  <link rel="manifest" href="/manifest.json">
+  <link rel="icon" type="image/svg+xml" href="/icons/icon-192.svg">
+  <link rel="apple-touch-icon" href="/icons/icon-192.svg">
+  <title>Projet A15</title>
+  <link rel="stylesheet" href="/styles/main.css">
+  <link rel="stylesheet" href="/styles/theme-kinara.css" data-theme-css>
+  <link rel="stylesheet" href="/styles/chat.css">
+  <link rel="stylesheet" href="/styles/sidebar.css">
+  <link rel="stylesheet" href="/styles/dice.css">
+  <link rel="stylesheet" href="/styles/splash.css">
+  <link rel="stylesheet" href="/styles/hub.css">
+  <link rel="stylesheet" href="/styles/generator.css">
+</head>
+<body>
+  <div id="app">
+    <!-- Hub Screen — Projet A15 -->
+    <div id="screen-hub" class="screen active">
+      <div class="hub-container">
+        <!-- Header -->
+        <div class="hub-header">
+          <div class="hub-engine-badge">A15</div>
+          <h1 class="hub-title">Projet A15</h1>
+          <p class="hub-tagline">Moteur narratif &agrave; 15 beats</p>
+        </div>
+        <!-- Book grid -->
+        <div class="hub-section">
+          <h2 class="hub-section-title">Biblioth&egrave;que</h2>
+          <div id="hub-book-grid" class="hub-book-grid">
+            <!-- Filled by JS: book cards + "Create" card -->
+          </div>
+        </div>
+        <!-- Footer -->
+        <div class="hub-footer">
+          <button id="btn-hub-changelog" class="hub-changelog-btn">v0.9.0</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Title / Splash Screen (per-book) -->
+    <div id="screen-title" class="screen">
+      <div class="splash-container">
+        <!-- Decorative pattern top -->
+        <div class="splash-pattern splash-pattern-top">
+          <svg viewBox="0 0 400 40" preserveAspectRatio="none">
+            <path d="M0,40 L20,10 L40,40 L60,10 L80,40 L100,10 L120,40 L140,10 L160,40 L180,10 L200,40 L220,10 L240,40 L260,10 L280,40 L300,10 L320,40 L340,10 L360,40 L380,10 L400,40" stroke="var(--color-gold-dim)" fill="none" stroke-width="1.5"/>
+          </svg>
+        </div>
+
+        <!-- Animated spirit symbol -->
+        <div class="splash-spirit">
+          <div class="spirit-ring spirit-ring-outer"></div>
+          <div class="spirit-ring spirit-ring-middle"></div>
+          <div class="spirit-ring spirit-ring-inner"></div>
+          <div class="spirit-core">◈</div>
+        </div>
+
+        <h1 class="splash-title">Kinara</h1>
+        <h2 class="splash-subtitle-main">Classic</h2>
+        <p class="splash-tagline">Là où les esprits marchent parmi les vivants</p>
+
+        <div class="splash-values">
+          <span class="splash-value" data-stat="ubuntu"><strong>Ubuntu</strong><small>Le Lien</small></span>
+          <span class="splash-separator">·</span>
+          <span class="splash-value" data-stat="maat"><strong>Maât</strong><small>La Balance</small></span>
+          <span class="splash-separator">·</span>
+          <span class="splash-value" data-stat="sankofa"><strong>Sankofa</strong><small>La Mémoire</small></span>
+          <span class="splash-separator">·</span>
+          <span class="splash-value" data-stat="biso"><strong>Biso</strong><small>L'Étincelle</small></span>
+        </div>
+
+        <!-- Resume active game (shown only when a game is in progress) -->
+        <button id="btn-resume-game" class="btn-resume-game hidden">
+          <span class="btn-resume-icon">▶</span>
+          <span class="btn-resume-text">Reprendre la partie</span>
+          <span class="btn-resume-sub" id="btn-resume-sub"></span>
+        </button>
+
+        <!-- Start new game -->
+        <button id="btn-enter" class="btn-enter">
+          <span class="btn-enter-text">Nouvelle Partie</span>
+          <span class="btn-enter-arrow">→</span>
+        </button>
+
+        <div class="splash-actions">
+          <button id="btn-load-save" class="btn-load-save hidden">
+            Charger une sauvegarde
+          </button>
+          <button id="btn-archives" class="btn-archives hidden">
+            Parties Termin&#233;es
+          </button>
+        </div>
+
+        <button id="btn-back-hub" class="btn-back-hub">&larr; Retour &agrave; la biblioth&egrave;que</button>
+
+        <!-- Update Notification -->
+        <div id="update-notification" class="update-notification hidden">
+          <button id="btn-update-toggle" class="update-toggle-btn">
+            <span class="update-badge" id="update-badge">NEW</span>
+            <span class="update-toggle-text">Notes de mise à jour</span>
+          </button>
+        </div>
+
+        <!-- Changelog Panel (inline on splash) -->
+        <div id="changelog-panel" class="changelog-panel hidden">
+          <div class="changelog-header">
+            <h3>Journal des Mises à Jour</h3>
+            <button id="btn-changelog-close" class="btn-context-close">&times;</button>
+          </div>
+          <div id="changelog-body" class="changelog-body">
+            <!-- Filled by JS -->
+          </div>
+        </div>
+
+        <!-- Decorative pattern bottom -->
+        <div class="splash-pattern splash-pattern-bottom">
+          <svg viewBox="0 0 400 40" preserveAspectRatio="none">
+            <path d="M0,0 L20,30 L40,0 L60,30 L80,0 L100,30 L120,0 L140,30 L160,0 L180,30 L200,0 L220,30 L240,0 L260,30 L280,0 L300,30 L320,0 L340,30 L360,0 L380,30 L400,0" stroke="var(--color-gold-dim)" fill="none" stroke-width="1.5"/>
+          </svg>
+        </div>
+      </div>
+    </div>
+
+    <!-- Character Creation Screen -->
+    <div id="screen-creation" class="screen">
+      <div class="creation-container">
+        <h1 class="title-kinara" id="creation-title">Kinara Classic</h1>
+        <p class="subtitle" id="creation-subtitle">Un monde d'African Fantasy uchronique</p>
+
+        <div class="creation-form">
+          <!-- Gender Selector (FIRST step) -->
+          <div class="form-group">
+            <label>Genre du personnage</label>
+            <div id="gender-selector" class="gender-selector">
+              <button class="gender-btn" data-gender="masculin">
+                <span class="gender-icon">♂</span>
+                <span class="gender-label">Masculin</span>
+              </button>
+              <button class="gender-btn" data-gender="feminin">
+                <span class="gender-icon">♀</span>
+                <span class="gender-label">Féminin</span>
+              </button>
+              <button class="gender-btn" data-gender="neutre">
+                <span class="gender-icon">⚧</span>
+                <span class="gender-label">Neutre</span>
+              </button>
+            </div>
+          </div>
+
+          <!-- Game Mode -->
+          <div class="form-group">
+            <label>Mode de jeu</label>
+            <div id="game-mode-selector" class="mode-selector">
+              <button class="mode-btn selected" data-mode="normal">
+                <span class="mode-icon">📖</span>
+                <span class="mode-label">Aventure Complète</span>
+                <span class="mode-desc">L'histoire se déploie à son rythme</span>
+              </button>
+              <button class="mode-btn" data-mode="rapide">
+                <span class="mode-icon">⚡</span>
+                <span class="mode-label">Histoire Rapide</span>
+                <span class="mode-desc">15 tours, 1 beat par tour</span>
+              </button>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="char-name">Nom du personnage</label>
+            <input type="text" id="char-name" placeholder="Entrez un nom..." />
+          </div>
+
+          <div class="form-group">
+            <label>Archétype</label>
+            <div id="archetype-list" class="archetype-grid">
+              <!-- Filled by JS -->
+            </div>
+          </div>
+
+          <!-- Personality -->
+          <div class="form-group">
+            <label>Personnalité</label>
+            <div id="personality-list" class="personality-grid">
+              <button class="personality-card" data-personality="courageux">
+                <span class="personality-emoji">🦁</span>
+                <span class="personality-name">Courageux</span>
+                <span class="personality-desc">Fonce tête baissée, inspire les autres</span>
+              </button>
+              <button class="personality-card" data-personality="prudent">
+                <span class="personality-emoji">🦉</span>
+                <span class="personality-name">Prudent</span>
+                <span class="personality-desc">Observe, analyse, puis agit</span>
+              </button>
+              <button class="personality-card" data-personality="curieux">
+                <span class="personality-emoji">🔮</span>
+                <span class="personality-name">Curieux</span>
+                <span class="personality-desc">Explore tout, pose mille questions</span>
+              </button>
+              <button class="personality-card" data-personality="protecteur">
+                <span class="personality-emoji">🛡️</span>
+                <span class="personality-name">Protecteur</span>
+                <span class="personality-desc">Protège les siens coûte que coûte</span>
+              </button>
+              <button class="personality-card" data-personality="rebelle">
+                <span class="personality-emoji">⚡</span>
+                <span class="personality-name">Rebelle</span>
+                <span class="personality-desc">Défie l'autorité, trace son chemin</span>
+              </button>
+              <button class="personality-card" data-personality="mystique">
+                <span class="personality-emoji">✨</span>
+                <span class="personality-name">Mystique</span>
+                <span class="personality-desc">Connecté aux esprits, guidé par l'intuition</span>
+              </button>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label>Répartition des stats <span id="stat-total">(20/20)</span></label>
+            <div class="stat-sliders">
+              <div class="stat-row">
+                <span class="stat-label" title="Diplomatie, soin, ralliement, sacrifice"><strong>Ubuntu</strong> <small>Le Lien &mdash; Communaut&eacute; &amp; Empathie</small></span>
+                <input type="range" id="stat-ubuntu" min="1" max="10" value="5" class="stat-slider" />
+                <span class="stat-value" id="val-ubuntu">5</span>
+              </div>
+              <div class="stat-row">
+                <span class="stat-label" title="Investigation, jugement, d&eacute;nonciation, r&eacute;sistance"><strong>Ma&acirc;t</strong> <small>La Balance &mdash; V&eacute;rit&eacute; &amp; Justice</small></span>
+                <input type="range" id="stat-maat" min="1" max="10" value="5" class="stat-slider" />
+                <span class="stat-value" id="val-maat">5</span>
+              </div>
+              <div class="stat-row">
+                <span class="stat-label" title="Rituels, esprits, connaissance ancestrale"><strong>Sankofa</strong> <small>La M&eacute;moire &mdash; Tradition &amp; Anc&ecirc;tres</small></span>
+                <input type="range" id="stat-sankofa" min="1" max="10" value="5" class="stat-slider" />
+                <span class="stat-value" id="val-sankofa">5</span>
+              </div>
+              <div class="stat-row">
+                <span class="stat-label" title="Action directe, combat, improvisation, invention"><strong>Biso</strong> <small>L'&Eacute;tincelle &mdash; Audace &amp; Innovation</small></span>
+                <input type="range" id="stat-biso" min="1" max="10" value="5" class="stat-slider" />
+                <span class="stat-value" id="val-biso">5</span>
+              </div>
+            </div>
+          </div>
+
+          <button id="btn-create" class="btn-primary" disabled>Commencer l'aventure</button>
+          <button id="btn-back-title" class="btn-back-title">&larr; Retour au menu</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Game Screen -->
+    <div id="screen-game" class="screen">
+      <!-- Beat Tracker -->
+      <div id="beat-tracker" class="beat-tracker">
+        <!-- 15 dots filled by JS -->
+        <button id="btn-context-toggle" class="btn-context-toggle" title="Contexte narratif">&#x25F0;</button>
+      </div>
+
+      <!-- Mobile sidebar toggle + backdrop -->
+      <button id="btn-sidebar-toggle" class="btn-sidebar-toggle" title="Personnage">&#x1F4CB;</button>
+      <div id="sidebar-backdrop" class="sidebar-backdrop"></div>
+
+      <div class="game-layout">
+        <!-- Sidebar: Character Sheet -->
+        <aside id="sidebar" class="sidebar">
+          <div class="char-header">
+            <h2 id="sidebar-name">—</h2>
+            <p id="sidebar-archetype" class="archetype-tag">—</p>
+          </div>
+          <div class="hp-bar">
+            <div id="hp-fill" class="hp-fill" style="width: 100%"></div>
+            <span id="hp-text">20/20</span>
+          </div>
+          <div class="stat-grid">
+            <div class="stat-card" data-stat="ubuntu">
+              <span class="stat-name">Ubuntu</span>
+              <span class="stat-subtitle">Le Lien</span>
+              <span class="stat-val" id="side-ubuntu">5</span>
+            </div>
+            <div class="stat-card" data-stat="maat">
+              <span class="stat-name">Maât</span>
+              <span class="stat-subtitle">La Balance</span>
+              <span class="stat-val" id="side-maat">5</span>
+            </div>
+            <div class="stat-card" data-stat="sankofa">
+              <span class="stat-name">Sankofa</span>
+              <span class="stat-subtitle">La Mémoire</span>
+              <span class="stat-val" id="side-sankofa">5</span>
+            </div>
+            <div class="stat-card" data-stat="biso">
+              <span class="stat-name">Biso</span>
+              <span class="stat-subtitle">L'Étincelle</span>
+              <span class="stat-val" id="side-biso">5</span>
+            </div>
+          </div>
+          <div id="inventory-section" class="inventory-section">
+            <h3>Inventaire</h3>
+            <ul id="inventory-list"></ul>
+          </div>
+          <div id="relationships-section" class="relationships-section">
+            <h3>Relations</h3>
+            <ul id="relationships-list"></ul>
+          </div>
+          <button id="btn-save-game" class="btn-sidebar-action">💾 Sauvegarder</button>
+          <button id="btn-menu-principal" class="btn-sidebar-action btn-sidebar-menu">Menu Principal</button>
+        </aside>
+
+        <!-- Chat Area -->
+        <main id="chat-area" class="chat-area">
+          <div id="chat-messages" class="chat-messages">
+            <!-- Messages filled by JS -->
+          </div>
+
+          <!-- Scroll to bottom -->
+          <button id="scroll-bottom-btn" class="scroll-bottom-btn" title="Défiler vers le bas">↓</button>
+
+          <!-- Dice Result Overlay -->
+          <div id="dice-overlay" class="dice-overlay hidden">
+            <div class="dice-result">
+              <div id="dice-icon" class="dice-icon">🎲</div>
+              <div id="dice-text" class="dice-text"></div>
+            </div>
+          </div>
+
+          <!-- Choice Buttons -->
+          <div id="choices-area" class="choices-area">
+            <!-- Choice buttons filled by JS -->
+          </div>
+
+          <!-- Free Text Input -->
+          <div id="free-input-area" class="free-input-area hidden">
+            <div class="free-input-wrapper">
+              <input type="text" id="free-input" class="free-input" placeholder="Décrivez votre propre action..." />
+              <button id="btn-free-send" class="btn-free-send" disabled>
+                <span class="btn-free-arrow">→</span>
+              </button>
+            </div>
+            <p class="free-input-hint">Le Maître du Jeu interprétera votre action librement</p>
+          </div>
+
+          <!-- In-game Loading -->
+          <div id="loading" class="loading hidden">
+            <div class="loading-quill">
+              <div class="quill-feather">✦</div>
+            </div>
+            <p class="loading-flavor" id="loading-flavor">Le Maître du Jeu réfléchit...</p>
+          </div>
+        </main>
+      </div>
+    </div>
+
+    <!-- Context Panel (Evolving Context — slide-in from right) -->
+    <div id="context-panel" class="context-panel panel-closed">
+      <div class="context-panel-header">
+        <h3>Contexte Narratif</h3>
+        <button id="btn-context-close" class="btn-context-close">&times;</button>
+      </div>
+      <div class="context-panel-body" id="context-panel-body">
+        <div class="context-section" id="ctx-pacing">
+          <h4>Rythme Actuel</h4>
+          <div class="ctx-content" id="ctx-pacing-content"></div>
+        </div>
+        <div class="context-section" id="ctx-flags">
+          <h4>Drapeaux du Monde</h4>
+          <div class="ctx-content" id="ctx-flags-content"></div>
+        </div>
+        <div class="context-section" id="ctx-relationships">
+          <h4>Relations PNJ</h4>
+          <div class="ctx-content" id="ctx-relationships-content"></div>
+        </div>
+        <div class="context-section" id="ctx-summaries">
+          <h4>Timeline des Beats</h4>
+          <div class="ctx-content" id="ctx-summaries-content"></div>
+        </div>
+        <div class="context-section" id="ctx-consequences">
+          <h4>Impacts Actifs</h4>
+          <div class="ctx-content" id="ctx-consequences-content"></div>
+        </div>
+        <div class="context-section" id="ctx-recent">
+          <h4>Actions R&#233;centes</h4>
+          <div class="ctx-content" id="ctx-recent-content"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Game End Overlay -->
+    <div id="screen-end" class="screen-end-overlay hidden">
+      <div class="end-container">
+        <button id="btn-end-close" class="btn-end-close" title="Fermer et revoir le jeu">&times;</button>
+
+        <div class="end-spirit">&#9672;</div>
+        <h1 class="end-title">Fin de l'Aventure</h1>
+        <p class="end-subtitle" id="end-subtitle">Votre histoire restera dans les m&#233;moires</p>
+
+        <!-- Conclusion paragraph -->
+        <div class="end-conclusion" id="end-conclusion"></div>
+
+        <!-- Choice report -->
+        <div class="end-choice-report" id="end-choice-report">
+          <h3>Votre Parcours</h3>
+          <div id="end-choices-list"></div>
+        </div>
+
+        <!-- Stats summary -->
+        <div class="end-stats" id="end-stats"></div>
+
+        <div class="end-actions">
+          <button id="btn-export-pdf" class="btn-end-action btn-end-primary">Exporter en PDF</button>
+          <button id="btn-new-game" class="btn-end-action btn-end-secondary">Nouvelle Partie</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Saves Modal -->
+    <div id="saves-modal" class="saves-modal hidden">
+      <div class="saves-modal-content">
+        <div class="saves-modal-header">
+          <h2>Sauvegardes</h2>
+          <button id="btn-saves-close" class="btn-context-close">&times;</button>
+        </div>
+        <div id="saves-list" class="saves-list">
+          <!-- Filled by JS -->
+        </div>
+      </div>
+    </div>
+
+    <!-- Archives Modal -->
+    <div id="archives-modal" class="saves-modal hidden">
+      <div class="saves-modal-content">
+        <div class="saves-modal-header">
+          <h2>Parties Termin&#233;es</h2>
+          <button id="btn-archives-close" class="btn-context-close">&times;</button>
+        </div>
+        <div id="archives-list" class="saves-list">
+          <!-- Filled by JS -->
+        </div>
+      </div>
+    </div>
+
+    <!-- Book Generator Modal -->
+    <div id="generator-modal" class="generator-modal hidden">
+      <div class="generator-content">
+        <div class="generator-header">
+          <h2>Cr&eacute;er un Nouveau Livre</h2>
+          <button class="btn-context-close" id="btn-generator-close">&times;</button>
+        </div>
+        <div id="generator-form" class="generator-form">
+          <div class="generator-field">
+            <label for="gen-name">Nom du livre</label>
+            <input type="text" id="gen-name" placeholder="Ex: Nuit &Eacute;ternelle" maxlength="60" />
+          </div>
+          <div class="generator-field">
+            <label for="gen-description">Pitch / Description</label>
+            <textarea id="gen-description" rows="5" placeholder="D&eacute;crivez l'univers, les personnages, l'ambiance..."></textarea>
+          </div>
+          <div class="generator-field-row">
+            <div class="generator-field">
+              <label for="gen-tone">Tonalit&eacute;</label>
+              <select id="gen-tone">
+                <option value="epique">&Eacute;pique</option>
+                <option value="romantique">Romantique</option>
+                <option value="sombre">Sombre</option>
+                <option value="mystique">Mystique</option>
+              </select>
+            </div>
+            <div class="generator-field">
+              <label for="gen-language">Langue</label>
+              <select id="gen-language">
+                <option value="fr">Fran&ccedil;ais</option>
+                <option value="en">English</option>
+              </select>
+            </div>
+          </div>
+          <button id="btn-generate" class="btn-primary btn-generate">G&eacute;n&eacute;rer le livre</button>
+        </div>
+        <div id="generator-progress" class="generator-progress hidden">
+          <div class="generator-steps">
+            <div class="gen-step" data-step="meta">
+              <span class="gen-step-icon">&#9675;</span>
+              <span class="gen-step-label">M&eacute;tadonn&eacute;es &amp; th&egrave;me</span>
+            </div>
+            <div class="gen-step" data-step="archetypes">
+              <span class="gen-step-icon">&#9675;</span>
+              <span class="gen-step-label">Arch&eacute;types</span>
+            </div>
+            <div class="gen-step" data-step="npcs">
+              <span class="gen-step-icon">&#9675;</span>
+              <span class="gen-step-label">Personnages (PNJ)</span>
+            </div>
+            <div class="gen-step" data-step="beats_1_8">
+              <span class="gen-step-icon">&#9675;</span>
+              <span class="gen-step-label">Beats 1&ndash;8</span>
+            </div>
+            <div class="gen-step" data-step="beats_9_15">
+              <span class="gen-step-icon">&#9675;</span>
+              <span class="gen-step-label">Beats 9&ndash;15</span>
+            </div>
+            <div class="gen-step" data-step="lore">
+              <span class="gen-step-icon">&#9675;</span>
+              <span class="gen-step-label">Lore &amp; monde</span>
+            </div>
+          </div>
+          <div class="generator-progress-bar">
+            <div class="generator-progress-fill" id="generator-progress-fill"></div>
+          </div>
+          <p class="generator-status" id="generator-status">Pr&eacute;paration...</p>
+          <!-- Done state -->
+          <div id="generator-done" class="generator-done hidden">
+            <div class="generator-done-icon">&#10024;</div>
+            <p class="generator-done-text" id="generator-done-text">Livre cr&eacute;&eacute; !</p>
+            <p class="generator-done-sub">Votre livre est pr&ecirc;t dans la biblioth&egrave;que</p>
+            <button id="btn-generator-done" class="btn-generator-done">Retour &agrave; la biblioth&egrave;que</button>
+          </div>
+          <!-- Error state -->
+          <div id="generator-error" class="generator-error hidden">
+            <p class="generator-error-text" id="generator-error-text">Une erreur est survenue</p>
+            <button id="btn-generator-retry" class="btn-generator-retry">R&eacute;essayer</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Fullscreen Loading Overlay (for game creation / long LLM calls) -->
+    <div id="loading-overlay" class="loading-overlay hidden">
+      <div class="loading-overlay-content">
+        <div class="loading-spirit-anim">
+          <div class="loading-orbit loading-orbit-1"></div>
+          <div class="loading-orbit loading-orbit-2"></div>
+          <div class="loading-orbit loading-orbit-3"></div>
+          <div class="loading-center-glyph">◈</div>
+        </div>
+        <h2 class="loading-overlay-title" id="loading-overlay-title">Invocation des esprits...</h2>
+        <p class="loading-overlay-sub" id="loading-overlay-sub">Les ancêtres tissent votre destin</p>
+        <div class="loading-progress-bar">
+          <div class="loading-progress-fill" id="loading-progress-fill"></div>
+        </div>
+        <p class="loading-tip" id="loading-tip">Chaque choix forge votre destin</p>
+      </div>
+    </div>
+  </div>
+
+  <script type="module" src="/scripts/app.js"></script>
+</body>
+</html>

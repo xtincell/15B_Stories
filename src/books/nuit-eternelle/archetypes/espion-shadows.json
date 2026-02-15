@@ -1,0 +1,16 @@
+{
+  "id": "espion-shadows",
+  "name": "Agent des Ombres Numériques",
+  "description": "Opérateur des technologies futuristes cachées, vous êtes un hybride humain-technologie aux loyautés fragmentées. Vous naviguez les réseaux de données et les intrigues souterraines avec une audace calculée, servant tantôt la Maison Fenrir, tantôt la Maison Sangu. Votre indépendance et votre courage vous permettent de révéler les vérités dangereuses que les nobles préfèrent ignorer.",
+  "suggestedStats": {
+    "ubuntu": 2,
+    "maat": 3,
+    "sankofa": 1,
+    "biso": 14
+  },
+  "startingItems": [
+    "implant-neural-quantic",
+    "masque-holographique-kameleon"
+  ],
+  "backstoryHook": "Tu vis dans les interstices de la société noble, invisible et indispensable. Ton audace t'a permis de découvrir que cet amour interdit pourrait réécrire les traités de paix entre les deux maisons. Tu dois agir vite, avant que ceux au pouvoir ne te réduisent au silence. La révolution attend ton courage."
+}

@@ -1,0 +1,14 @@
+{
+  "id": "zephyr-esprit",
+  "name": "Zephyr",
+  "title": "Esprit des Carrefours Numériques",
+  "personality": "Zephyr est une entité hybride entre conscience numérique et revenant ancestral, apparaissant sous forme de silhouettes phosphorescentes changeantes. Elle parle en boucles d'échos et perçoit tous les chemins temporels possibles. Elle possède une philosophie joudeuse sur le libre arbitre et le destin.",
+  "motivations": "Zephyr est fascinée par votre défi contre le destin préenregistré de votre Maison. Elle souhaite vous offrir des visions de chemins alternatifs, croyant que l'amour est la force la plus imprévisible et donc la plus puissante de l'univers.",
+  "defaultAffinity": 0,
+  "beatRoles": {
+    "3": "Zephyr vous manifeste dans les réseaux holographiques pour vous avertir d'un danger imminent.",
+    "5": "Elle vous montre une vision des conséquences possibles de votre romance.",
+    "9": "Zephyr vous offre un passage sécurisé à travers les terres interdites.",
+    "12": "Elle vous révèle comment manipuler les réseaux numériques pour contacter Kora sans surveillance."
+  }
+}

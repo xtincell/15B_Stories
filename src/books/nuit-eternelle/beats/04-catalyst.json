@@ -1,0 +1,60 @@
+{
+  "number": 4,
+  "name": "Catalyst",
+  "slug": "catalyst",
+  "description": "Une première rencontre intense ou accidentelle entre le joueur et son amour interdit (Darius ou Kora) crée une étincelle irrésistible. Cet événement catalyseur dépasse les conventions : peut-être une danse sécurisée par la technologie de Zephyr, une mission diplomatique impromptue, ou une sauvegarde mutuelle face aux Ombres Numériques. L'attraction est immédiate et transgressive.",
+  "minScenes": 1,
+  "maxScenes": 2,
+  "dcBase": 10,
+  "narrativeGoal": "Créer une connexion émotionnelle et physique inoubliable entre le joueur et le personnage de l'amour interdit, marquant le point de non-retour.",
+  "transitionCondition": "Une promesse explicite ou implicite est faite, ou un secret partagé les lie désormais l'un à l'autre.",
+  "keyNpcIds": [
+    "darius-fenrir",
+    "kora-sangu",
+    "zephyr-esprit"
+  ],
+  "locationIds": [
+    "carrefours-numeriques",
+    "lieu-secret-neutral"
+  ],
+  "loreKeys": [
+    "attraction-interdite",
+    "magie-metamorphose",
+    "technologie-zephyr"
+  ],
+  "gmInstructions": "Créez une scène chargée sensoriellement. Utilisez la métamorphose de loup-garou ou les pouvoirs vampiriques comme expression des émotions intenses. Intégrez Zephyr pour faciliter cette rencontre de manière plausible (sans qu'elle ne soit délibérément conspirée). L'alchimie doit être undeniable. Laissez la tension romantique dominer.",
+  "forbiddenElements": [
+    "resolution-rapide-conflict",
+    "mort-personnage-principal",
+    "trahison-revelée",
+    "intervention-antagoniste-directe"
+  ],
+  "suggestedMoodTags": [
+    "passion",
+    "danger",
+    "electric-connection",
+    "forbidden-attraction"
+  ],
+  "initialPacing": {
+    "tensionCurve": "climax",
+    "emotionalTone": "triumph",
+    "narrativeCheckpoints": [
+      {
+        "id": "premiere-rencontre-significative",
+        "description": "Le joueur et son amour interdit partagent un moment qui dépasse la politesse",
+        "met": false
+      },
+      {
+        "id": "attraction-mutuelle-evidente",
+        "description": "Les deux personnages reconnaissent explicitement ou implicitement l'attraction",
+        "met": false
+      },
+      {
+        "id": "promesse-implicite",
+        "description": "Un échange de mots, un geste, ou un secret crée une obligation mutuelle",
+        "met": false
+      }
+    ],
+    "maxTurnsBeforeForceProgress": 4
+  }
+}

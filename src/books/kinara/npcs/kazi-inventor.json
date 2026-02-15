@@ -1,0 +1,15 @@
+{
+  "id": "kazi-inventor",
+  "name": "Kazi",
+  "title": "L'Inventrice de Zandara",
+  "personality": "Audacieuse et impatiente, Kazi est une jeune prodige de la capitale Zandara. Elle croit fermement que l'innovation et la technologie peuvent resoudre les problemes que la tradition echoue a regler. Elle parle vite, pense plus vite encore et supporte mal l'inaction. Elle incarne le Biso -- l'audace creatrice qui repousse les limites du possible. Initialement mefiante envers le heros et les traditions spirituelles, elle apprend progressivement a respecter ce qu'elle ne comprend pas. Son brillant esprit cache une peur profonde de l'echec heritee d'un pere inventeur mort dans l'explosion de sa propre creation.",
+  "motivations": "Prouver que la science et l'innovation peuvent coexister avec le monde des esprits. Construire un dispositif capable de stabiliser le Voile sans avoir besoin de Tisserands. Honorer la memoire de son pere en reussissant la ou il a echoue. Trouver sa place dans un monde qui privilegie la tradition sur le progres.",
+  "defaultAffinity": -1,
+  "beatRoles": {
+    "7": "Rencontre le heros a Zandara dans son atelier. Initialement hostile aux methodes traditionnelles du heros, elle accepte une alliance pragmatique face a la menace commune.",
+    "8": "Travaille avec le heros et Nia pour combiner savoir ancien et innovation. Cree un prototype de dispositif de stabilisation du Voile qui fonctionne... partiellement.",
+    "9": "Son dispositif attire l'attention de l'Ombre. Confrontee a la realite que sa technologie peut etre detournee a des fins destructrices.",
+    "13": "Revient avec un dispositif perfectionne. Son invention pourrait etre la cle de la victoire ou une catastrophe, selon la facon dont le heros choisit de l'utiliser.",
+    "14": "Son role dans l'affrontement final depend de la confiance construite avec le heros. Son invention et son courage sont mis a l'epreuve ultime."
+  }
+}
