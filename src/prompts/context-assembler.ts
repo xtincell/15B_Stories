@@ -1,3 +1,19 @@
+/**
+ * @module context-assembler
+ *
+ * Module central d'assemblage du contexte envoyé au LLM.
+ *
+ * Ce module orchestre la collecte de toutes les couches de mémoire
+ * (persistante, documentaire, fonctionnelle) et les fusionne en un
+ * contexte structuré unique. Il s'occupe aussi de construire le prompt
+ * système final à partir de templates Markdown mis en cache.
+ *
+ * Architecture mémoire :
+ *  - Persistante : journal d'actions, résumés de beats, flags du monde
+ *  - Documentaire : définition du beat, lore, profils PNJ
+ *  - Fonctionnelle : stats, contraintes, rythme narratif
+ */
+
 import { readFileSync } from 'fs';
 import { join, dirname } from 'path';
 import { fileURLToPath } from 'url';
@@ -14,12 +30,23 @@ import { STAT_DESCRIPTIONS, PERSONALITY_TRAITS } from '../types/game.js';
 import type { PersonalityTrait } from '../types/game.js';
 import { estimateTokens, trimToTokenBudget } from '../llm/token-budget.js';
 
+/** Résolution du répertoire courant pour accéder aux templates en ESM */
 const __dirname = dirname(fileURLToPath(import.meta.url));
+
+/** Chemin absolu vers le dossier contenant les templates Markdown */
 const TEMPLATES_DIR = join(__dirname, 'templates');
 
-// ── Template caching: load once at startup, not per-request ──
+// ── Mise en cache des templates : chargement unique au démarrage ──
 const templateCache = new Map<string, string>();
 
+/**
+ * Charge un template Markdown depuis le disque avec mise en cache.
+ * Après le premier appel, les lectures suivantes sont servies depuis la mémoire
+ * afin d'éliminer toute E/S fichier pendant le traitement des requêtes.
+ *
+ * @param name - Nom du fichier template (ex : 'base-system.md')
+ * @returns Le contenu textuel du template
+ */
 function loadTemplate(name: string): string {
   let cached = templateCache.get(name);
   if (!cached) {
@@ -29,22 +56,29 @@ function loadTemplate(name: string): string {
   return cached;
 }
 
-// Pre-warm the template cache immediately
+// Pré-chargement du cache au démarrage pour éviter les latences lors du premier tour
 try {
   loadTemplate('base-system.md');
   loadTemplate('beat-instructions.md');
   loadTemplate('scene-format.md');
   loadTemplate('character-creation.md');
 } catch {
-  // Templates may not exist yet during first build
+  // Les templates peuvent ne pas exister encore lors du premier build
 }
 
 // ── Main assembly function ──
 
 /**
- * Assemble the full context for an LLM call.
- * All DB queries grouped together for minimal overhead.
- * Templates loaded from memory cache — zero file I/O.
+ * Assemble le contexte complet pour un appel au LLM.
+ *
+ * Regroupe toutes les requêtes en base de données pour minimiser la latence,
+ * puis structure les résultats en trois couches de mémoire distinctes.
+ * Les templates sont servis depuis le cache — aucune E/S fichier.
+ *
+ * @param session - Session de jeu active contenant l'état courant
+ * @param character - Personnage du joueur avec ses stats et inventaire
+ * @param pacing - État du rythme narratif (tension, tone, checkpoints)
+ * @returns Contexte assemblé prêt à être injecté dans le prompt système
  */
 export function assembleContext(
   session: GameSession,
@@ -67,8 +101,10 @@ export function assembleContext(
     worldFlags,
   };
 
-  // ── 2. Documentary Memory ──
+  // ── 2. Mémoire Documentaire ──
   const relevantLore = getLoreForBeat(bookId, session.currentBeat);
+  // Construction d'une carte d'affinité PNJ pour enrichir les profils
+  // avec les relations dynamiques du joueur
   const affinityMap = new Map<string, number>();
   const relationships = getRelationshipsForBeat(session.id, beat.keyNpcIds);
   for (const rel of relationships) {
@@ -86,12 +122,13 @@ export function assembleContext(
       forbiddenElements: beat.forbiddenElements,
       transitionCondition: beat.transitionCondition,
     },
+    // Chaque entrée de lore est tronquée pour respecter le budget de tokens
     relevantLore: relevantLore.map(l => trimToTokenBudget(l, 500)),
     activeNpcProfiles,
     relevantLocations: [],
   };
 
-  // ── 3. Functional Memory ──
+  // ── 3. Mémoire Fonctionnelle (règles, contraintes, rythme) ──
   const consequenceReminders = buildConsequenceReminders(worldFlags, session.currentBeat);
 
   const functional: FunctionalMemoryContext = {
@@ -108,6 +145,7 @@ export function assembleContext(
       tensionCurve: pacing.tensionCurve,
       emotionalTone: pacing.emotionalTone,
       sceneEscalation: pacing.sceneEscalation,
+      // Ne garder que les checkpoints non encore atteints pour guider le LLM
       checkpointsRemaining: pacing.narrativeCheckpoints
         .filter(cp => !cp.met)
         .map(cp => cp.description),
@@ -120,8 +158,16 @@ export function assembleContext(
 }
 
 /**
- * Build the full system prompt from assembled context.
- * Uses cached templates — no file I/O.
+ * Construit le prompt système complet à partir du contexte assemblé.
+ *
+ * Fusionne les templates Markdown (en cache) avec les données dynamiques
+ * du contexte pour produire le prompt final envoyé au LLM. Gère aussi
+ * le mode « rapide » qui impose un beat par tour.
+ *
+ * @param context - Contexte assemblé par {@link assembleContext}
+ * @param character - Personnage du joueur (stats, personnalité, genre)
+ * @param gameMode - Mode de jeu : 'normal' ou 'rapide'
+ * @returns Le prompt système complet sous forme de chaîne Markdown
  */
 export function buildSystemPrompt(
   context: AssembledContext,
@@ -133,7 +179,7 @@ export function buildSystemPrompt(
   const meta = context.bookMeta;
   const authorVoice = meta?.authorVoice;
 
-  // Build author voice block from per-book personality
+  // Construction du bloc « voix d'auteur » à partir de la personnalité définie par livre
   const voiceBlock = authorVoice ? [
     authorVoice.influences ? `## Influences & Voix\n${authorVoice.influences}` : '',
     authorVoice.strengths ? `## Tes Forces Narratives\n${authorVoice.strengths}` : '',
@@ -142,7 +188,7 @@ export function buildSystemPrompt(
     authorVoice.avoidances ? `## Ce Que Tu Ne Fais JAMAIS\n${authorVoice.avoidances}` : '',
   ].filter(Boolean).join('\n\n') : '';
 
-  // Build stat descriptions block from book meta
+  // Construction du bloc des descriptions de stats, avec fallback vers les valeurs par défaut
   const statBlock = meta?.statDescriptions
     ? (['ubuntu', 'maat', 'sankofa', 'biso'] as const).map(key => {
         const name = meta.statNames?.[key] || key;
@@ -153,7 +199,7 @@ export function buildSystemPrompt(
       }).join('\n')
     : `- **Ubuntu** (Le Lien) : Communaut\u00e9 / Empathie, diplomatie, soin, ralliement, sacrifice pour le groupe\n- **Ma\u00e2t** (La Balance) : V\u00e9rit\u00e9 / Justice, investigation, jugement, d\u00e9nonciation, r\u00e9sistance \u00e0 la corruption\n- **Sankofa** (La M\u00e9moire) : Tradition / Anc\u00eatres, rituels, communication avec les esprits, connaissance ancestrale\n- **Biso** (L'\u00c9tincelle) : Innovation / Audace, action directe, combat, improvisation, invention`;
 
-  // Parameterize base-system template with book-specific author voice
+  // Injection des variables spécifiques au livre dans le template de base
   let baseSystem = loadTemplate('base-system.md');
   baseSystem = baseSystem
     .replace('{{authorIdentity}}', authorVoice?.identity || `Tu es le Ma\u00eetre du Jeu de ${meta?.name || 'cette aventure'}`)
@@ -163,7 +209,7 @@ export function buildSystemPrompt(
 
   sections.push(baseSystem);
 
-  // Quick mode: inject a global directive at the top
+  // Mode rapide : directive globale imposant un seul tour par beat
   if (isQuickMode) {
     sections.push(`# MODE HISTOIRE RAPIDE
 
@@ -181,7 +227,8 @@ export function buildSystemPrompt(
     sections.push('# Lore Pertinent\n\n' + context.documentary.relevantLore.join('\n\n---\n\n'));
   }
 
-  // Build urgency directive based on escalation (or override in quick mode)
+  // Directive d'urgence : calibrée selon l'escalation pour pousser le LLM
+  // à conclure le beat quand le nombre de tours restants diminue
   const turnsLeft = context.functional.pacingState.maxTurns - context.functional.pacingState.turnsInBeat;
   let pacingDirective: string;
   if (isQuickMode) {
@@ -238,18 +285,33 @@ export function buildSystemPrompt(
 }
 
 /**
- * Build conversation history for the LLM call.
+ * Récupère l'historique de conversation pour l'appel au LLM.
+ *
+ * Limite le nombre de messages pour rester dans le budget de tokens
+ * tout en fournissant assez de contexte conversationnel au modèle.
+ *
+ * @param sessionId - Identifiant unique de la session de jeu
+ * @param limit - Nombre maximum de messages à récupérer (par défaut 6)
+ * @returns Tableau de messages de conversation ordonnés chronologiquement
  */
 export function buildConversationHistory(sessionId: string, limit: number = 6): ConversationMessage[] {
   return getConversationHistory(sessionId, limit);
 }
 
-// ── Helpers ──
+// ── Fonctions utilitaires internes ──
 
+/**
+ * Construit la section Markdown décrivant l'état du personnage joueur.
+ * Inclut stats, personnalité, genre grammatical, inventaire et backstory.
+ *
+ * @param character - Personnage du joueur
+ * @param bookMeta - Métadonnées du livre (noms de stats personnalisés)
+ * @returns Section Markdown formatée pour le prompt système
+ */
 function buildCharacterSection(character: Character, bookMeta?: GameBookMeta): string {
   const personalityInfo = PERSONALITY_TRAITS[character.personality as PersonalityTrait];
 
-  // Build stat lines dynamically from book meta
+  // Génération dynamique des lignes de stats avec les noms personnalisés du livre
   const statKeys = ['ubuntu', 'maat', 'sankofa', 'biso'] as const;
   const statLines = statKeys.map(key => {
     const name = bookMeta?.statNames?.[key] || key.charAt(0).toUpperCase() + key.slice(1);
@@ -280,7 +342,7 @@ function buildCharacterSection(character: Character, bookMeta?: GameBookMeta): s
     `- **La narration** : décris les gestes, pensées et attitudes du personnage en accord avec ce trait`,
   );
 
-  // Gender-aware narration instructions
+  // Instructions d'accord grammatical selon le genre choisi par le joueur
   const gender = character.gender || 'masculin';
   const genderPronouns: Record<string, { subject: string; article: string; example: string }> = {
     masculin: { subject: 'il', article: 'le', example: 'il est courageux, le guerrier avance' },
@@ -309,6 +371,12 @@ function buildCharacterSection(character: Character, bookMeta?: GameBookMeta): s
   return lines.join('\n');
 }
 
+/**
+ * Construit la section Markdown listant les PNJ présents dans la scène.
+ *
+ * @param npcs - Profils des PNJ actifs avec leurs affinités dynamiques
+ * @returns Section Markdown formatée pour le prompt système
+ */
 function buildNpcSection(npcs: DocumentaryMemoryContext['activeNpcProfiles']): string {
   const lines = ['# PNJ Présents'];
   for (const npc of npcs) {
@@ -321,6 +389,13 @@ function buildNpcSection(npcs: DocumentaryMemoryContext['activeNpcProfiles']): s
   return lines.join('\n');
 }
 
+/**
+ * Construit la section d'historique récent pour le prompt.
+ * Combine les résumés de beats passés et les dernières actions détaillées.
+ *
+ * @param context - Contexte assemblé contenant la mémoire persistante
+ * @returns Section Markdown avec résumés et actions récentes
+ */
 function buildHistorySection(context: AssembledContext): string {
   const lines = ['# Historique Récent'];
 
@@ -342,12 +417,21 @@ function buildHistorySection(context: AssembledContext): string {
   return lines.join('\n');
 }
 
+/**
+ * Transforme les flags du monde en rappels de conséquences lisibles par le LLM.
+ * Permet au modèle de tenir compte des choix passés du joueur dans sa narration.
+ *
+ * @param worldFlags - Dictionnaire des flags du monde (booléens, chaînes, nombres)
+ * @param currentBeat - Numéro du beat actuel (réservé pour filtrage futur)
+ * @returns Liste de rappels textuels des conséquences actives
+ */
 function buildConsequenceReminders(
   worldFlags: Record<string, boolean | string | number>,
   currentBeat: number,
 ): string[] {
   const reminders: string[] = [];
   for (const [key, value] of Object.entries(worldFlags)) {
+    // Seuls les flags booléens actifs et les flags textuels sont pertinents
     if (typeof value === 'boolean' && value) {
       reminders.push(`Flag actif : ${key.replace(/_/g, ' ')}`);
     } else if (typeof value === 'string') {

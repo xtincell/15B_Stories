@@ -1,3 +1,15 @@
+/**
+ * @module book-generator
+ * @description Générateur complet de livres-jeu via LLM.
+ *
+ * Ce module orchestre la création d'un nouveau livre-jeu en 7 étapes séquentielles,
+ * chacune faisant appel au LLM pour générer du contenu structuré (JSON/Markdown).
+ * Les étapes sont : métadonnées, archétypes, PNJ, beats (1-8 puis 9-15), lore et thème CSS.
+ *
+ * L'ensemble du contenu généré est écrit sur le système de fichiers dans le dossier
+ * `src/books/<book-id>/`, prêt à être chargé par le moteur de jeu.
+ */
+
 import { writeFileSync, mkdirSync, existsSync, readFileSync } from 'fs';
 import { join, dirname } from 'path';
 import { fileURLToPath } from 'url';
@@ -10,17 +22,40 @@ const BOOKS_DIR = join(__dirname, '..', 'books');
 
 // ── Types ──
 
+/** Pitch initial fourni par l'utilisateur pour générer un livre-jeu. */
 export interface BookPitch {
+  /** Nom du livre-jeu */
   name: string;
+  /** Description de l'univers et du concept */
   description: string;
+  /** Tonalité narrative (romantique, épique, sombre, mystique) */
   tone: string;
+  /** Langue de génération du contenu */
   language: string;
 }
 
+/**
+ * Callback de progression appelé à chaque étape de la génération.
+ *
+ * @param step - Identifiant de l'étape en cours
+ * @param percent - Pourcentage de progression (0-100)
+ * @param message - Message descriptif affiché à l'utilisateur
+ */
 export type ProgressCallback = (step: string, percent: number, message: string) => void;
 
-// ── Main generator ──
+// ── Générateur principal ──
 
+/**
+ * Génère un livre-jeu complet à partir d'un pitch utilisateur.
+ *
+ * Orchestre 7 étapes séquentielles de génération via LLM, avec notification
+ * de progression à chaque étape. Le livre est écrit dans `src/books/<slug>/`.
+ *
+ * @param pitch - Le pitch initial décrivant l'univers souhaité
+ * @param onProgress - Callback de progression pour l'interface utilisateur
+ * @returns L'identifiant (slug) du livre-jeu créé
+ * @throws Si un livre avec le même slug existe déjà
+ */
 export async function generateBook(pitch: BookPitch, onProgress: ProgressCallback): Promise<string> {
   const bookId = slugify(pitch.name);
   const bookDir = join(BOOKS_DIR, bookId);
@@ -81,8 +116,18 @@ export async function generateBook(pitch: BookPitch, onProgress: ProgressCallbac
   return bookId;
 }
 
-// ── Step 1: Meta ──
+// ── Étape 1 : Métadonnées ──
 
+/**
+ * Génère le fichier meta.json contenant la configuration globale du livre-jeu.
+ *
+ * Inclut les noms de stats, descriptions, personnalités genrées, tags et configuration UI.
+ *
+ * @param llm - Adaptateur LLM pour la génération
+ * @param pitch - Pitch utilisateur
+ * @param bookId - Slug du livre-jeu
+ * @returns Objet JSON des métadonnées
+ */
 async function generateMeta(llm: LLMAdapter, pitch: BookPitch, bookId: string): Promise<any> {
   const systemPrompt = `Tu es un concepteur de livres-jeu narratifs interactifs. Tu generes des fichiers JSON parfaitement structures.
 IMPORTANT: Reponds UNIQUEMENT avec du JSON valide, sans texte avant ni apres. Pas de markdown, pas de commentaires.`;
@@ -139,8 +184,19 @@ REGLES:
   return extractJson(raw);
 }
 
-// ── Step 2: Archetypes ──
+// ── Étape 2 : Archétypes ──
 
+/**
+ * Génère les 4 archétypes de personnage joueur.
+ *
+ * Chaque archétype est équilibré avec des stats distinctes (total = 20),
+ * une backstory immersive et des objets de départ uniques.
+ *
+ * @param llm - Adaptateur LLM pour la génération
+ * @param pitch - Pitch utilisateur
+ * @param meta - Métadonnées déjà générées (pour les noms de stats)
+ * @returns Tableau de 4 archétypes
+ */
 async function generateArchetypes(llm: LLMAdapter, pitch: BookPitch, meta: any): Promise<any[]> {
   const systemPrompt = `Tu es un concepteur de livres-jeu narratifs. Tu generes des fichiers JSON parfaitement structures.
 IMPORTANT: Reponds UNIQUEMENT avec du JSON valide (un tableau), sans texte avant ni apres.`;
@@ -176,8 +232,20 @@ Reponds avec un tableau JSON de 4 archetypes: [archetype1, archetype2, archetype
   return extractJson(raw) as any[];
 }
 
-// ── Step 3: NPCs ──
+// ── Étape 3 : PNJ ──
 
+/**
+ * Génère les 7 personnages non-joueurs avec leurs rôles narratifs.
+ *
+ * Les PNJ couvrent des archétypes narratifs classiques (mentor, allié,
+ * antagoniste, etc.) et sont assignés à des beats spécifiques via beatRoles.
+ *
+ * @param llm - Adaptateur LLM pour la génération
+ * @param pitch - Pitch utilisateur
+ * @param meta - Métadonnées du livre
+ * @param archetypes - Archétypes déjà générés (pour la cohérence)
+ * @returns Tableau de 7 PNJ
+ */
 async function generateNPCs(llm: LLMAdapter, pitch: BookPitch, meta: any, archetypes: any[]): Promise<any[]> {
   const systemPrompt = `Tu es un concepteur de livres-jeu narratifs. Tu generes des fichiers JSON parfaitement structures.
 IMPORTANT: Reponds UNIQUEMENT avec du JSON valide (un tableau), sans texte avant ni apres.`;
@@ -225,8 +293,9 @@ Reponds avec un tableau JSON de 7 PNJ: [npc1, npc2, ..., npc7]`;
   return extractJson(raw) as any[];
 }
 
-// ── Step 4 & 5: Beats ──
+// ── Étapes 4 & 5 : Beats narratifs ──
 
+/** Noms des 15 beats selon la structure Save the Cat! de Blake Snyder */
 const BEAT_NAMES = [
   'Opening Image', 'Theme Stated', 'Set-Up', 'Catalyst', 'Debate',
   'Break into Two', 'B Story', 'Fun and Games', 'Midpoint',
@@ -234,8 +303,10 @@ const BEAT_NAMES = [
   'Break into Three', 'Finale', 'Final Image',
 ];
 
+/** Difficulté de base (DC) par beat — progression graduelle de 8 à 16 */
 const BEAT_DCS = [8, 8, 8, 10, 10, 10, 12, 12, 12, 14, 14, 14, 16, 16, 16];
 
+/** Courbe de tension par défaut par beat — guide le rythme narratif si le LLM n'en fournit pas */
 const TENSION_CURVES: Record<number, string> = {
   1: 'plateau', 2: 'plateau', 3: 'rising',
   4: 'rising', 5: 'plateau', 6: 'rising',
@@ -244,6 +315,7 @@ const TENSION_CURVES: Record<number, string> = {
   13: 'rising', 14: 'climax', 15: 'falling',
 };
 
+/** Ton émotionnel par défaut par beat — fallback si le LLM n'en fournit pas */
 const EMOTIONAL_TONES: Record<number, string> = {
   1: 'serenity', 2: 'serenity', 3: 'wonder',
   4: 'dread', 5: 'tension', 6: 'hope',
@@ -252,6 +324,23 @@ const EMOTIONAL_TONES: Record<number, string> = {
   13: 'hope', 14: 'tension', 15: 'serenity',
 };
 
+/**
+ * Génère une tranche de beats narratifs (1-8 ou 9-15).
+ *
+ * La génération est scindée en deux appels pour respecter les limites de tokens
+ * du LLM. Le second appel reçoit le contexte des beats précédents pour assurer
+ * la continuité narrative. Les données de pacing manquantes sont complétées
+ * avec les valeurs par défaut.
+ *
+ * @param llm - Adaptateur LLM pour la génération
+ * @param pitch - Pitch utilisateur
+ * @param meta - Métadonnées du livre
+ * @param npcs - PNJ générés (pour les IDs de référence)
+ * @param from - Numéro du premier beat à générer (inclus)
+ * @param to - Numéro du dernier beat à générer (inclus)
+ * @param previousBeats - Beats déjà générés pour le contexte (optionnel, utilisé pour 9-15)
+ * @returns Tableau de beats avec numérotation et pacing corrigés
+ */
 async function generateBeats(
   llm: LLMAdapter,
   pitch: BookPitch,
@@ -327,7 +416,8 @@ Reponds avec un tableau JSON de ${to - from + 1} beats.`;
   const raw = await llm.generate(systemPrompt, userPrompt, 8192);
   const beats = extractJson(raw) as any[];
 
-  // Ensure correct numbering and fill missing pacing data
+  // Correction de la numérotation et comblement des données de pacing manquantes
+  // pour garantir la robustesse face aux oublis du LLM
   return beats.map((beat, idx) => {
     const num = from + idx;
     return {
@@ -347,8 +437,19 @@ Reponds avec un tableau JSON de ${to - from + 1} beats.`;
   });
 }
 
-// ── Step 6: Lore ──
+// ── Étape 6 : Lore ──
 
+/**
+ * Génère le lore (background narratif) du livre-jeu en markdown.
+ *
+ * Produit deux fichiers : world.md (géographie, civilisations, règles du monde)
+ * et history.md (chronologie, événements majeurs).
+ *
+ * @param llm - Adaptateur LLM pour la génération
+ * @param pitch - Pitch utilisateur
+ * @param meta - Métadonnées du livre
+ * @returns Dictionnaire clé→contenu markdown (world, history)
+ */
 async function generateLore(llm: LLMAdapter, pitch: BookPitch, meta: any): Promise<Record<string, string>> {
   const systemPrompt = `Tu es un auteur de fantasy/SF. Tu ecris du lore riche et immersif en markdown.
 IMPORTANT: Reponds UNIQUEMENT avec du JSON valide, sans texte avant ni apres.`;
@@ -372,8 +473,19 @@ Utilise des titres markdown (## et ###) pour structurer.`;
   return extractJson(raw) as Record<string, string>;
 }
 
-// ── Author Voice ──
+// ── Voix d'auteur ──
 
+/**
+ * Génère la personnalité narrative (voix d'auteur) du livre-jeu.
+ *
+ * Crée une identité d'auteur fictif avec style, influences, forces et pièges à éviter.
+ * Cette personnalité guide le ton du LLM lors des parties.
+ *
+ * @param llm - Adaptateur LLM pour la génération
+ * @param pitch - Pitch utilisateur
+ * @param meta - Métadonnées du livre
+ * @returns Objet JSON de la personnalité d'auteur
+ */
 async function generateAuthorVoice(llm: LLMAdapter, pitch: BookPitch, meta: any): Promise<any> {
   const systemPrompt = `Tu es un directeur editorial expert en narration interactive. Tu crees des personnalites d'auteur riches et distinctes pour des livres-jeu.
 IMPORTANT: Reponds UNIQUEMENT avec du JSON valide, sans texte avant ni apres.`;
@@ -409,8 +521,19 @@ REGLES:
   return extractJson(raw);
 }
 
-// ── Loading Messages ──
+// ── Messages de chargement ──
 
+/**
+ * Génère les messages d'ambiance affichés pendant le chargement.
+ *
+ * Produit des messages "flavor" immersifs, des conseils de gameplay
+ * et des phases d'overlay pour l'écran de chargement.
+ *
+ * @param llm - Adaptateur LLM pour la génération
+ * @param pitch - Pitch utilisateur
+ * @param meta - Métadonnées du livre (pour les noms de stats)
+ * @returns Objet contenant flavors, tips et overlayPhases
+ */
 async function generateLoadingMessages(llm: LLMAdapter, pitch: BookPitch, meta: any): Promise<any> {
   const systemPrompt = `Tu es un UX writer pour un jeu narratif interactif. Tu crees des messages d'ambiance immersifs.
 IMPORTANT: Reponds UNIQUEMENT avec du JSON valide, sans texte avant ni apres.`;
@@ -454,9 +577,9 @@ REGLES:
   return extractJson(raw);
 }
 
-// ── Theme CSS generator (template-based, no LLM) ──
+// ── Générateur de thème CSS (basé sur templates, sans LLM) ──
 
-// Shared variables appended to every generated theme
+/** Variables CSS partagées par tous les thèmes — mise en page et typographie */
 const SHARED_THEME_VARS: Record<string, string> = {
   '--sidebar-width': '280px',
   '--beat-tracker-height': '48px',
@@ -466,6 +589,7 @@ const SHARED_THEME_VARS: Record<string, string> = {
   '--font-ui': "system-ui, -apple-system, sans-serif",
 };
 
+/** Palettes de couleurs CSS indexées par tonalité narrative */
 const TONE_PALETTES: Record<string, Record<string, string>> = {
   romantique: {
     '--color-bg': '#0d0a14',
@@ -581,6 +705,17 @@ const TONE_PALETTES: Record<string, Record<string, string>> = {
   },
 };
 
+/**
+ * Construit le fichier CSS du thème à partir de la tonalité.
+ *
+ * Fusionne la palette de couleurs correspondante avec les variables partagées
+ * et produit un bloc `:root` CSS. Retombe sur la palette 'epique' si la tonalité
+ * n'est pas reconnue.
+ *
+ * @param tone - Tonalité narrative (romantique, epique, sombre, mystique)
+ * @param bookId - Identifiant du livre, inclus dans le commentaire CSS
+ * @returns Chaîne CSS complète prête à écrire
+ */
 function buildThemeCSS(tone: string, bookId: string): string {
   const palette = TONE_PALETTES[tone] || TONE_PALETTES['epique'];
   const allVars = { ...palette, ...SHARED_THEME_VARS };
@@ -588,16 +723,37 @@ function buildThemeCSS(tone: string, bookId: string): string {
   return `/* Theme auto-generated for book: ${bookId} (tone: ${tone}) */\n:root {\n${lines.join('\n')}\n}\n`;
 }
 
-// ── File writing utilities ──
+// ── Utilitaires d'écriture de fichiers ──
 
+/**
+ * Crée un répertoire s'il n'existe pas encore (récursivement).
+ *
+ * @param dir - Chemin absolu du répertoire à créer
+ */
 function ensureDir(dir: string): void {
   if (!existsSync(dir)) mkdirSync(dir, { recursive: true });
 }
 
+/**
+ * Écrit un objet en JSON formaté dans un fichier.
+ *
+ * @param dir - Répertoire de destination
+ * @param filename - Nom du fichier (ex: 'meta.json')
+ * @param data - Données à sérialiser
+ */
 function writeJson(dir: string, filename: string, data: any): void {
   writeFileSync(join(dir, filename), JSON.stringify(data, null, 2), 'utf-8');
 }
 
+/**
+ * Écrit les fichiers d'archétypes et met à jour meta.json avec les genderMaps.
+ *
+ * Chaque archétype est écrit dans un fichier individuel, un index.json les répertorie,
+ * et les maps de genre/descriptions sont injectées dans les métadonnées.
+ *
+ * @param bookDir - Répertoire racine du livre-jeu
+ * @param archetypes - Tableau des archétypes générés
+ */
 function writeArchetypes(bookDir: string, archetypes: any[]): void {
   const dir = join(bookDir, 'archetypes');
   ensureDir(dir);
@@ -605,7 +761,7 @@ function writeArchetypes(bookDir: string, archetypes: any[]): void {
   const ids: string[] = [];
   for (const arch of archetypes) {
     ids.push(arch.id);
-    // Extract genderMap into meta-level data (stored separately)
+    // Le genderMap est séparé du fichier archétype car il appartient aux métadonnées globales
     const { genderMap, ...archData } = arch;
     writeJson(dir, `${arch.id}.json`, archData);
   }
@@ -627,6 +783,12 @@ function writeArchetypes(bookDir: string, archetypes: any[]): void {
   writeFileSync(metaPath, JSON.stringify(meta, null, 2), 'utf-8');
 }
 
+/**
+ * Écrit les fichiers de PNJ (un par PNJ) et l'index associé.
+ *
+ * @param bookDir - Répertoire racine du livre-jeu
+ * @param npcs - Tableau des PNJ générés
+ */
 function writeNPCs(bookDir: string, npcs: any[]): void {
   const dir = join(bookDir, 'npcs');
   ensureDir(dir);
@@ -639,6 +801,12 @@ function writeNPCs(bookDir: string, npcs: any[]): void {
   writeJson(dir, 'index.json', { npcs: ids });
 }
 
+/**
+ * Écrit les fichiers de beats, nommés avec numéro préfixé (ex: 01-opening-image.json).
+ *
+ * @param bookDir - Répertoire racine du livre-jeu
+ * @param beats - Tableau des 15 beats générés
+ */
 function writeBeats(bookDir: string, beats: any[]): void {
   const dir = join(bookDir, 'beats');
   ensureDir(dir);
@@ -649,6 +817,12 @@ function writeBeats(bookDir: string, beats: any[]): void {
   }
 }
 
+/**
+ * Écrit les fichiers de lore en markdown et crée le dossier locations vide.
+ *
+ * @param bookDir - Répertoire racine du livre-jeu
+ * @param lore - Dictionnaire clé→contenu markdown
+ */
 function writeLore(bookDir: string, lore: Record<string, string>): void {
   const dir = join(bookDir, 'lore');
   ensureDir(dir);
@@ -661,8 +835,17 @@ function writeLore(bookDir: string, lore: Record<string, string>): void {
   ensureDir(join(dir, 'locations'));
 }
 
-// ── Utilities ──
+// ── Utilitaires ──
 
+/**
+ * Convertit un texte en slug kebab-case compatible URL.
+ *
+ * Normalise les accents (NFD), supprime les diacritiques, met en minuscules
+ * et remplace les caractères non-alphanumériques par des tirets.
+ *
+ * @param text - Texte à convertir
+ * @returns Slug en kebab-case sans accents
+ */
 function slugify(text: string): string {
   return text
     .toLowerCase()
@@ -672,18 +855,33 @@ function slugify(text: string): string {
     .replace(/^-+|-+$/g, '');
 }
 
+/**
+ * Extrait et parse du JSON depuis une réponse LLM potentiellement bruitée.
+ *
+ * Tente plusieurs stratégies d'extraction par ordre de fiabilité :
+ * 1. Parse direct du texte brut
+ * 2. Extraction depuis un bloc de code markdown (```json ... ```)
+ * 3. Recherche d'un tableau ou objet JSON dans le texte
+ * 4. Réparation de JSON tronqué (ajout des crochets/accolades manquants)
+ *
+ * @param text - Texte brut de la réponse LLM
+ * @returns L'objet ou le tableau JSON extrait
+ * @throws Si aucune stratégie d'extraction ne fonctionne
+ */
 function extractJson(text: string): unknown {
   const trimmed = text.trim();
-  // Try direct parse first
+
+  // Stratégie 1 : parse direct — cas idéal où le LLM a bien respecté la consigne
   try {
     return JSON.parse(trimmed);
   } catch {
-    // Try extracting from markdown code block
+    // Stratégie 2 : extraction depuis un bloc markdown ```json```
     const jsonMatch = trimmed.match(/```(?:json)?\s*\n?([\s\S]*?)\n?```/);
     if (jsonMatch) {
       try { return JSON.parse(jsonMatch[1].trim()); } catch { /* fall through */ }
     }
-    // Try finding JSON array or object in text
+
+    // Stratégie 3 : recherche du premier tableau ou objet JSON dans le texte
     const arrMatch = trimmed.match(/\[[\s\S]*\]/);
     if (arrMatch) {
       try { return JSON.parse(arrMatch[0]); } catch { /* fall through */ }
@@ -692,16 +890,17 @@ function extractJson(text: string): unknown {
     if (objMatch) {
       try { return JSON.parse(objMatch[0]); } catch { /* fall through */ }
     }
-    // Last resort: try to fix truncated JSON (missing closing brackets)
+
+    // Stratégie 4 : réparation de JSON tronqué — le LLM a parfois atteint
+    // sa limite de tokens et le JSON est coupé en plein milieu
     let fixable = arrMatch?.[0] || objMatch?.[0] || trimmed;
-    // Count brackets
     const openBrackets = (fixable.match(/\[/g) || []).length;
     const closeBrackets = (fixable.match(/\]/g) || []).length;
     const openBraces = (fixable.match(/\{/g) || []).length;
     const closeBraces = (fixable.match(/\}/g) || []).length;
-    // Try to fix by appending missing closers
+
     let fixed = fixable;
-    // Remove trailing comma before closing
+    // Suppression de la virgule pendante avant de fermer les structures
     fixed = fixed.replace(/,\s*$/, '');
     for (let i = 0; i < openBraces - closeBraces; i++) fixed += '}';
     for (let i = 0; i < openBrackets - closeBrackets; i++) fixed += ']';

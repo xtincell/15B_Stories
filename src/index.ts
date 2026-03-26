@@ -1,3 +1,10 @@
+/**
+ * @module index
+ * @description Point d'entrée principal du serveur KinChat / 15B Stories.
+ * Charge les variables d'environnement, initialise la base de données SQLite,
+ * construit l'application Fastify et gère l'arrêt gracieux du processus.
+ */
+
 import dotenv from 'dotenv';
 dotenv.config({ override: true });
 import { buildApp } from './server/app.js';
@@ -6,8 +13,13 @@ import { getDb, closeDb } from './memory/persistent/db.js';
 const PORT = parseInt(process.env.PORT ?? '3017', 10);
 const HOST = process.env.HOST ?? '0.0.0.0';
 
+/**
+ * @description Fonction principale asynchrone qui orchestre le démarrage du serveur.
+ * Séquence : initialisation BDD → construction de l'app → écoute HTTP → gestion des signaux.
+ * @returns {Promise<void>}
+ */
 async function main() {
-  // Initialize database
+  // Initialise la connexion SQLite (crée le fichier si nécessaire)
   getDb();
   console.log('Database initialized');
 
@@ -23,7 +35,7 @@ async function main() {
     process.exit(1);
   }
 
-  // Graceful shutdown
+  // Arrêt gracieux : ferme les connexions HTTP puis la BDD avant de quitter
   const shutdown = async () => {
     console.log('Shutting down...');
     await app.close();

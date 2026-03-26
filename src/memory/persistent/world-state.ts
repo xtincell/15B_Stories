@@ -1,7 +1,24 @@
+/**
+ * @module world-state
+ * @description Gestion de l'état du monde et des sessions de jeu.
+ * CRUD complet sur les sessions (création, lecture, mise à jour, suppression),
+ * gestion des flags monde (drapeaux narratifs), des relations PNJ
+ * et des parties terminées. C'est la couche de persistance principale
+ * pour toutes les données dynamiques d'une partie.
+ */
+
 import { v4 as uuid } from 'uuid';
 import { getDb } from './db.js';
 import type { GameSession, GameMode, SessionStatus, NPCRelationship } from '../../types/game.js';
 
+/**
+ * @description Crée une nouvelle session de jeu en base de données.
+ * Initialise le beat à 1, la scène à 1, le compteur de tours à 0 et les flags monde vides.
+ * @param {string} characterId - Identifiant du personnage associé
+ * @param {string} bookId - Identifiant du livre de jeu
+ * @param {GameMode} gameMode - Mode de jeu ('normal' ou 'rapide', défaut: 'normal')
+ * @returns {GameSession} La session créée avec tous ses champs initialisés
+ */
 export function createSession(characterId: string, bookId: string, gameMode: GameMode = 'normal'): GameSession {
   const db = getDb();
   const id = uuid();
@@ -28,6 +45,11 @@ export function createSession(characterId: string, bookId: string, gameMode: Gam
   };
 }
 
+/**
+ * @description Récupère une session de jeu complète depuis la base, incluant les relations PNJ.
+ * @param {string} id - Identifiant de la session
+ * @returns {GameSession | null} La session complète ou null si introuvable
+ */
 export function getSession(id: string): GameSession | null {
   const db = getDb();
   const row = db.prepare('SELECT * FROM sessions WHERE id = ?').get(id) as any;
@@ -52,6 +74,13 @@ export function getSession(id: string): GameSession | null {
   };
 }
 
+/**
+ * @description Met à jour partiellement une session de jeu.
+ * Construit dynamiquement la requête SQL à partir des champs fournis.
+ * Le champ updated_at est toujours mis à jour automatiquement.
+ * @param {string} id - Identifiant de la session
+ * @param {object} updates - Champs à mettre à jour (tous optionnels)
+ */
 export function updateSession(id: string, updates: {
   currentBeat?: number;
   currentScene?: number;
@@ -75,6 +104,14 @@ export function updateSession(id: string, updates: {
   db.prepare(`UPDATE sessions SET ${sets.join(', ')} WHERE id = ?`).run(...values);
 }
 
+/**
+ * @description Définit ou met à jour un flag monde dans une session.
+ * Les flags monde sont des drapeaux narratifs (ex: "village_détruit", "allié_trahi")
+ * qui influencent le comportement du LLM et les transitions de beat.
+ * @param {string} sessionId - Identifiant de la session
+ * @param {string} key - Clé du flag
+ * @param {boolean | string | number} value - Valeur du flag
+ */
 export function setWorldFlag(sessionId: string, key: string, value: boolean | string | number): void {
   const session = getSession(sessionId);
   if (!session) return;
@@ -82,6 +119,11 @@ export function setWorldFlag(sessionId: string, key: string, value: boolean | st
   updateSession(sessionId, { worldFlags: flags });
 }
 
+/**
+ * @description Récupère tous les flags monde d'une session.
+ * @param {string} sessionId - Identifiant de la session
+ * @returns {Record<string, boolean | string | number>} Dictionnaire des flags monde
+ */
 export function getWorldFlags(sessionId: string): Record<string, boolean | string | number> {
   const db = getDb();
   const row = db.prepare('SELECT world_flags_json FROM sessions WHERE id = ?').get(sessionId) as any;
@@ -89,8 +131,14 @@ export function getWorldFlags(sessionId: string): Record<string, boolean | strin
   return JSON.parse(row.world_flags_json);
 }
 
-// ── NPC Relationships ──
+// ── Relations PNJ ──
 
+/**
+ * @description Récupère toutes les relations PNJ d'une session.
+ * Utilisé en interne par getSession pour hydrater la session complète.
+ * @param {string} sessionId - Identifiant de la session
+ * @returns {NPCRelationship[]} Liste des relations PNJ
+ */
 function getRelationships(sessionId: string): NPCRelationship[] {
   const db = getDb();
   const rows = db.prepare('SELECT * FROM npc_relationships WHERE session_id = ?').all(sessionId) as any[];
@@ -103,6 +151,12 @@ function getRelationships(sessionId: string): NPCRelationship[] {
   }));
 }
 
+/**
+ * @description Insère ou met à jour une relation PNJ (upsert via ON CONFLICT).
+ * Si la relation existe déjà, seuls l'affinité, le dernier beat d'interaction et les notes sont mis à jour.
+ * @param {string} sessionId - Identifiant de la session
+ * @param {NPCRelationship} rel - Données de la relation à insérer ou mettre à jour
+ */
 export function upsertRelationship(sessionId: string, rel: NPCRelationship): void {
   const db = getDb();
   db.prepare(`
@@ -115,6 +169,12 @@ export function upsertRelationship(sessionId: string, rel: NPCRelationship): voi
   `).run(uuid(), sessionId, rel.npcId, rel.npcName, rel.affinity, rel.lastInteractionBeat, JSON.stringify(rel.notes));
 }
 
+/**
+ * @description Récupère une relation PNJ spécifique.
+ * @param {string} sessionId - Identifiant de la session
+ * @param {string} npcId - Identifiant du PNJ
+ * @returns {NPCRelationship | null} La relation ou null si inexistante
+ */
 export function getRelationship(sessionId: string, npcId: string): NPCRelationship | null {
   const db = getDb();
   const row = db.prepare('SELECT * FROM npc_relationships WHERE session_id = ? AND npc_id = ?').get(sessionId, npcId) as any;
@@ -128,8 +188,11 @@ export function getRelationship(sessionId: string, npcId: string): NPCRelationsh
   };
 }
 
-// ── Completed Games ──
+// ── Parties terminées ──
 
+/**
+ * @description Résumé d'une partie terminée, utilisé pour l'affichage dans l'historique.
+ */
 export interface CompletedGameSummary {
   sessionId: string;
   characterName: string;
@@ -141,6 +204,11 @@ export interface CompletedGameSummary {
   completedAt: string;
 }
 
+/**
+ * @description Récupère la liste de toutes les parties terminées avec leurs métadonnées.
+ * Joint la table sessions avec characters pour enrichir le résumé.
+ * @returns {CompletedGameSummary[]} Parties terminées triées par date de fin décroissante
+ */
 export function getCompletedSessions(): CompletedGameSummary[] {
   const db = getDb();
   const rows = db.prepare(`
@@ -164,12 +232,18 @@ export function getCompletedSessions(): CompletedGameSummary[] {
   }));
 }
 
+/**
+ * @description Supprime une session et toutes ses données associées (cascade manuelle).
+ * L'ordre de suppression respecte les dépendances entre tables car le schéma
+ * ne définit pas de ON DELETE CASCADE.
+ * @param {string} id - Identifiant de la session à supprimer
+ */
 export function deleteSession(id: string): void {
   const db = getDb();
   const session = db.prepare('SELECT character_id FROM sessions WHERE id = ?').get(id) as any;
   if (!session) return;
 
-  // Cascade delete — no ON DELETE CASCADE in schema, so manual order
+  // Suppression en cascade manuelle — respecte l'ordre des dépendances
   db.prepare('DELETE FROM conversation_cache WHERE session_id = ?').run(id);
   db.prepare('DELETE FROM beat_pacing WHERE session_id = ?').run(id);
   db.prepare('DELETE FROM action_summaries WHERE session_id = ?').run(id);

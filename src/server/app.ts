@@ -1,3 +1,10 @@
+/**
+ * @module server/app
+ * @description Configuration et construction de l'application Fastify.
+ * Enregistre tous les plugins (CORS, multipart, WebSocket, fichiers statiques)
+ * et monte les routes API sous leurs préfixes respectifs.
+ */
+
 import Fastify from 'fastify';
 import fastifyStatic from '@fastify/static';
 import fastifyCors from '@fastify/cors';
@@ -17,32 +24,37 @@ import { wsRoutes } from './routes/ws.routes.js';
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 
+/**
+ * @description Construit et configure l'instance Fastify avec tous les plugins et routes.
+ * @returns {import('fastify').FastifyInstance} L'application Fastify prête à écouter.
+ */
 export function buildApp() {
   const app = Fastify({ logger: true });
 
-  // CORS
+  // Autorise toutes les origines pour le développement local et les déploiements flexibles
   app.register(fastifyCors, { origin: true });
 
-  // Multipart (for file uploads)
-  app.register(fastifyMultipart, { limits: { fileSize: 50 * 1024 * 1024 } }); // 50MB max
+  // Support multipart pour l'upload de livres (ZIP jusqu'à 50 Mo)
+  app.register(fastifyMultipart, { limits: { fileSize: 50 * 1024 * 1024 } });
 
-  // WebSocket (for multiplayer)
+  // WebSocket pour le mode multijoueur en temps réel
   app.register(fastifyWebSocket);
 
-  // Serve client static files
+  // Sert les fichiers du client (SPA) depuis le dossier compilé
   app.register(fastifyStatic, {
     root: join(__dirname, '..', 'client'),
     prefix: '/',
   });
 
-  // Serve book assets (cover images, etc.)
+  // Sert les assets des livres (images de couverture, CSS de thème, etc.)
   app.register(fastifyStatic, {
     root: join(__dirname, '..', 'books'),
     prefix: '/books/',
-    decorateReply: false, // avoid conflict with first fastifyStatic
+    decorateReply: false, // évite le conflit avec la première instance de fastifyStatic
   });
 
-  // API routes
+  // ── Montage des routes API ──
+  // Chaque groupe de routes est isolé dans son propre plugin Fastify
   app.register(booksRoutes, { prefix: '/api/books' });
   app.register(generatorRoutes, { prefix: '/api/books' });
   app.register(bookTransferRoutes, { prefix: '/api/books' });
@@ -53,7 +65,7 @@ export function buildApp() {
   app.register(roomRoutes, { prefix: '/api/rooms' });
   app.register(wsRoutes, { prefix: '/api/ws' });
 
-  // Health check
+  /** GET /api/health — Vérification de santé du serveur */
   app.get('/api/health', async () => ({ status: 'ok' }));
 
   return app;

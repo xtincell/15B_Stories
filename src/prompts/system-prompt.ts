@@ -1,12 +1,39 @@
+/**
+ * @module system-prompt
+ *
+ * Point d'entrée pour la construction des requêtes LLM complètes.
+ *
+ * Ce module expose les fonctions de haut niveau qui combinent
+ * l'assemblage du contexte, la construction du prompt système et
+ * la mise en forme du message utilisateur pour produire des objets
+ * {@link LLMRequest} prêts à être envoyés à l'adaptateur LLM.
+ *
+ * Deux cas d'usage principaux :
+ *  - Tour de jeu standard (le joueur a fait un choix)
+ *  - Scène d'ouverture (premier tour, pas de choix précédent)
+ */
+
 import type { Character, GameSession, BeatPacing } from '../types/game.js';
 import type { LLMRequest, ConversationMessage, PlayerTurnInput } from '../types/llm.js';
 import { assembleContext, buildSystemPrompt, buildConversationHistory } from './context-assembler.js';
 import { loadGameBook } from '../memory/documentary/loader.js';
 
+/** Limite de tokens pour la réponse du LLM — assez pour une narration riche avec choix */
 const MAX_RESPONSE_TOKENS = 4096;
 
 /**
- * Build the complete LLM request for a game turn.
+ * Construit la requête LLM complète pour un tour de jeu standard.
+ *
+ * Assemble le contexte, le prompt système, l'historique de conversation,
+ * puis formate le message utilisateur selon le type d'action choisie
+ * (choix prédéfini, texte libre, ou choix avec texte complémentaire).
+ *
+ * @param session - Session de jeu active
+ * @param character - Personnage du joueur
+ * @param pacing - État du rythme narratif pour ce beat
+ * @param playerInput - Action choisie par le joueur (ID de choix et/ou texte libre)
+ * @param diceResultText - Résultat du jet de dé formaté (optionnel, si un jet actif a eu lieu)
+ * @returns Requête LLM prête à être envoyée à l'adaptateur
  */
 export function buildTurnRequest(
   session: GameSession,
@@ -19,11 +46,11 @@ export function buildTurnRequest(
   const systemPrompt = buildSystemPrompt(context, character, session.gameMode);
   const conversationHistory = buildConversationHistory(session.id);
 
-  // Build the user message for this turn
+  // Construction du message utilisateur selon le type d'action
   let userMessage: string;
 
   if (playerInput.choiceId === 'free-text' && playerInput.freeText) {
-    // Free text action: the player wrote their own action
+    // Action libre : le joueur a écrit sa propre action au lieu de choisir parmi les options
     userMessage = `Le joueur décrit sa propre action : "${playerInput.freeText}"
 
 IMPORTANT : Le joueur a choisi une action libre au lieu d'un des choix proposés. Tu dois :
@@ -58,7 +85,16 @@ Si l'action est absurde ou impossible dans le contexte, le MJ peut la réinterpr
 }
 
 /**
- * Build the LLM request for the very first turn (opening scene).
+ * Construit la requête LLM pour le tout premier tour (scène d'ouverture).
+ *
+ * Pas d'historique de conversation ni de choix précédent.
+ * Le message invite le LLM à présenter l'« Opening Image » du récit,
+ * en adaptant les instructions selon le mode de jeu (normal ou rapide).
+ *
+ * @param session - Session de jeu nouvellement créée
+ * @param character - Personnage fraîchement créé par le joueur
+ * @param pacing - État initial du rythme narratif
+ * @returns Requête LLM pour la scène d'ouverture
  */
 export function buildOpeningRequest(
   session: GameSession,

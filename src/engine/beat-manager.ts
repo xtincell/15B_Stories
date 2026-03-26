@@ -1,3 +1,14 @@
+/**
+ * @module beat-manager
+ * @description Gestionnaire du rythme narratif (pacing) et des transitions entre beats.
+ *
+ * Ce module orchestre la progression du joueur à travers les 15 beats de la structure
+ * narrative de Blake Snyder. Il gère la courbe de tension, le ton émotionnel,
+ * les points de contrôle narratifs et les conditions de transition d'un beat à l'autre.
+ *
+ * Le pacing est persisté en base de données pour permettre la reprise de session.
+ */
+
 import { v4 as uuid } from 'uuid';
 import { getDb } from '../memory/persistent/db.js';
 import { getBeatDefinition, createInitialPacing } from '../memory/documentary/beat-content.js';
@@ -5,7 +16,17 @@ import type { BeatPacing, BeatDefinition, NarrativeCheckpoint, EmotionalTone } f
 import type { BeatTransitionCheck } from '../types/engine.js';
 
 /**
- * Get or create pacing state for a beat.
+ * Récupère ou crée l'état de rythme (pacing) pour un beat donné.
+ *
+ * Si un état existe déjà en base pour cette session et ce beat, il est retourné.
+ * Sinon, un pacing initial est créé à partir de la définition du beat, persisté,
+ * puis retourné.
+ *
+ * @param sessionId - Identifiant unique de la session de jeu
+ * @param beatNumber - Numéro du beat (1 à 15)
+ * @param bookId - Identifiant du livre-jeu
+ * @returns L'état de rythme du beat, existant ou nouvellement créé
+ * @throws Si le beat demandé n'existe pas dans la définition du livre
  */
 export function getPacing(sessionId: string, beatNumber: number, bookId: string): BeatPacing {
   const db = getDb();
@@ -34,8 +55,19 @@ export function getPacing(sessionId: string, beatNumber: number, bookId: string)
 }
 
 /**
- * Update pacing after a turn.
- * Now also accepts the LLM's moodTag to evolve emotional tone dynamically.
+ * Met à jour le rythme narratif après un tour de jeu.
+ *
+ * Incrémente le compteur de tours, recalcule l'escalade de scène,
+ * marque les checkpoints atteints, ajuste la courbe de tension
+ * et fait évoluer le ton émotionnel si le LLM suggère un changement valide.
+ *
+ * @param sessionId - Identifiant unique de la session de jeu
+ * @param beatNumber - Numéro du beat courant (1 à 15)
+ * @param bookId - Identifiant du livre-jeu
+ * @param checkpointsMet - Liste optionnelle des IDs de checkpoints narratifs atteints ce tour
+ * @param llmMoodTag - Tag d'humeur optionnel suggéré par le LLM pour faire évoluer le ton
+ * @returns L'état de rythme mis à jour
+ * @throws Si le beat demandé n'existe pas dans la définition du livre
  */
 export function advancePacing(
   sessionId: string,
@@ -62,19 +94,20 @@ export function advancePacing(
     }
   }
 
-  // Auto-adjust tension curve based on escalation
+  // La courbe de tension s'adapte automatiquement à l'escalade :
+  // au-delà de 80%, on bascule en climax pour forcer la résolution
   if (pacing.sceneEscalation >= 0.8) {
     pacing.tensionCurve = 'climax';
   } else if (pacing.sceneEscalation >= 0.5 && pacing.tensionCurve !== 'climax') {
     pacing.tensionCurve = 'rising';
   }
 
-  // Evolve emotional tone if the LLM's moodTag is a valid EmotionalTone
-  // and the beat's suggested mood tags include it (or we're past mid-escalation)
+  // Évolution du ton émotionnel : on n'accepte un changement que si le tag
+  // proposé par le LLM est une émotion reconnue ET qu'il correspond aux
+  // humeurs suggérées du beat ou que la scène est suffisamment avancée (≥50%)
   const validTones: Set<string> = new Set(['wonder', 'dread', 'hope', 'grief', 'triumph', 'tension', 'serenity', 'rage']);
   if (llmMoodTag && validTones.has(llmMoodTag)) {
     const suggestedMoods = new Set(beat.suggestedMoodTags as string[]);
-    // Accept mood change if: it's in the beat's suggested moods, or we're past half escalation
     if (suggestedMoods.has(llmMoodTag) || pacing.sceneEscalation >= 0.5) {
       pacing.emotionalTone = llmMoodTag as EmotionalTone;
     }
@@ -85,9 +118,23 @@ export function advancePacing(
 }
 
 /**
- * Check if a beat transition is valid.
- * In quick mode ('rapide'), the isQuickMode flag bypasses minScenes requirement
- * to ensure 1 beat per turn progression.
+ * Vérifie si la transition vers le beat suivant est autorisée.
+ *
+ * La transition nécessite normalement trois conditions :
+ * 1. Le nombre minimum de scènes a été joué
+ * 2. Tous les checkpoints narratifs sont atteints
+ * 3. Le LLM estime que l'objectif narratif est rempli
+ *
+ * En mode rapide ('rapide'), la condition de scènes minimum est ignorée
+ * pour permettre une progression d'un beat par tour.
+ * Une progression forcée intervient si le joueur reste bloqué trop longtemps.
+ *
+ * @param sessionId - Identifiant unique de la session de jeu
+ * @param beatNumber - Numéro du beat courant (1 à 15)
+ * @param bookId - Identifiant du livre-jeu
+ * @param llmReadyToTransition - Indique si le LLM considère la transition narrativement justifiée
+ * @param isQuickMode - Si vrai, ignore la contrainte de scènes minimum
+ * @returns Objet décrivant si la transition est possible et pourquoi
  */
 export function checkBeatTransition(
   sessionId: string,
@@ -149,15 +196,31 @@ export function checkBeatTransition(
 }
 
 /**
- * Transition to the next beat.
+ * Effectue la transition vers le beat suivant.
+ *
+ * Initialise le pacing du prochain beat (plafonné à 15, le dernier beat).
+ *
+ * @param sessionId - Identifiant unique de la session de jeu
+ * @param currentBeat - Numéro du beat courant
+ * @param bookId - Identifiant du livre-jeu
+ * @returns L'état de rythme du nouveau beat
  */
 export function transitionToNextBeat(sessionId: string, currentBeat: number, bookId: string): BeatPacing {
   const nextBeat = Math.min(currentBeat + 1, 15);
   return getPacing(sessionId, nextBeat, bookId);
 }
 
-// ── Persistence ──
+// ── Persistance ──
 
+/**
+ * Persiste l'état de rythme d'un beat en base de données.
+ *
+ * Utilise un UPSERT pour créer ou mettre à jour l'enregistrement.
+ *
+ * @param sessionId - Identifiant unique de la session de jeu
+ * @param beatNumber - Numéro du beat
+ * @param pacing - État de rythme à sauvegarder
+ */
 function savePacing(sessionId: string, beatNumber: number, pacing: BeatPacing): void {
   const db = getDb();
   db.prepare(`

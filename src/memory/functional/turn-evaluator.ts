@@ -1,3 +1,13 @@
+/**
+ * @module turn-evaluator
+ * @description Pipeline de post-traitement d'un tour de jeu.
+ * Après que le LLM a généré sa sortie, ce module valide la réponse,
+ * applique les changements d'état, gère le rythme narratif, journalise
+ * les actions et déclenche les transitions de beat. Toutes les écritures
+ * en base sont regroupées dans une transaction unique pour garantir
+ * l'atomicité et la performance.
+ */
+
 import type { TurnOutput, PlayerTurnInput, Choice } from '../../types/llm.js';
 import type { Character, GameSession } from '../../types/game.js';
 import { applyStateChanges } from '../../engine/consequences.js';
@@ -11,28 +21,47 @@ import { getDb } from '../../memory/persistent/db.js';
 import type { LLMAdapter } from '../../types/llm.js';
 import type { DiceRollResult } from '../../types/engine.js';
 
+/**
+ * @description Résultat complet du traitement d'un tour de jeu.
+ * Contient la sortie validée du LLM, les résultats de dés, le journal
+ * des changements d'état, et les données de session/personnage à jour.
+ */
 export interface TurnResult {
+  /** Sortie du LLM après validation et corrections */
   output: TurnOutput;
+  /** Résultat du jet de dés, si applicable */
   diceResult?: DiceRollResult;
+  /** Journal des changements d'état appliqués et rejetés */
   stateLog: { applied: string[]; rejected: string[] };
+  /** Indique si le beat a changé à ce tour */
   beatTransitioned: boolean;
+  /** Numéro du nouveau beat après transition */
   newBeat?: number;
-  /** True when beat 15 is completed — the adventure is over */
+  /** Vrai quand le beat 15 est terminé — fin de l'aventure */
   gameCompleted: boolean;
-  /** Updated character after state changes applied */
+  /** Personnage mis à jour après application des changements */
   updatedCharacter: Character;
-  /** Updated session after turn processing */
+  /** Session mise à jour après traitement du tour */
   updatedSession: GameSession;
 }
 
 /**
- * Process a turn: validate LLM output, apply state changes, check beat transition.
- * This is the post-LLM processing pipeline.
+ * @description Traite un tour de jeu : valide la sortie LLM, applique les changements d'état,
+ * vérifie la transition de beat. C'est le pipeline de post-traitement principal.
  *
- * Key optimizations:
- * - All DB writes are wrapped in a single transaction (atomic + faster).
- * - Summarization is fire-and-forget (does NOT block the response).
- * - Updated state is returned directly, eliminating redundant DB reads in the route.
+ * Optimisations clés :
+ * - Toutes les écritures DB sont dans une transaction unique (atomicité + performance).
+ * - La résumérisation est asynchrone et non bloquante (fire-and-forget).
+ * - L'état mis à jour est retourné directement, éliminant les relectures DB dans la route.
+ *
+ * @param {TurnOutput} output - Sortie brute du LLM à valider
+ * @param {PlayerTurnInput} playerInput - Entrée du joueur pour ce tour
+ * @param {Choice | undefined} previousChoice - Choix présenté au joueur (pour le contexte)
+ * @param {Character} character - État courant du personnage
+ * @param {GameSession} session - Session de jeu courante
+ * @param {DiceRollResult | undefined} diceResult - Résultat du jet de dés, si applicable
+ * @param {LLMAdapter} summarizer - Adaptateur LLM dédié à la résumérisation
+ * @returns {Promise<TurnResult>} Résultat complet du traitement du tour
  */
 export async function evaluateTurn(
   output: TurnOutput,
@@ -176,7 +205,12 @@ export async function evaluateTurn(
 }
 
 /**
- * Validate and fix LLM output to ensure consistency.
+ * @description Valide et corrige la sortie du LLM pour garantir la cohérence.
+ * Corrige le numéro de beat si le LLM s'est trompé, et garantit entre 2 et 4 choix
+ * en ajoutant un choix de repli ou en tronquant les excédents.
+ * @param {TurnOutput} output - Sortie brute du LLM
+ * @param {GameSession} session - Session courante pour vérifier le beat
+ * @returns {TurnOutput} Sortie validée et corrigée
  */
 function validateOutput(output: TurnOutput, session: GameSession): TurnOutput {
   if (output.beatProgress.currentBeat !== session.currentBeat) {

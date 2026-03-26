@@ -1,3 +1,13 @@
+/**
+ * @module server/routes/turn
+ * @description Routes de traitement des tours de jeu (actions du joueur).
+ * Deux variantes sont proposées : streaming SSE (pour l'affichage progressif
+ * de la narration) et non-streaming (pour les appels programmatiques).
+ * Chaque tour comprend : résolution de dé optionnelle, appel LLM, évaluation
+ * des conséquences (changements d'état, transition de beat, fin de partie).
+ * Préfixe attendu : /api/game
+ */
+
 import type { FastifyPluginAsync } from 'fastify';
 import { getSession } from '../../memory/persistent/world-state.js';
 import { getCharacter } from '../../memory/persistent/character-state.js';
@@ -9,10 +19,25 @@ import { createAdaptersFromEnv } from '../../llm/factory.js';
 import type { PlayerTurnInput, Choice } from '../../types/llm.js';
 import type { StatName } from '../../types/game.js';
 
+/**
+ * @description Plugin Fastify regroupant les routes de traitement des tours.
+ */
 export const turnRoutes: FastifyPluginAsync = async (app) => {
 
-  // ── SSE Streaming endpoint: POST /api/game/:id/turn/stream ──
-  // Streams narration chunks via Server-Sent Events, then sends final JSON.
+  /**
+   * POST /api/game/:id/turn/stream
+   * @description Traite un tour de jeu avec diffusion SSE de la narration.
+   * Le client reçoit d'abord un événement "dice" (si applicable), puis des "chunk"
+   * contenant les fragments de narration au fil de la génération, et enfin un "done"
+   * avec l'état complet mis à jour, ou "error" en cas d'échec.
+   * @param {string} id - Identifiant de la session de jeu.
+   * @param {string} body.choiceId - ID du choix sélectionné par le joueur.
+   * @param {string} [body.freeText] - Texte libre si le joueur écrit sa propre action.
+   * @param {Choice[]} [body.previousChoices] - Choix proposés au tour précédent (pour retrouver le choix sélectionné).
+   * @returns {SSE} Événements : dice(DiceResult), chunk(string), done(TurnResult), error({ error }).
+   * @returns {400} Si le choix est invalide et aucun texte libre n'est fourni.
+   * @returns {404} Si la session ou le personnage n'existe pas.
+   */
   app.post<{
     Params: { id: string };
     Body: {
@@ -38,7 +63,7 @@ export const turnRoutes: FastifyPluginAsync = async (app) => {
       return reply.status(400).send({ error: 'Invalid choiceId — no matching choice found and no free text provided' });
     }
 
-    // Handle active dice roll
+    // Résolution du jet de dé actif si le choix l'exige (ex: "Forcer la porte" → Force DC 12)
     let diceResult = undefined;
     let diceResultText = undefined;
 
@@ -56,9 +81,10 @@ export const turnRoutes: FastifyPluginAsync = async (app) => {
 
     const pacing = getPacing(session.id, session.currentBeat, session.bookId);
     const llmRequest = buildTurnRequest(session, character, pacing, playerInput, diceResultText);
+    // Deux adaptateurs LLM : main pour la narration, summarizer pour les résumés de beats
     const { main, summarizer } = createAdaptersFromEnv();
 
-    // Set SSE headers
+    // En-têtes SSE pour le streaming de la narration
     reply.raw.writeHead(200, {
       'Content-Type': 'text/event-stream',
       'Cache-Control': 'no-cache',
@@ -77,7 +103,7 @@ export const turnRoutes: FastifyPluginAsync = async (app) => {
         reply.raw.write(`event: chunk\ndata: ${JSON.stringify(chunk)}\n\n`);
       });
 
-      // Process the turn (DB transaction, state changes, beat transition)
+      // Évalue les conséquences du tour : mise à jour BDD, changements d'état, transition de beat
       const result = await evaluateTurn(
         output, playerInput, chosenChoice, character, session, diceResult, summarizer,
       );
@@ -108,7 +134,19 @@ export const turnRoutes: FastifyPluginAsync = async (app) => {
     }
   });
 
-  // ── Regular (non-streaming) endpoint: POST /api/game/:id/turn ──
+  /**
+   * POST /api/game/:id/turn
+   * @description Traite un tour de jeu en mode classique (réponse JSON complète, sans streaming).
+   * Même logique que l'endpoint SSE mais renvoie directement le résultat complet.
+   * @param {string} id - Identifiant de la session de jeu.
+   * @param {string} body.choiceId - ID du choix sélectionné par le joueur.
+   * @param {string} [body.freeText] - Texte libre si le joueur écrit sa propre action.
+   * @param {Choice[]} [body.previousChoices] - Choix proposés au tour précédent.
+   * @returns {{ output, diceResult, stateLog, beatTransitioned, newBeat, gameCompleted, session, character, pacing }}
+   * @returns {400} Si le choix est invalide et aucun texte libre n'est fourni.
+   * @returns {404} Si la session ou le personnage n'existe pas.
+   * @returns {500} Si le traitement du tour échoue.
+   */
   app.post<{
     Params: { id: string };
     Body: {
@@ -160,7 +198,7 @@ export const turnRoutes: FastifyPluginAsync = async (app) => {
         output, playerInput, chosenChoice, character, session, diceResult, summarizer,
       );
 
-      // Return updated state directly from evaluateTurn — no redundant DB reads
+      // Renvoie l'état mis à jour directement depuis evaluateTurn — évite les relectures BDD inutiles
       return {
         output: result.output,
         diceResult: result.diceResult,

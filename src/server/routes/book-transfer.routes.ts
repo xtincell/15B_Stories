@@ -1,3 +1,11 @@
+/**
+ * @module server/routes/book-transfer
+ * @description Routes d'import/export de livres de jeu au format ZIP.
+ * Permet le téléchargement d'un livre existant, l'upload et l'installation
+ * d'un nouveau livre, ainsi que la validation de la structure d'un ZIP
+ * sans l'installer.
+ */
+
 import type { FastifyPluginAsync } from 'fastify';
 import { createWriteStream, existsSync, mkdirSync, cpSync, rmSync, readdirSync, readFileSync } from 'fs';
 import { join, dirname } from 'path';
@@ -13,6 +21,9 @@ const BOOKS_DIR = join(__dirname, '..', '..', 'books');
 
 // ── Validation ──
 
+/**
+ * @description Résultat de la validation structurelle d'un livre de jeu.
+ */
 interface ValidationResult {
   valid: boolean;
   errors: string[];
@@ -20,6 +31,13 @@ interface ValidationResult {
   meta?: Record<string, unknown>;
 }
 
+/**
+ * @description Valide la structure d'un livre de jeu extrait dans un répertoire temporaire.
+ * Vérifie la présence et la conformité de : meta.json, archetypes/, beats/ (15 fichiers),
+ * npcs/, lore/ et theme.css. Les erreurs bloquent l'installation, les warnings non.
+ * @param {string} extractedDir - Chemin absolu vers le répertoire extrait du ZIP.
+ * @returns {ValidationResult} Résultat contenant les erreurs, warnings et métadonnées parsées.
+ */
 function validateBookStructure(extractedDir: string): ValidationResult {
   const errors: string[] = [];
   const warnings: string[] = [];
@@ -121,8 +139,11 @@ function validateBookStructure(extractedDir: string): ValidationResult {
 }
 
 /**
- * Extract a ZIP into a temp directory, handling nested root folders.
- * If the ZIP contains a single root directory, we use its contents.
+ * @description Extrait un ZIP dans un répertoire temporaire unique.
+ * Gère le cas courant d'un ZIP contenant un unique dossier racine
+ * (ex: livre.zip → livre/ → meta.json) en remontant d'un niveau.
+ * @param {Buffer} zipBuffer - Contenu brut du fichier ZIP en mémoire.
+ * @returns {string} Chemin absolu vers le répertoire contenant les fichiers du livre.
  */
 function extractZipToTemp(zipBuffer: Buffer): string {
   const zip = new AdmZip(zipBuffer);
@@ -148,8 +169,18 @@ function extractZipToTemp(zipBuffer: Buffer): string {
 
 // ── Routes ──
 
+/**
+ * @description Plugin Fastify regroupant les routes d'import/export de livres.
+ * Préfixe attendu : /api/books
+ */
 export const bookTransferRoutes: FastifyPluginAsync = async (app) => {
-  // GET /api/books/:id/download — Download a book as ZIP
+  /**
+   * GET /api/books/:id/download
+   * @description Télécharge un livre de jeu complet sous forme d'archive ZIP.
+   * @param {string} id - Identifiant unique du livre (ex: "kinara").
+   * @returns {Stream} Flux ZIP en pièce jointe (Content-Disposition: attachment).
+   * @returns {404} Si le livre n'existe pas.
+   */
   app.get<{ Params: { id: string } }>('/:id/download', async (request, reply) => {
     const bookId = request.params.id;
 
@@ -165,7 +196,7 @@ export const bookTransferRoutes: FastifyPluginAsync = async (app) => {
       return reply.status(404).send({ error: `Dossier du livre "${bookId}" introuvable` });
     }
 
-    // Hijack the response so Fastify doesn't try to send its own
+    // Hijack empêche Fastify de sérialiser la réponse — nécessaire pour le streaming binaire
     reply.hijack();
 
     // Stream ZIP response
@@ -185,7 +216,16 @@ export const bookTransferRoutes: FastifyPluginAsync = async (app) => {
     await archive.finalize();
   });
 
-  // POST /api/books/upload — Upload and install a book from ZIP
+  /**
+   * POST /api/books/upload
+   * @description Upload et installation d'un livre depuis un fichier ZIP (multipart).
+   * Le ZIP est validé structurellement avant installation. En cas de conflit d'ID, renvoie 409.
+   * @param {File} file - Fichier ZIP envoyé en multipart/form-data.
+   * @returns {{ success: boolean, bookId: string, warnings: string[] }} 200 si installé.
+   * @returns {400} Si aucun fichier ou ZIP invalide.
+   * @returns {409} Si un livre avec le même ID existe déjà.
+   * @returns {422} Si la structure du livre est invalide (détails dans errors[]).
+   */
   app.post('/upload', async (request, reply) => {
     const data = await request.file();
     if (!data) {
@@ -235,7 +275,7 @@ export const bookTransferRoutes: FastifyPluginAsync = async (app) => {
       return reply.status(409).send({ error: `Un livre avec l'ID "${bookId}" existe déjà` });
     }
 
-    // Install: copy from temp to books dir
+    // Copie le livre validé dans le répertoire définitif et vide le cache du loader
     try {
       cpSync(extractedDir, targetDir, { recursive: true });
       clearCache();
@@ -253,7 +293,14 @@ export const bookTransferRoutes: FastifyPluginAsync = async (app) => {
     };
   });
 
-  // POST /api/books/validate — Validate a book ZIP without installing
+  /**
+   * POST /api/books/validate
+   * @description Valide la structure d'un livre ZIP sans l'installer.
+   * Utile pour le client afin de pré-vérifier un fichier avant l'upload définitif.
+   * @param {File} file - Fichier ZIP envoyé en multipart/form-data.
+   * @returns {ValidationResult} Résultat de validation (valid, errors, warnings, meta).
+   * @returns {400} Si aucun fichier ou ZIP invalide.
+   */
   app.post('/validate', async (request, reply) => {
     const data = await request.file();
     if (!data) {

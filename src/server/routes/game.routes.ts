@@ -1,3 +1,12 @@
+/**
+ * @module server/routes/game
+ * @description Routes principales de gestion des sessions de jeu.
+ * Couvre le cycle de vie complet : création de partie, consultation de l'état,
+ * suivi des beats narratifs, export de l'historique, panneau de contexte évolutif,
+ * et suppression de parties terminées.
+ * Préfixe attendu : /api/game
+ */
+
 import type { FastifyPluginAsync } from 'fastify';
 import { createSession, getSession, getWorldFlags, getCompletedSessions, deleteSession } from '../../memory/persistent/world-state.js';
 import { getCharacter } from '../../memory/persistent/character-state.js';
@@ -11,14 +20,29 @@ import { TurnOutputSchema } from '../../llm/output-schema.js';
 import { cacheConversationMessage, getRecentActions, getBeatSummaries } from '../../memory/persistent/action-journal.js';
 import { getRelationshipsForBeat } from '../../memory/persistent/npc-state.js';
 
+/**
+ * @description Plugin Fastify regroupant les routes de gestion des parties.
+ */
 export const gameRoutes: FastifyPluginAsync = async (app) => {
-  // GET /api/game/completed - List all completed game sessions
-  // MUST be registered before /:id routes so Fastify doesn't match "completed" as an :id param
+  /**
+   * GET /api/game/completed
+   * @description Liste toutes les sessions de jeu terminées (statut "completed").
+   * Enregistrée avant les routes /:id pour éviter que Fastify ne capture "completed" comme paramètre.
+   * @returns {CompletedSession[]} Tableau de sessions terminées avec résumé.
+   */
   app.get('/completed', async () => {
     return getCompletedSessions();
   });
 
-  // DELETE /api/game/:id - Delete a completed game and all related data
+  /**
+   * DELETE /api/game/:id
+   * @description Supprime une partie terminée et toutes ses données associées.
+   * Refuse la suppression des parties en cours pour éviter la perte de données.
+   * @param {string} id - Identifiant de la session.
+   * @returns {{ success: boolean }}
+   * @returns {400} Si la partie n'est pas terminée.
+   * @returns {404} Si la session n'existe pas.
+   */
   app.delete<{ Params: { id: string } }>('/:id', async (request, reply) => {
     const session = getSession(request.params.id);
     if (!session) {
@@ -31,7 +55,17 @@ export const gameRoutes: FastifyPluginAsync = async (app) => {
     return { success: true };
   });
 
-  // POST /api/game/new - Create a new game session
+  /**
+   * POST /api/game/new
+   * @description Crée une nouvelle session de jeu. Initialise les relations PNJ,
+   * le pacing du beat 1, puis génère la narration d'ouverture via le LLM.
+   * @param {string} body.characterId - ID du personnage créé au préalable.
+   * @param {string} [body.bookId=kinara] - Livre de jeu à utiliser.
+   * @param {string} [body.gameMode=normal] - Mode de jeu ("normal" ou "rapide").
+   * @returns {{ sessionId, character, output, beat }} État initial de la partie avec la narration d'ouverture.
+   * @returns {404} Si le personnage ou le livre n'existe pas.
+   * @returns {500} Si la génération LLM échoue.
+   */
   app.post<{ Body: { characterId: string; bookId?: string; gameMode?: string } }>('/new', async (request, reply) => {
     const { characterId, bookId = 'kinara', gameMode = 'normal' } = request.body;
 
@@ -47,7 +81,7 @@ export const gameRoutes: FastifyPluginAsync = async (app) => {
       return reply.status(404).send({ error: `Game book "${bookId}" not found` });
     }
 
-    // Create session
+    // Restreint le mode aux valeurs autorisées pour éviter les injections
     const validMode = gameMode === 'rapide' ? 'rapide' as const : 'normal' as const;
     const session = createSession(characterId, bookId, validMode);
 
@@ -64,7 +98,7 @@ export const gameRoutes: FastifyPluginAsync = async (app) => {
     try {
       const output = await main.generateTurn(llmRequest);
 
-      // Cache the opening exchange
+      // Sauvegarde l'échange initial dans le journal pour le contexte conversationnel futur
       cacheConversationMessage(session.id, 0, 'user', 'Début de l\'aventure');
       cacheConversationMessage(session.id, 0, 'assistant', output.narration.slice(0, 500));
 
@@ -80,7 +114,14 @@ export const gameRoutes: FastifyPluginAsync = async (app) => {
     }
   });
 
-  // GET /api/game/:id - Get current game state
+  /**
+   * GET /api/game/:id
+   * @description Récupère l'état complet d'une partie en cours : session, personnage, beats et pacing.
+   * Utilisé par le client pour restaurer l'interface après un rechargement.
+   * @param {string} id - Identifiant de la session.
+   * @returns {{ session, character, beats, pacing }}
+   * @returns {404} Si la session n'existe pas.
+   */
   app.get<{ Params: { id: string } }>('/:id', async (request, reply) => {
     const session = getSession(request.params.id);
     if (!session) {
@@ -99,7 +140,13 @@ export const gameRoutes: FastifyPluginAsync = async (app) => {
     };
   });
 
-  // GET /api/game/:id/beats - Get all beat names for tracker
+  /**
+   * GET /api/game/:id/beats
+   * @description Renvoie la liste des 15 beats narratifs (Save the Cat) pour le tracker de progression.
+   * @param {string} id - Identifiant de la session.
+   * @returns {Beat[]} Tableau des beats avec numéro et nom.
+   * @returns {404} Si la session n'existe pas.
+   */
   app.get<{ Params: { id: string } }>('/:id/beats', async (request, reply) => {
     const session = getSession(request.params.id);
     if (!session) {
@@ -108,7 +155,14 @@ export const gameRoutes: FastifyPluginAsync = async (app) => {
     return getAllBeats(session.bookId);
   });
 
-  // GET /api/game/:id/export - Export full game history for PDF generation
+  /**
+   * GET /api/game/:id/export
+   * @description Exporte l'historique complet d'une partie pour la génération PDF côté client.
+   * Inclut le personnage, la session, toutes les actions, les résumés de beats et les flags du monde.
+   * @param {string} id - Identifiant de la session.
+   * @returns {{ character, session, actions, beatSummaries, beats, worldFlags }}
+   * @returns {404} Si la session n'existe pas.
+   */
   app.get<{ Params: { id: string } }>('/:id/export', async (request, reply) => {
     const session = getSession(request.params.id);
     if (!session) {
@@ -131,7 +185,15 @@ export const gameRoutes: FastifyPluginAsync = async (app) => {
     };
   });
 
-  // GET /api/game/:id/context - Evolving context panel data
+  /**
+   * GET /api/game/:id/context
+   * @description Fournit les données du panneau de contexte évolutif affiché dans la sidebar.
+   * Agrège : flags du monde, résumés de beats, relations PNJ, rappels de conséquences,
+   * actions récentes, stats du personnage et progression actuelle.
+   * @param {string} id - Identifiant de la session.
+   * @returns {{ worldFlags, beatSummaries, relationships, pacing, consequenceReminders, recentActions, stats, currentBeat, turnCount }}
+   * @returns {404} Si la session n'existe pas.
+   */
   app.get<{ Params: { id: string } }>('/:id/context', async (request, reply) => {
     const session = getSession(request.params.id);
     if (!session) {
@@ -147,7 +209,8 @@ export const gameRoutes: FastifyPluginAsync = async (app) => {
     // Get all NPC relationships from session
     const relationships = session.relationships ?? [];
 
-    // Build consequence reminders from flags
+    // Transforme les flags du monde en rappels lisibles pour le joueur
+    // Les flags booléens deviennent des phrases simples, les strings gardent leur valeur
     const consequenceReminders: string[] = [];
     for (const [key, value] of Object.entries(worldFlags)) {
       if (typeof value === 'boolean' && value) {

@@ -1,3 +1,13 @@
+/**
+ * @module consequences
+ * @description Moteur d'application des conséquences narratives sur l'état du jeu.
+ *
+ * Ce module reçoit les changements d'état produits par le LLM (modifications de stats,
+ * points de vie, inventaire, drapeaux du monde, relations PNJ) et les applique de
+ * manière sécurisée au personnage et à la session. Chaque changement est validé,
+ * contraint aux plages légales et journalisé.
+ */
+
 import { setWorldFlag, getWorldFlags } from '../memory/persistent/world-state.js';
 import type { StateChange } from '../types/llm.js';
 import type { Character, StatBlock } from '../types/game.js';
@@ -6,9 +16,25 @@ import { updateCharacterStats, updateCharacterHp, updateCharacterInventory } fro
 import { updateAffinity } from '../memory/persistent/npc-state.js';
 
 /**
- * Apply a list of state changes from the LLM output.
- * Validates and clamps values to legal ranges.
- * Returns a log of what was actually applied.
+ * Applique une liste de changements d'état issus de la sortie du LLM.
+ *
+ * Chaque changement est validé individuellement : les valeurs sont contraintes
+ * aux plages légales, les cibles invalides sont rejetées, et les erreurs sont
+ * capturées sans interrompre le traitement des autres changements.
+ *
+ * Types de changements gérés :
+ * - `stat_change` : modification d'une des 4 stats (ubuntu, maat, sankofa, biso)
+ * - `hp_change` : modification des points de vie
+ * - `inventory_add` / `inventory_remove` : ajout/retrait d'objets
+ * - `flag_set` : pose d'un drapeau sur l'état du monde
+ * - `relationship_change` : modification de l'affinité avec un PNJ
+ * - `beat_progress` : signal de progression narrative (délégué au beat-manager)
+ *
+ * @param changes - Liste des changements d'état à appliquer
+ * @param character - Personnage du joueur (modifié en place)
+ * @param sessionId - Identifiant unique de la session de jeu
+ * @param currentBeat - Numéro du beat courant, utilisé pour le suivi des relations
+ * @returns Deux listes : les changements appliqués et ceux rejetés, avec descriptions
  */
 export function applyStateChanges(
   changes: StateChange[],
