@@ -33,7 +33,11 @@ ni réception mobile n'en découle.
   liste fixe du moteur. Les quatre axes techniques restent aussi nommés Ubuntu,
   Maât, Sankofa et Biso ; les libellés de livre ne rendent pas le noyau universel.
 
-Le modèle est obligatoire pour l'ouverture et les tours dans les routes actuelles.
+L'ouverture et les tours appellent un modèle métier à la demande. Cela ne constitue
+pas, à soi seul, une dépendance à un agent autonome : le contrat Shinkiro autorise
+une capacité IA pilotée depuis une interface humaine. Il n'exige pas un meneur
+manuel remplaçant le narrateur. Aucun agent autonome ni Dan n'est requis par les
+routes lues ; la recette native sans ces agents reste à effectuer.
 Le statut d'accès, la séparation de comptes, les erreurs réseau, la reprise et
 les fondations multijoueur ne sont pas reçus. Ne pas publier ce prototype comme
 service TPE mutualisé sur la seule foi du build.
