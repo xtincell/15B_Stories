@@ -1,5 +1,5 @@
 import Database from 'better-sqlite3';
-import { readFileSync } from 'fs';
+import { mkdirSync, readFileSync } from 'fs';
 import { join, dirname } from 'path';
 import { fileURLToPath } from 'url';
 
@@ -10,11 +10,18 @@ let db: Database.Database | null = null;
 export function getDb(): Database.Database {
   if (!db) {
     const dbPath = join(__dirname, '..', '..', '..', 'data', 'kinchat.db');
-    db = new Database(dbPath);
-    db.pragma('journal_mode = WAL');
-    db.pragma('foreign_keys = ON');
-    initSchema(db);
-    runMigrations(db);
+    mkdirSync(dirname(dbPath), { recursive: true });
+    const database = new Database(dbPath);
+    try {
+      database.pragma('journal_mode = WAL');
+      database.pragma('foreign_keys = ON');
+      initSchema(database);
+      runMigrations(database);
+      db = database;
+    } catch (error) {
+      database.close();
+      throw error;
+    }
   }
   return db;
 }

@@ -85,6 +85,22 @@ npm test           # Tests (vitest)
 npm run test:watch # Tests en mode watch
 ```
 
+### Livraison de production
+
+`npm run build` compile le serveur et assemble dans `dist/` les deux livres,
+le client, les templates de narration et le schéma SQLite. `npm start` lit ces
+ressources dans `dist/` ; il ne dépend pas du dossier `src/`.
+
+Le dossier `data/` est créé au premier démarrage. Sa base `kinchat.db` et les
+fichiers WAL restent des données persistantes à monter et sauvegarder séparément ;
+le build ne les copie ni ne les efface.
+
+La recette `npm test` vérifie l'installation vierge, la réouverture d'une base,
+le rattrapage d'une initialisation échouée et les ressources des deux livres à
+l'octet près. Elle exerce les routes du runtime compilé et la construction du
+premier prompt sans appeler de fournisseur. Cela ne reçoit pas une partie jouée,
+la restauration d'un instantané ou un déploiement public.
+
 ---
 
 ## Architecture
